@@ -602,6 +602,7 @@ class SymfonyRequirements extends RequirementCollection
             'Install and enable the <strong>XML</strong> extension.'
         );
 
+
         $this->addRecommendation(
             function_exists('filter_var'),
             'filter_var() should be available',
@@ -669,6 +670,8 @@ class SymfonyRequirements extends RequirementCollection
             $accelerator,
             'a PHP accelerator should be installed',
             'Install and/or enable a <strong>PHP accelerator</strong> (highly recommended).'
+            'Install and/or enable a <strong>PHP accelerator</strong> (highly recommended).'
+            'Install and enable a <strong>PHP accelerator</strong> like APC (highly recommended).'
         );
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
