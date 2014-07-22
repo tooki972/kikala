@@ -602,12 +602,15 @@ class SymfonyRequirements extends RequirementCollection
             'Install and enable the <strong>XML</strong> extension.'
         );
 
+<<<<<<< HEAD
         $this->addRecommendation(
             function_exists('filter_var'),
             'filter_var() should be available',
             'Install and enable the <strong>filter</strong> extension.'
         );
 
+=======
+>>>>>>> e2e1abfc873539828c59d63901fa30373284cedf
         if (!defined('PHP_WINDOWS_VERSION_BUILD')) {
             $this->addRecommendation(
                 function_exists('posix_isatty'),
@@ -668,7 +671,11 @@ class SymfonyRequirements extends RequirementCollection
         $this->addRecommendation(
             $accelerator,
             'a PHP accelerator should be installed',
+<<<<<<< HEAD
             'Install and/or enable a <strong>PHP accelerator</strong> (highly recommended).'
+=======
+            'Install and enable a <strong>PHP accelerator</strong> like APC (highly recommended).'
+>>>>>>> e2e1abfc873539828c59d63901fa30373284cedf
         );
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
