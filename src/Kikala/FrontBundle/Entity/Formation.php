@@ -1,0 +1,292 @@
+<?php
+
+namespace Kikala\FrontBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Formation
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Formation
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="miImage", type="string", length=255)
+     */
+    private $miImage;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFormation", type="datetime")
+     */
+    private $dateFormation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreated", type="date")
+     */
+    private $dateCreated;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu", type="string", length=255)
+     */
+    private $lieu;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="duree", type="time")
+     */
+    private $duree;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descriptif", type="text")
+     */
+    private $descriptif;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbTotal", type="integer")
+     */
+    private $nbTotal;
+
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
+     
+     /**
+     *
+     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Tag")
+     **/
+    private $tag;
+
+     /**
+     *
+     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Category")
+     **/
+    private $category;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Formation
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set miImage
+     *
+     * @param string $miImage
+     * @return Formation
+     */
+    public function setMiImage($miImage)
+    {
+        $this->miImage = $miImage;
+
+        return $this;
+    }
+
+    /**
+     * Get miImage
+     *
+     * @return string 
+     */
+    public function getMiImage()
+    {
+        return $this->miImage;
+    }
+
+    /**
+     * Set dateFormation
+     *
+     * @param \DateTime $dateFormation
+     * @return Formation
+     */
+    public function setDateFormation($dateFormation)
+    {
+        $this->dateFormation = $dateFormation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFormation
+     *
+     * @return \DateTime 
+     */
+    public function getDateFormation()
+    {
+        return $this->dateFormation;
+    }
+
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     * @return Formation
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     * @return Formation
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string 
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param \DateTime $duree
+     * @return Formation
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return \DateTime 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set descriptif
+     *
+     * @param string $descriptif
+     * @return Formation
+     */
+    public function setDescriptif($descriptif)
+    {
+        $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptif
+     *
+     * @return string 
+     */
+    public function getDescriptif()
+    {
+        return $this->descriptif;
+    }
+
+    /**
+     * Set nbTotal
+     *
+     * @param integer $nbTotal
+     * @return Formation
+     */
+    public function setNbTotal($nbTotal)
+    {
+        $this->nbTotal = $nbTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get nbTotal
+     *
+     * @return integer 
+     */
+    public function getNbTotal()
+    {
+        return $this->nbTotal;
+    }
+}

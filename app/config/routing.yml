@@ -1,0 +1,4 @@
+kikala_front:
+    resource: "@KikalaFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+

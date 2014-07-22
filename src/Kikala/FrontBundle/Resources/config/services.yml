@@ -1,0 +1,7 @@
+parameters:
+#    kikala_front.example.class: Kikala\FrontBundle\Example
+
+services:
+#    kikala_front.example:
+#        class: %kikala_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
