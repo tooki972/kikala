@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 22 Juillet 2014 à 16:25
+-- Généré le :  Mar 22 Juillet 2014 à 16:30
 -- Version du serveur :  5.6.16
 -- Version de PHP :  5.5.11
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `kikala`
 --
+CREATE DATABASE IF NOT EXISTS `kikala` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `kikala`;
 
 -- --------------------------------------------------------
 
