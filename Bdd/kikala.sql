@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 22 Juillet 2014 à 15:28
+-- Généré le :  Mar 22 Juillet 2014 à 16:25
 -- Version du serveur :  5.6.16
 -- Version de PHP :  5.5.11
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `kikala`
 --
-CREATE DATABASE IF NOT EXISTS `kikala` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `kikala`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `kikala`;
 -- Structure de la table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -41,7 +38,6 @@ CREATE TABLE `category` (
 -- Structure de la table `formation`
 --
 
-DROP TABLE IF EXISTS `formation`;
 CREATE TABLE `formation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -55,6 +51,7 @@ CREATE TABLE `formation` (
   `isActive` tinyint(1) NOT NULL,
   `tag_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
+  `cancelDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C2B1A31CBAD26311` (`tag_id`),
   KEY `IDX_C2B1A31C12469DE2` (`category_id`)
@@ -66,7 +63,6 @@ CREATE TABLE `formation` (
 -- Structure de la table `inscriptionform`
 --
 
-DROP TABLE IF EXISTS `inscriptionform`;
 CREATE TABLE `inscriptionform` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -79,10 +75,27 @@ CREATE TABLE `inscriptionform` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `kikotransactionhistory`
+--
+
+CREATE TABLE `kikotransactionhistory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateTransaction` date NOT NULL,
+  `kikosTransfered` int(11) NOT NULL,
+  `transactionType` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `toUser_id` int(11) DEFAULT NULL,
+  `fromUser_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_532C3758B7320117` (`toUser_id`),
+  KEY `IDX_532C37581CD1765A` (`fromUser_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `tag`
 --
 
-DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -95,7 +108,6 @@ CREATE TABLE `tag` (
 -- Structure de la table `userkikologue`
 --
 
-DROP TABLE IF EXISTS `userkikologue`;
 CREATE TABLE `userkikologue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -136,6 +148,13 @@ ALTER TABLE `formation`
 ALTER TABLE `inscriptionform`
   ADD CONSTRAINT `FK_359B73215200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`),
   ADD CONSTRAINT `FK_359B7321A76ED395` FOREIGN KEY (`user_id`) REFERENCES `userkikologue` (`id`);
+
+--
+-- Contraintes pour la table `kikotransactionhistory`
+--
+ALTER TABLE `kikotransactionhistory`
+  ADD CONSTRAINT `FK_532C37581CD1765A` FOREIGN KEY (`fromUser_id`) REFERENCES `userkikologue` (`id`),
+  ADD CONSTRAINT `FK_532C3758B7320117` FOREIGN KEY (`toUser_id`) REFERENCES `userkikologue` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

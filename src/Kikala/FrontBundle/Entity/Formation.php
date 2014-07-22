@@ -43,7 +43,7 @@ class Formation
     private $dateFormation;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="dateCreated", type="date")
      */
@@ -77,13 +77,20 @@ class Formation
      */
     private $nbTotal;
 
-     /**
+    /**
      * @var boolean
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
-     
+    
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="cancelDate", type="date")
+     */
+    private $cancelDate;
+    
      /**
      *
      * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Tag")
@@ -95,7 +102,7 @@ class Formation
      * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Category")
      **/
     private $category;
-    
+
     /**
      * Get id
      *
