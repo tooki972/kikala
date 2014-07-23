@@ -22,19 +22,15 @@ kikala_front_forgot:
     path:     /forgot/
     defaults: { _controller: KikalaFrontBundle:User:forgot }
 
-<<<<<<< HEAD
+
 kikala_front_lsForma:
     path:     /lsForma/
     defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
-=======
+
 kikala_front_logout:
     path:     /logout/
     defaults: { _controller: KikalaFrontBundle:User:logout }
 
-kikala_front_lsFoma:
-    path:     /lsFoma/
-    defaults: { _controller: KikalaFrontBundle:Formation:lsFoma }
->>>>>>> 240609bd7ffd68b61a184865bb1af278c7af043b
 
 kikala_front_formaDetail:
     path:     /formaDetail/
