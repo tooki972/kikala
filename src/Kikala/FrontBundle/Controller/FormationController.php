@@ -6,9 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FormationController extends Controller
 {
-	public function lsFomaAction(){
-
-
-		return $this->render('kikalaFrontBundle:Default:home.html.twig', $params);
+	public function lsFormaAction(){
+		return $this->render('kikalaFrontBundle:Formation:lsForma.html.twig');
 	}
+
+	public function formaDetailAction(){
+		return $this->render('kikalaFrontBundle:Formation:formaDetail.html.twig');
+	}
+
 }

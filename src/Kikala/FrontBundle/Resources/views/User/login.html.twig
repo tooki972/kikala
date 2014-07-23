@@ -1,0 +1,17 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - login
+{% endblock %}
+{% block body %}
+
+<p>Cette page affiche le formulaire de connexion
+- email
+- mot de passe
+- rester connecté ?
+
+Le champs “rester connecté” est une case à cocher (checkbox) permettant au kikologue de ne pas avoir à se reconnecter à chaque visite sur le site. 
+
+Sous le formulaire, 2 liens sont affichés : “Créer un compte” menant vers la page “inscription”, et “mot de passe oublié ?”, menant vers la page du même nom. 
+
+Une fois connecté, le kikologue est redirigé vers la page “Mon compte : accueil”.</p>
+{% endblock %}

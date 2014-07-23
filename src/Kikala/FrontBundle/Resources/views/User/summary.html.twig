@@ -1,0 +1,11 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - summary
+{% endblock %}
+{% block body %}
+
+<p>mes_inscriptions
+
+Cet écran affiche les inscriptions à des formations, passées ou futures. 
+Il est possible de se désincrire d’une formation en cliquant sur un bouton (affiché auprès de chacune des formations futures). Sur clic de ce bouton, le kikologue est averti qu’il ne récupérera que la moitié de ses kikos engagés, arrondis vers le bas.  </p>
+{% endblock %}
