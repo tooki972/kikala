@@ -1,3 +1,11 @@
 kikala_front_homepage:
-    path:     /hello/{name}
+    path:     /home/
     defaults: { _controller: KikalaFrontBundle:Default:index }
+
+kikala_front_legal:
+    path:     /legal/
+    defaults: { _controller: KikalaFrontBundle:Default:legal }
+
+kikala_front_about:
+    path:     /about/
+    defaults: { _controller: KikalaFrontBundle:Default:about }
