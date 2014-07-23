@@ -3,14 +3,14 @@
 namespace Kikala\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\UserKikologue;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
 
-use Symfony\Component\Security\Core\SecurityContext;
 
-use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class UserController extends Controller
 {
@@ -70,8 +70,9 @@ class UserController extends Controller
           'last_username' => $session->get(SecurityContext::LAST_USERNAME),  
           'error'         => $error,
       ));
-        return $this->render('KikalaFrontBundle:User:login.html.twig');
+       
     }
+}
 
     public function forgotAction()
     {
