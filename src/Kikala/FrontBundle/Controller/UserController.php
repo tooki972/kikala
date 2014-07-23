@@ -20,6 +20,8 @@ class UserController extends Controller
 
     public function registerAction(Request $request)
     {
+        $errors = array();
+        
         //instanciation d'un objet
         $user = new UserKikologue();
 
@@ -33,7 +35,7 @@ class UserController extends Controller
         if ($register_form->isValid()){
 
             //errors
-
+            
             //go pour l'inscription
             $user->setIsActive(true);
             $user->setDateRegistered(new DateTime());

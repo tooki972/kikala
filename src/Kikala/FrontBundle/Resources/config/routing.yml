@@ -18,16 +18,9 @@ kikala_front_login:
     path:     /login/
     defaults: { _controller: KikalaFrontBundle:User:login }
 
-login_check:
-    pattern: /login_check
-
 kikala_front_forgot:
     path:     /forgot/
     defaults: { _controller: KikalaFrontBundle:User:forgot }
-
-kikala_front_logout:
-    path:     /logout/
-    defaults: { _controller: KikalaFrontBundle:User:logout }
 
 kikala_front_lsForma:
     path:     /lsForma/
