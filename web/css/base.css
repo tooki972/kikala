@@ -1,0 +1,143 @@
+ @import "reset.css";
+body{
+	background: #fff;
+}
+#wrapper{
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.2);	
+	min-height: 250px;
+	margin: 0 auto;
+	padding-bottom: 15px;
+}
+header{
+	background: #00649C;
+	border-radius:0 8px 0 8px;
+	height: auto;
+	padding: 5px;
+	padding-top: 15px;
+}
+#top{
+	background: #D7E9F8;
+	box-shadow: 0px 0px 10px rgba(0,0,0, 0.2);
+}
+#navfoot, #navtop{
+	background: #fff;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3);	
+	border: 1px solid #00649C;
+	border-radius: 8px;
+	margin: 10px auto;
+	padding-right: 0;
+	padding-left: 0;
+	text-align: center;
+}
+#navtop ul li, #navfoot ul li{
+	display: inline-block;
+	margin-right: 0px;
+	padding-right: 0;
+	padding-left: 0;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+	background-color: #3276b1;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3), 0px 0px 10px rgba(0,0,0, 0.3);
+	color: #fff;
+	text-decoration: none;
+	transition: background-color .25s linear;
+	-moz-transition: background-color .25s linear;
+}
+
+section{
+	box-shadow: 0px 0px 10px rgba(0,0,0, 0.2);
+	border: 1px solid #3276b1;
+	border-radius:0 8px 0 8px;
+	float: left;
+	margin-top: 10px;
+	padding: 5px 5px 15px 5px;
+	width: 70%;
+}
+aside{
+	background: #fff;
+	border: 1px solid #3276b1;
+	border-radius:0 8px 0 8px;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3);
+	margin-top: 10px;
+	min-height: 250px !important;
+	padding: 15px;
+}
+h1{
+ 	color: #3276b1;
+ 	font-size: 2em;
+}
+#une{
+	margin-top: 15px;
+}
+#logo a{
+ 	color: #fff;
+ 	font-size: 1.25em;
+}
+#logo a:hover{
+ 	text-decoration: none;
+ 	font-size: 1.3em;
+}
+h3{
+	background: #3276b1;
+ 	color: #fff;
+ 	font-size: 1.25em;
+ 	margin-bottom: 15px;
+ 	margin-top: 15px;
+ 	padding: 2px;
+}
+#cat{
+	display: inline-block;
+	margin-left: 15px;
+	color: red;
+	font-size: .8em;
+}
+.une{
+	border-bottom: 1px solid #3276b1;
+	margin-bottom: 15px;
+	margin-left: 0px;
+}
+#une h3{
+	border-radius:0 8px 0 8px;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3);
+}
+.glyphicon {
+	color: #3276b1;
+	margin-right: 15px;
+}
+
+/**************FORMULAIRE AJOUT *****************/
+.form-control {
+	width: 82%;
+}
+#wf3_wikibundle_content > div, #wf3_wikibundle_register > div{
+	margin-bottom: 15px;
+	height: 25px;
+}
+#wf3_wikibundle_content label, #wf3_wikibundle_register label{
+	text-align: right;
+}
+#wf3_wikibundle_content ul li, #wf3_wikibundle_register ul li{
+	color: red;
+}
+#wf3_wikibundle_register_Valider{
+	width: 82%;
+}
+/***************  footer   ****************/
+#bas{
+	background: #00649C;
+	border-radius:0 8px  0 8px;
+	height: auto;
+	padding: 5px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+footer{
+	background: #D7E9F8;
+	padding: 15px;
+	min-height: 250px;
+	overflow: hidden;
+}
+#navfoot{
+	margin: 0;
+	
+}
