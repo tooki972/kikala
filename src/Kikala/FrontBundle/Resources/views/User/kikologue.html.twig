@@ -1,0 +1,14 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - kikologue
+{% endblock %}
+{% block body %}
+
+<p>Cet écran présente un résumé des informations pertinentes sur un kikologue, et permet de naviguer aisément vers les autres pages du “compte”. 
+
+Le pseudo et l’image de profil sont affichés au haut de l’écran. Auprès de ceux-ci, un bouton permet de “Modifier son profil”.
+
+Le nombre de kikos en banque est affiché. Auprès de celui-ci, un lien permet d’accéder à la page de “Création d’une formation”.
+
+Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions </p>
+{% endblock %}

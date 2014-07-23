@@ -1,0 +1,9 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - lsForma
+{% endblock %}
+{% block body %}
+
+<p> Cet écran affiche les formations en cours (futures), au nombre de 30. Elles sont affichées par date de formation, croissant (la plus proche d’abord). 
+Un système de pagination est nécessairement mis en place, afin de voir les éventuelles formations plus lointaines. Les formations passées ne sont pas affichées. </p>
+{% endblock %}

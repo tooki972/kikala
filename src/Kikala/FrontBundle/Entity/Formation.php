@@ -105,9 +105,10 @@ class Formation
 
     /**
     *
-    * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
+    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
     **/
     private $inscriptionForms;
+
     /**
      * Get id
      *

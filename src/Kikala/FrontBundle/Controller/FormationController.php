@@ -1,14 +1,17 @@
 <?php
 
-namespace kikala\FrontBundle\Controller;
+namespace Kikala\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FormationController extends Controller
 {
-	public function lsFomaAction(){
-
-
-		return $this->render('kikalaFrontBundle:Default:home.html.twig', $params);
+	public function lsFormaAction(){
+		return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig');
 	}
+
+	public function formaDetailAction(){
+		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig');
+	}
+
 }

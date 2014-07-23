@@ -1,0 +1,13 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - myForma
+{% endblock %}
+{% block body %}
+
+<p>mes_formations
+
+Cette page affiche la liste de toutes les formations dispensées (ou à dispenser) par le kikologue connecté. 
+Un bouton permet d’annuler une formation à dispenser. Sur clic de ce bouton, le kikologue est averti qu’il perdra la totalité de ses kikos en banques s’il confirme l’annulation, et que cette annulation sera conservée dans son historique (et affichée publiquement).
+
+À noter qu’il n’est pas possible de modifier une formation publiée. Le kikologue doit contacter les administrateurs pour le faire.  </p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - kikoDetail
+{% endblock %}
+{% block body %}
+
+<p>Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
+À noter que l’âge du kikologue est affiché par tranche de 10 ans. 
+
+La liste des formations (passées et futures) dispensées par ce kikologue est affichée. 
+La liste des formations (passées et futures) suivies par ce kikologue est affichée. </p>
+{% endblock %}
