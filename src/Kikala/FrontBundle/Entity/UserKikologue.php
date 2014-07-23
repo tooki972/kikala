@@ -146,7 +146,11 @@ class UserKikologue
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
-
+    /**
+    *
+    * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm", mappedBy="user")
+    **/
+    private $inscriptionForms;
 
     /**
      * Get id
