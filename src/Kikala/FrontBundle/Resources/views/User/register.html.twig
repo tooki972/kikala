@@ -2,7 +2,12 @@
 {%block title%} 
 {{ parent()}} - register
 {% endblock %}
+
 {% block body %}
+<h1>Créez votre user !</h1>
+
+{{ form(register_form, {'attr':{'novalidate': 'novalidate'}}) }}
+
 
 <p>Cette page affiche le formulaire d’inscription.
 - pseudo

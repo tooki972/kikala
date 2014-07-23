@@ -15,13 +15,25 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 class UserController extends Controller
 {
     //affiche et traite le formulaire d'inscription
-    public function registerAction()
+    //page formulaire
+    
+
+    public function registerAction(Request $request)
     {
-        $user = new User();
+        //instanciation d'un objet
+        $user = new UserKikologue();
+
+        //crée une instance de Form
         $register_form =$this->createForm(new UserKikologueType, $user);
+
+        //traitement de requête
         $register_form->handleRequest($request);
 
+         //si le formulaire est soumis et valide
         if ($register_form->isValid()){
+
+            //errors
+
             //go pour l'inscription
             $user->setIsActive(true);
             $user->setDateRegistered(new DateTime());
@@ -41,19 +53,21 @@ class UserController extends Controller
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
-            
-            //Sauvegarde
+    
+            //récupération du manager pour sauvegarder l'entity
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush();
-          }
 
-        $params = array(
-            "register_form"=> $register_form->createView()
-        );
+            $em->flush();
+            }
+
+            $params = array(
+            "register_form" => $register_form->createView()
+            );
 
         return $this->render('KikalaFrontBundle:User:register.html.twig', $params);
     }
+            
 
     public function loginAction()
     {
