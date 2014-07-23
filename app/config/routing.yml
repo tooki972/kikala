@@ -1,4 +1,8 @@
 kikala_front:
     resource: "@KikalaFrontBundle/Resources/config/routing.yml"
     prefix:   /
-
+login:
+    pattern:   /login
+    defaults:  { _controller: KikalaFrontBundle:Security:login }
+login_check:
+    pattern:   /login_check
