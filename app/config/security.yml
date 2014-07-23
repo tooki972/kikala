@@ -4,6 +4,10 @@ security:
             algorithm: sha512
             iterations: 1
             encode_as_base64: false
+<<<<<<< HEAD
+=======
+
+>>>>>>> 240609bd7ffd68b61a184865bb1af278c7af043b
 
     role_hierarchy:
         ROLE_USER:        ROLE_BASIC
