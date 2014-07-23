@@ -12,7 +12,7 @@ security:
 
     providers:
         administrators:
-         entity: { class: KikalaFrontBundle:Userkikologue, property: pseudo 
+         entity: { class: KikalaFrontBundle:Userkikologue, property: pseudo }
 
 
     firewalls:
