@@ -23,13 +23,13 @@ class InscriptionForm
 
     /**
     *
-    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue")
+    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue", inversedBy='inscriptionForms')
     */
     private $user;
 
     /**
     *
-    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Formation")
+    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Formation",mappedBy="inscriptionForms")
     **/
     private $formation;
     

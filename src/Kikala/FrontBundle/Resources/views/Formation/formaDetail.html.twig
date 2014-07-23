@@ -1,0 +1,17 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - formaDetail
+{% endblock %}
+{% block body %}
+
+<p>Cette page affiche toutes les informations publiques disponibles sur la formation. 
+
+L’image affichée est de taille moyenne.
+
+Si l’internaute visitant cette page est connecté et inscrit à la formation, une indication visuelle du genre “Vous êtes inscrit !” est affichée. 
+S’il est connecté et non-inscrit, qu’il possède suffisamment de kikos, et qu’il reste des places, un bouton “Inscrivez-vous !” est affiché. S’il n’a pas assez de kikos, une indication le précise.  
+S’il n’est pas connecté et qu’il reste des places, un bouton “Connectez-vous pour vous inscrire” est affiché. 
+S’il ne reste plus de places, une indication visuelle du genre “Cette formation est complète” est indiquée. 
+
+Cette page affiche également une mini-fiche sur le kikologue formateur. Un clic sur son nom mène à la page de détail du kikologue. </p>
+{% endblock %}

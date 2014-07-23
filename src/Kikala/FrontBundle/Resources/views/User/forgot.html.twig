@@ -1,0 +1,11 @@
+{% extends "::base.html.twig"%}
+{%block title%} 
+{{ parent()}} - forgot
+{% endblock %}
+{% block body %}
+
+<p>Mot de passe oublié (forgotpassword)
+Cette page affiche un très simple formulaire d’un seul champ : l’email de l’utilisateur. Sur soumission du formulaire, un lien doit être envoyé au kikologue, par email.  Sur clic du lien, un formulaire de création d’un nouveau mot de passe doit être affiché. Celui-ci comporte simplement 2 champs, 2 fois le nouveau mot de passe. 
+
+Sur soumission de ce formulaire, le mot de passe est validé, puis le kikologue est redirigé vers la page des “formations en cours”.</p>
+{% endblock %}
