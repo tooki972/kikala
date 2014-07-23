@@ -104,6 +104,11 @@ class Formation
     private $category;
 
     /**
+    *
+    * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
+    **/
+    private $inscriptionForms;
+    /**
      * Get id
      *
      * @return integer 
