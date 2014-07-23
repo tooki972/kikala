@@ -1,9 +1,14 @@
 security:
     encoders:
+<<<<<<< HEAD
+        Kikala\FrontBundle\Entity\UserKikologue: 
+            algorithm: sha512
+=======
         Symfony\Component\Security\Core\User\User:
             algorithm:  sha512
             iterations: 1
             encode_as_base64: false
+>>>>>>> 5d1736c9e7b48b305eb76008df4b6feea62d494d
 
     role_hierarchy:
         ROLE_USER:        ROLE_BASIC
