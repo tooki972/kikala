@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-	 public function indexAction()
+	 public function homeAction()
     {
-        return $this->render('KikalaFrontBundle:Default:index.html.twig');
+        return $this->render('KikalaFrontBundle:Default:home.html.twig');
     }
     public function legalAction()
     {
