@@ -5,7 +5,7 @@ security:
             algorithm: sha512
 =======
         Symfony\Component\Security\Core\User\User:
-            algorithm:   sha1
+            algorithm:  sha512
             iterations: 1
             encode_as_base64: false
 >>>>>>> 5d1736c9e7b48b305eb76008df4b6feea62d494d
@@ -16,13 +16,9 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-       # administrators:
-        # entity: { class: KikalaFrontBundle:Userkikologue, property: pseudo 
-        in_memory:
-            memory:
-                users:
-                    charles: { password: 85d8d76ba15bde3ef1602f477f32fd64e32fea5a, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        administrators:
+         entity: { class: KikalaFrontBundle:Userkikologue, property: pseudo }
+
 
     firewalls:
         secured_area:
