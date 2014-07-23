@@ -3,15 +3,23 @@
 {{ parent()}} - login
 {% endblock %}
 {% block body %}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
 
-<p>Cette page affiche le formulaire de connexion
-- email
-- mot de passe
-- rester connecté ?
+<form action="{{ path('login_check') }}" method="post">
+    <label for="username">Login :</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-Le champs “rester connecté” est une case à cocher (checkbox) permettant au kikologue de ne pas avoir à se reconnecter à chaque visite sur le site. 
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="_password" />
 
-Sous le formulaire, 2 liens sont affichés : “Créer un compte” menant vers la page “inscription”, et “mot de passe oublié ?”, menant vers la page du même nom. 
+    {#
+        Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+        (plus de détails ci-dessous)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
 
-Une fois connecté, le kikologue est redirigé vers la page “Mon compte : accueil”.</p>
+    <button type="submit">login</button>
+</form>
 {% endblock %}

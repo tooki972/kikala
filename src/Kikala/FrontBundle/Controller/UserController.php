@@ -3,18 +3,92 @@
 namespace Kikala\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Util\SecureRandom;
+use Symfony\Component\HttpFoundation\Request;
+use Kikala\FrontBundle\Entity\UserKikologue;
+use \DateTime;
+use Kikala\FrontBundle\Form\UserKikologueType;
+
+
 
 class UserController extends Controller
 {
-    public function registerAction()
+    //affiche et traite le formulaire d'inscription
+    //page formulaire
+    
+
+    public function registerAction(Request $request)
     {
-        return $this->render('KikalaFrontBundle:User:register.html.twig');
+        $errors = array();
+        
+        //instanciation d'un objet
+        $user = new UserKikologue();
+
+        //crée une instance de Form
+        $register_form =$this->createForm(new UserKikologueType, $user);
+
+        //traitement de requête
+        $register_form->handleRequest($request);
+
+         //si le formulaire est soumis et valide
+        if ($register_form->isValid()){
+
+            //errors
+            
+            //go pour l'inscription
+            $user->setIsActive(true);
+            $user->setDateRegistered(new DateTime());
+
+            //salt
+            $generator = new SecureRandom();
+            $salt = bin2hex($generator->nextBytes(30));
+            $user->setSalt($salt);
+            
+            //token
+            $generator = new SecureRandom();
+            $token = bin2hex($generator->nextBytes(30));
+            $user->setToken($token);
+
+            //hache le mot de passe
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($password);
+    
+            //récupération du manager pour sauvegarder l'entity
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+
+            $em->flush();
+            }
+
+            $params = array(
+            "register_form" => $register_form->createView()
+            );
+
+        return $this->render('KikalaFrontBundle:User:register.html.twig', $params);
     }
+            
 
     public function loginAction()
     {
-        return $this->render('KikalaFrontBundle:User:login.html.twig');
+ 	      $request = $this->getRequest();
+      $session = $request->getSession();
+      // get the login error if there is one
+	     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+          $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+      } else {
+          $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+          $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
+             return $this->render('KikalaFrontBundle:User:login.html.twig', array(
+          // last username entered by the user
+          'last_username' => $session->get(SecurityContext::LAST_USERNAME),  
+          'error'         => $error,
+      ));
+       
     }
+}
 
     public function forgotAction()
     {
