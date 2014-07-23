@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Kikala !{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-3.1.1-dist/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div id="top" >
+            <header class="container">
+            <div id='logo' class="col-xs-12"><a href="{{ path('wf3_wiki_home') }}"> Kikala !<img src="{{ asset('img/kikala-logo.png') }}"></a>
+                <div>
+                  
+                </div>
+            </div>
+                <nav id="navtop" class="col-xs-12 col-md-8">
+                    <ul class="nav nav-pills">
+                        <li class="dropdown col-xs-12 col-md-1 "></li>
+                        <li class="dropdown col-xs-12 col-md-1 "></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>    
+        <div id="wrapper" class="container">    
+            <section class="col-xs-12 col-md-8">
+                {% block body %}{% endblock %}
+            </section>
+
+            <aside id="colD" class="col-xs-12 col-md-3 col-md-offset-1">
+                 {% block aside %}{% endblock %}
+            </aside>
+
+        </div>
+            <footer>
+                <div id="bas" class="container">
+               
+                </div>             
+            </footer>        
+        {% block javascripts %}
+
+           <script type="text/javascript" src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>{% endblock %}
     </body>
 </html>
