@@ -1,6 +1,6 @@
 kikala_front_homepage:
     path:     /home/
-    defaults: { _controller: KikalaFrontBundle:Default:index }
+    defaults: { _controller: KikalaFrontBundle:Default:home }
 
 kikala_front_legal:
     path:     /legal/
