@@ -23,6 +23,11 @@ kikala_front_forgot:
     defaults: { _controller: KikalaFrontBundle:User:forgot }
 
 
+kikala_front_newPass:
+    path:     /forgot/{token}/{email}
+    defaults: { _controller: KikalaFrontBundle:User:newpass }
+
+
 kikala_front_logout:
     path:     /logout/
     defaults: { _controller: KikalaFrontBundle:User:logout }

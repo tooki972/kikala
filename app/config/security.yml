@@ -29,8 +29,13 @@ security:
                 check_path: login_check
                 login_path: login
             logout:
-                path:   _demo_logout
-                target: _demo
+                path:   /logout
+                target:
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

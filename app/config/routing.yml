@@ -1,7 +1,6 @@
 kikala_front:
     resource: "@KikalaFrontBundle/Resources/config/routing.yml"
     prefix:   /
-<<<<<<< HEAD
 
 login:
     pattern:   /connexion/
@@ -11,10 +10,4 @@ login_check:
 
 logout:
     pattern:   /logout
-=======
-login:
-    pattern:   /login
-    defaults:  { _controller: KikalaFrontBundle:Security:login }
-login_check:
-    pattern:   /login_check
->>>>>>> 240609bd7ffd68b61a184865bb1af278c7af043b
+

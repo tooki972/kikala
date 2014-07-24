@@ -29,6 +29,7 @@ header{
 	padding-left: 0;
 	text-align: center;
 }
+.forget {float:right;}
 #navtop ul li, #navfoot ul li{
 	display: inline-block;
 	margin-right: 0px;
