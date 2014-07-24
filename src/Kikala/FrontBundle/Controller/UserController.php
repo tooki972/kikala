@@ -113,7 +113,10 @@ class UserController extends Controller
 
         return $this->render('KikalaFrontBundle:User:forgot.html.twig',$params);
     }
-    
+    public function newPassAction()
+    {
+        return $this->render('KikalaFrontBundle:User:newpass.html.twig');
+    }
     public function logoutAction()
     {
         return $this->render('KikalaFrontBundle:User:logout.html.twig');
