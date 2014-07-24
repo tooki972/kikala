@@ -16,25 +16,25 @@ class UserKikologueType extends AbstractType
     {
         $builder
             ->add('pseudo', null, array(
-                'required' => false,
+                'required' => true,
                 "label" => "Pseudo",
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
                  'placeholder' => 'Pseudo',
-                 'class'=> "col-xs-12 col-md-10"
+                 'class'=> "col-xs-12 col-md-8"
                 ) ))
             ->add('email', 'email',
                 array(
-                'required' => false,
+                'required' => true,
                 "label" => "email",
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
                  'placeholder' => 'email',
-                 'class'=> "col-xs-12 col-md-10"
+                 'class'=> "col-xs-12 col-md-8"
                 ) ))
             ->add('password', 'repeated', array(
                 'type' => 'password',
@@ -43,33 +43,33 @@ class UserKikologueType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'Password',
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 )),
                 'second_options' => array('label' => 'Confirmez votre password',
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 )),
                 ))
             ->add('name', null, array(
-                'required' => false,
+                'required' => true,
                 "label" => "name",
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
                  'placeholder' => 'name',
-                 'class'=> "col-xs-12 col-md-10"
+                 'class'=> "col-xs-12 col-md-8"
                 )  
                 ))
             ->add('prenom', null, array(
-                'required' => false,
+                'required' => true,
                 "label" => "prenom",
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
                  'placeholder' => 'prenom',
-                 'class'=> "col-xs-12 col-md-10"
+                 'class'=> "col-xs-12 col-md-8"
                 )  
                 ))
             ->add('birthday', 'datetime', array(
@@ -78,7 +78,7 @@ class UserKikologueType extends AbstractType
                 'input' => 'datetime',
                 'format' => 'dd/MM/yyyy',
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-2"
+                 'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
             ->add('gender', 'choice', array(
@@ -88,22 +88,61 @@ class UserKikologueType extends AbstractType
                 ),
                 'required'    => false,
                 'empty_value' => 'Choisissez votre sexe',
-                'empty_data'  => null
+                'empty_data'  => null,
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
                  ))
-            ->add('metier', 'text')
-            ->add('infoFormateur', 'textarea')
-            ->add('infoEtudiant', 'textarea')
-            ->add('photo', 'textarea')
+            ->add('metier', 'text', array(
+                'required' => true,
+                "label" => "metier",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'metier',
+                 'class'=> "col-xs-12 col-md-8"
+                ) ))
+            ->add('infoFormateur', 'textarea', array(
+                'required' => true,
+                "label" => "infoFormateur",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'infoFormateur',
+                 'class'=> "col-xs-12 col-md-8"
+                ) ))
+            ->add('infoEtudiant', 'textarea', array(
+                'required' => true,
+                "label" => "infoEtudiant",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'infoEtudiant',
+                 'class'=> "col-xs-12 col-md-8"
+                ) ))
+            ->add('photo', 'file', array(
+                'required' => false,
+                "label" => "photo",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => '',
+                 'class'=> "col-xs-12 col-md-8"
+                ) ))
             //->add('token')
             //->add('salt')
             //->add('isActive')
             //->add('dateRegistered')
-            ->add('kikos', 'text')
-            ->add('redCross', 'text')
-            ->add('image', 'textarea')
+            //->add('kikos', 'text')
+            //->add('redCross', 'text')
+            //->add('image', 'textarea')
             ->add('Valider', 'submit', array(
                 'attr'=> array(
-                'class'=>'btn btn-primary btn-xs col-xs-12 col-md-10 col-md-offset-2')))
+                'class'=>'btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4')))
         ;
     }
     

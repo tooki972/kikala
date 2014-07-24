@@ -29,6 +29,7 @@ header{
 	padding-left: 0;
 	text-align: center;
 }
+.forget {float:right;}
 #navtop ul li, #navfoot ul li{
 	display: inline-block;
 	margin-right: 0px;
@@ -110,21 +111,23 @@ h3{
 }
 
 /**************FORMULAIRE AJOUT *****************/
-.form-control {
-	width: 82%;
-}
-#wf3_wikibundle_content > div, #wf3_wikibundle_register > div{
-	margin-bottom: 15px;
-	height: 25px;
-}
-#wf3_wikibundle_content label, #wf3_wikibundle_register label{
+
+#kikala_frontbundle_userkikologue label{
 	text-align: right;
 }
-#wf3_wikibundle_content ul li, #wf3_wikibundle_register ul li{
-	color: red;
+#wf3_wikibundle_content ul li, #kikala_frontbundle_userkikologue ul li{
+	color: red; clear: left;
 }
-#wf3_wikibundle_register_Valider{
-	width: 82%;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+	color: #fff;
+	background-color: #ca5745;
+	border-color: red;
+}
+.btn-primary{
+	color: #fff;
+	background-color: #b8c945;
+	border-color: #adc50c;
+	margin-top: 15px
 }
 /***************  footer   ****************/
 #bas{

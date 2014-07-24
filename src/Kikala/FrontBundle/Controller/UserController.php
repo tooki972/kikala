@@ -36,8 +36,18 @@ class UserController extends Controller
             //errors
 
             //go pour l'inscription
+            //Active
             $user->setIsActive(true);
             $user->setDateRegistered(new DateTime());
+
+            //Kikos
+            $user->setKikos(2);
+            
+            //redCross
+            $user->setRedCross(0);
+
+            //image
+            $user->setImage(0);
 
             //salt
             $generator = new SecureRandom();
@@ -106,6 +116,9 @@ class UserController extends Controller
 
     public function kikologueAction()
     {
+        //affiche tous les contenus
+        
+
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig');
     }
 
