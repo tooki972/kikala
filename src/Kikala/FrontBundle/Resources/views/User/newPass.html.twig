@@ -3,4 +3,7 @@
 {{ parent()}} - nouveau mot de pass
 {% endblock %}
 {% block body %}
+{{ form(newPass_form, {'attr':{'novalidate': 'novalidate'}}) }}
 {% endblock %}
+
+
