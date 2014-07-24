@@ -22,6 +22,9 @@ kikala_front_forgot:
     path:     /forgot/
     defaults: { _controller: KikalaFrontBundle:User:forgot }
 
+kikala_front_newPass:
+    path:     /forgot/{token}/{email}
+    defaults: { _controller: KikalaFrontBundle:User:newpass }
 
 kikala_front_lsForma:
     path:     /lsForma/

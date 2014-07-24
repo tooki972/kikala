@@ -99,9 +99,28 @@ class UserController extends Controller
     }
 }
 
-    public function forgotAction()
+    public function forgotAction(request $request)
     {
-        return $this->render('KikalaFrontBundle:User:forgot.html.twig');
+        $email=$request->request->get('email');
+        $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
+       $user=$mailreposytory->findOneByEmail($email);
+       if(!empty($user)){
+       $token = $user->getToken();
+        $url=$this->generateUrl("kikala_front_newPass",array('token'=>$token,
+                                                            'email'=>$email),true);
+        $message = \Swift_Message::newInstance()
+        ->setSubject('mot de pass oublier')
+        ->setFrom('kikalabundle@gmail.com')
+        ->setTo($email)
+        ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
+       
+         $this->get('mailer')->send($message);
+        }
+
+       $params =array();
+       
+
+        return $this->render('KikalaFrontBundle:User:forgot.html.twig',$params);
     }
     
     public function logoutAction()
