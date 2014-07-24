@@ -3,4 +3,9 @@
 {{ parent()}} - nouveau mot de pass
 {% endblock %}
 {% block body %}
+<form method="POST" action="">
+<p> Veillez renseignez votre nouveau mot de pass</p>
+<label>nouveaux mot de pass</label><input name='pass' type="password">
+<label>confimation nouveaux mot de pass</label><input name='pass2' type="password">
+<input type="submit" value="envoyer">
 {% endblock %}

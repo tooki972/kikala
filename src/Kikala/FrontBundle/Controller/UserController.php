@@ -90,7 +90,7 @@ class UserController extends Controller
     }
 }
 
-    public function forgotAction(request $request)
+    public function forgotAction(Request $request)
     {
         $email=$request->request->get('email');
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
@@ -106,6 +106,7 @@ class UserController extends Controller
         ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
        
          $this->get('mailer')->send($message);
+         echo'mail envoyer';
         }
 
        $params =array();
@@ -113,9 +114,26 @@ class UserController extends Controller
 
         return $this->render('KikalaFrontBundle:User:forgot.html.twig',$params);
     }
-    public function newPassAction()
+    public function newPassAction(Request $request,$token,$email)
     {
-        return $this->render('KikalaFrontBundle:User:newpass.html.twig');
+        $mdp=$request->request->get('pass');
+        $confirm=$request->request->get('pass2');
+    if(!empty($mdp)){
+    if($mdp==$confirm){
+        $tokenReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
+       $user=$tokenReposytory->findOneByToken($token);
+       $user->setPassword($mdp);
+       $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($password);
+        $em = $this->getDoctrine()->getManager();
+       $em->flush();
+
+        return $this->redirect($this->generateUrl('kikala_front_homepage'));
+    }
+}
+return $this->render('KikalaFrontBundle:User:newPass.html.twig');
     }
     public function logoutAction()
     {
