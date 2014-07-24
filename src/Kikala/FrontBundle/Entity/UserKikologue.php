@@ -5,6 +5,10 @@ namespace Kikala\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * UserKikologue
  *
@@ -25,13 +29,24 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le pseudo doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre pseudo doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre pseudo ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="pseudo", type="string", length=255)
      */
     private $pseudo;
 
     /**
      * @var string
-     *
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -39,6 +54,14 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le mot de passe doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "4",
+     *      max = "255",
+     *      minMessage = "Votre mot de passe doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre mot de passe ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
@@ -46,6 +69,14 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le nom doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -53,13 +84,22 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le prénom doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre prénom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre prénom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank(message="La date doit être renseigné!")
+     * @Assert\DateTime()
      * @ORM\Column(name="birthday", type="date")
      */
     private $birthday;
@@ -67,19 +107,29 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le gender doit être renseigné!")
+     * @Assert\Choice(choices = {"m", "f"}, message = "Choose a valid gender.")
      * @ORM\Column(name="gender", type="string", length=255)
      */
     private $gender;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Le métier doit être renseigné!")
      *
+     * @Assert\Length(
+     *      min = "5",
+     *      max = "255",
+     *      minMessage = "Votre métier doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre métier ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="metier", type="text")
      */
     private $metier;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="quelques infos sur vous !")
      *
      * @ORM\Column(name="infoFormateur", type="text")
      */
@@ -87,6 +137,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @var string
+     * @Assert\NotBlank(message="quelques infos sur vous !")
      *
      * @ORM\Column(name="infoEtudiant", type="text")
      */
@@ -94,7 +145,16 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @var string
-     *
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 1200,
+     *     minHeight = 200,
+     *     maxHeight = 1200,
+     *     maxSize = "1024k",
+     *     maxSizeMessage = "choisissez une photo de moins de 1M",
+     *     mimeTypes = {"image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "choisissez une photo en jpg"
+     * )
      * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
