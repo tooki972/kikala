@@ -20,8 +20,7 @@ class UserController extends Controller
 
     public function registerAction(Request $request)
     {
-        $errors = array();
-        
+
         //instanciation d'un objet
         $user = new UserKikologue();
 
@@ -35,10 +34,20 @@ class UserController extends Controller
         if ($register_form->isValid()){
 
             //errors
-            
+
             //go pour l'inscription
+            //Active
             $user->setIsActive(true);
             $user->setDateRegistered(new DateTime());
+
+            //Kikos
+            $user->setKikos(2);
+            
+            //redCross
+            $user->setRedCross(0);
+
+            //image
+            $user->setImage(0);
 
             //salt
             $generator = new SecureRandom();
@@ -147,6 +156,9 @@ return $this->render('KikalaFrontBundle:User:newPass.html.twig');
 
     public function kikologueAction()
     {
+        //affiche tous les contenus
+        
+
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig');
     }
 

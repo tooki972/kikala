@@ -1,27 +1,14 @@
 {% extends "::base.html.twig"%}
+{% form_theme register_form '::bootstrap-form.html.twig' %}
 {%block title%} 
 {{ parent()}} - register
 {% endblock %}
 
 {% block body %}
-<h1>Créez votre user !</h1>
+<h1>Créez votre Kikologue !</h1>
 
 {{ form(register_form, {'attr':{'novalidate': 'novalidate'}}) }}
 
 
-<p>Cette page affiche le formulaire d’inscription.
-- pseudo
-- email
-- password (2x)
-- name
-- prenom
-- Année de naissance (l’âge sera affiché par tranche) - birthday
-- gender
-- metier (texte libre)
-- Descriptif en tant que formateur- infoFormateur
-- Descriptif en tant qu’étudiant - inforEtudiant
-- photo (ou image) de profil
 
-Tous les champs sont requis, à l’exception de la photo. 
-Avant validation et inscription, toutes les validations nécessaires à l’intégrité des données et à la sécurité sont évidemment réalisées, au moins côté backend. Commentaire</p>
 {% endblock %}

@@ -26,13 +26,13 @@ kikala_front_newPass:
     path:     /forgot/{token}/{email}
     defaults: { _controller: KikalaFrontBundle:User:newpass }
 
+kikala_front_lsForma:
+    path:     /lsForma/
+    defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
+
 kikala_front_logout:
     path:     /logout/
     defaults: { _controller: KikalaFrontBundle:User:logout }
-
-kikala_front_lsFoma:
-    path:     /lsFoma/
-    defaults: { _controller: KikalaFrontBundle:Formation:lsFoma }
 
 
 kikala_front_formaDetail:
