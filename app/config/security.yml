@@ -23,14 +23,9 @@ security:
                 login_path:  /login
                 check_path:  /login_check
                 default_target_path: /kikologue/
-        demo_secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: login_check
-                login_path: login
             logout:
                 path:   /logout
-                target:
+                target: /home/
             remember_me:
                 key:      "%secret%"
                 lifetime: 31536000 # 365 days in seconds

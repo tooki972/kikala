@@ -101,6 +101,7 @@ class UserController extends Controller
 
     public function forgotAction(Request $request)
     {
+        $mailsend=false;
         $email=$request->request->get('email');
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
        $user=$mailreposytory->findOneByEmail($email);
@@ -115,7 +116,7 @@ class UserController extends Controller
         ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
        
          $this->get('mailer')->send($message);
-         echo'mail envoyer';
+         $mailsend=true;
         }
 
        $params =array();
@@ -144,10 +145,7 @@ class UserController extends Controller
 }
 return $this->render('KikalaFrontBundle:User:newPass.html.twig');
     }
-    public function logoutAction()
-    {
-        return $this->render('KikalaFrontBundle:User:logout.html.twig');
-    }
+   
 
     public function kikoDetailAction()
     {
