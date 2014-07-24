@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\UserKikologue;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
-
+use \abeautifulsite\simpleimage;
 
 
 class UserController extends Controller
@@ -47,7 +47,15 @@ class UserController extends Controller
             $user->setRedCross(0);
 
             //image
+           // $dir = $this->get('kernel')->getRootDir() . '/../web';
+           // $file = $UserKikologue->getFile();
+            // comput a random name and try to guess the extension
+           // $extension = $file->guessExtension();
+           // $newFilename = time().'.'.$extension;
+           // $file->move($dir, $newFilename);
+            //$user->setImage($newFilename);
             $user->setImage(0);
+            $user->setPhoto(0);
 
             //salt
             $generator = new SecureRandom();
@@ -136,10 +144,15 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
     }
 
-    public function kikologueAction()
+    public function kikologueAction($id)
     {
         //affiche tous les contenus
         
+        $userKikologueRepository=$this->getDoctrine()->getRepository("KikalaFrontBundle:UserKikologue");
+
+        $monAccount=$userKikologueRepository->findById($id);
+       
+        print_r($monAccount);
 
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig');
     }
