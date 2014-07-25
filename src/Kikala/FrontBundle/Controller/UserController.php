@@ -72,8 +72,11 @@ class UserController extends Controller
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
-    
+
+            //roles
+            $user ->setRole(array'ROLE_USER');
             //récupération du manager pour sauvegarder l'entity
+            $user
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
 
