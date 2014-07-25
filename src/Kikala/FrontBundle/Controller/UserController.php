@@ -67,6 +67,7 @@ class UserController extends Controller
                     $em->persist($user);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
+                 return $this->redirect($this->generateUrl("kikala_front_home"));
                 }
         // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
             $params = array(

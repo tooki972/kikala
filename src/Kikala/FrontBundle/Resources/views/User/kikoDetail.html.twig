@@ -4,6 +4,27 @@
 {% endblock %}
 {% block body %}
 
+
+pseudo {{ user.pseudo }}
+{% if date(user.birthday)>date('-10years') %}
+Vous avez  menti sur votre age('sinon va te coucher kevin')
+{% elseif date(user.birthday)>date('-20years') %}
+ Vous avez la dizaine
+ {% elseif date(user.birthday)>date('-30years') %}
+Vous avez la vingtaine
+ {% elseif date(user.birthday)>date('-40years') %}
+ Vous avez la trentaine
+  {% elseif date(user.birthday)>date('-50years') %}
+  Vous avez la quarantaine
+    {% elseif date(user.birthday)>date('-60years') %}
+    Vous avez la cinquantaine
+      {% elseif date(user.birthday)>date('-70years') %}
+      Vous avez la soixantaine
+        {% elseif date(user.birthday)>date('-80years') %}
+        Vous avez la soixantedizaine
+          {% elseif date(user.birthday)>date('-90years') %}
+          Vous avez quatre-vingtaine
+{% endif %}
 <p>Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
 À noter que l’âge du kikologue est affiché par tranche de 10 ans. 
 
