@@ -73,7 +73,7 @@ class UserKikologueType extends AbstractType
                 )  
                 ))
             ->add('birthday', 'datetime', array(
-                "label" => "Date de création",
+                "label" => "Date de naissance",
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'format' => 'dd/MM/yyyy',
