@@ -779,4 +779,12 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     {
         return $this->inscriptionForms;
     }
+    public function count()
+    {
+        return $this->createQueryBuilder('id')
+            ->select('COUNT(id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

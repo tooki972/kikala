@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserKikologueRepository extends EntityRepository
 {
+	public function countUser(){
+		$count=$this->createQueryBuilder('pseudo')
+				->select('COUNT(pseudo)')
+				->getQuery()
+				->getSingleScalarResult();
+				return $count;
+	}
 }
