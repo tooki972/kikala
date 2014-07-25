@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\UserKikologue;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
-
+use \abeautifulsite\simpleimage;
 
 
 class UserController extends Controller
@@ -47,7 +47,15 @@ class UserController extends Controller
             $user->setRedCross(0);
 
             //image
+           // $dir = $this->get('kernel')->getRootDir() . '/../web';
+           // $file = $UserKikologue->getFile();
+            // comput a random name and try to guess the extension
+           // $extension = $file->guessExtension();
+           // $newFilename = time().'.'.$extension;
+           // $file->move($dir, $newFilename);
+            //$user->setImage($newFilename);
             $user->setImage(0);
+            $user->setPhoto(0);
 
             //salt
             $generator = new SecureRandom();
@@ -64,6 +72,9 @@ class UserController extends Controller
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
+
+            //Roles
+            $user->addRole(array("ROLE_USER"));
     
             //récupération du manager pour sauvegarder l'entity
             $em = $this->getDoctrine()->getManager();
@@ -87,7 +98,7 @@ class UserController extends Controller
       // get the login error if there is one
 	     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
           $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-          return $this->redirect($this->generateUrl('kikala_front_kikologue'));
+          return $this->redirect($this->generateUrl('kikala_front_kikologue', array('id'=>$this->getUser()->getId)));
       } else {
           $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
           $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
@@ -98,10 +109,16 @@ class UserController extends Controller
       ));
        
     }
-}
+    }
+
+    public function loginRedirect() {
+        $redirect = $this->getUser()->getRole;
+    
+    }
 
     public function forgotAction(Request $request)
     {
+        $mailsend=false;
         $email=$request->request->get('email');
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
 
@@ -117,7 +134,7 @@ class UserController extends Controller
         ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
        
          $this->get('mailer')->send($message);
-         echo'mail envoyer';
+         $mailsend=true;
         }
 
        $params =array();
@@ -147,10 +164,7 @@ class UserController extends Controller
 return $this->render('KikalaFrontBundle:User:newPass.html.twig');
 
     }
-    public function logoutAction()
-    {
-        return $this->render('KikalaFrontBundle:User:logout.html.twig');
-    }
+   
 
     public function kikoDetailAction()
     {
@@ -160,9 +174,9 @@ return $this->render('KikalaFrontBundle:User:newPass.html.twig');
 
     public function kikologueAction($id){
 
-        $user=$request->request->get($id);
+        
         $userKikologueReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
-        $monAccount=$userKikologueReposytory->findById();
+        $monAccount=$userKikologueReposytory->findById($id);
 
         $params =array(
         print_r ($monAccount)

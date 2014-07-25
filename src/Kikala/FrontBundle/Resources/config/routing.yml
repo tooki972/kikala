@@ -33,16 +33,16 @@ kikala_front_lsForma:
     defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
 
 
-kikala_front_logout:
-    path:     /logout/
-    defaults: { _controller: KikalaFrontBundle:User:logout }
+logout:
+    path:     /logout
+
 
 kikala_front_formaDetail:
     path:     /formaDetail/
     defaults: { _controller: KikalaFrontBundle:Formation:formaDetail }
 
 kikala_front_kikoDetail:
-    path:     /kikoDetail/
+    path:     /kikoDetail/{id}
     defaults: { _controller: KikalaFrontBundle:User:kikoDetail }
 
 kikala_front_kikologue:
