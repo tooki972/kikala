@@ -226,7 +226,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function __construct()
     {
-        $this->roles =Array();
+
 
     }
 
@@ -248,8 +248,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setPseudo($pseudo)
     {
-        $this->pseudo = $pseudo;
-        $this->pseudo strip_tags($pseudo)
+       $this->pseudo=strip_tags($pseudo);
 
         return $this;
     }
@@ -276,8 +275,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setEmail($email)
     {
-        $this->email = $email;
-        $this->pseudo strip_tags($email)
+        $this->email = strip_tags($email);
 
         return $this;
     }
@@ -300,8 +298,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
-        $this->password strip_tags($password)
+        $this->password = strip_tags($password);
 
         return $this;
     }
@@ -324,8 +321,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setName($name)
     {
-        $this->name = $name;
-        $this->name strip_tags($name)
+        $this->name = strip_tags($name);
 
         return $this;
     }
@@ -348,8 +344,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setPrenom($prenom)
     {
-        $this->prenom = $prenom;
-        $this->prenom strip_tags($prenom)
+        $this->prenom = strip_tags($prenom);
         return $this;
     }
 
@@ -417,8 +412,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setMetier($metier)
     {
-        $this->metier = $metier;
-        $this->metier strip_tags($metier)
+        $this->metier = strip_tags($metier);
 
         return $this;
     }
@@ -441,8 +435,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setInfoFormateur($infoFormateur)
     {
-        $this->infoFormateur = $infoFormateur;
-        $this->infoFormateur strip_tags($infoFormateur)
+        $this->infoFormateur = strip_tags($infoFormateur);
 
         return $this;
     }
@@ -465,8 +458,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setInfoEtudiant($infoEtudiant)
     {
-        $this->infoEtudiant = $infoEtudiant;
-        $this->infoEtudiant strip_tags($infoEtudiant)
+        $this->infoEtudiant = strip_tags($infoEtudiant);
 
         return $this;
     }
@@ -664,7 +656,22 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     {
         return $this->image;
     }
-        /**
+
+    
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return UserKikologue
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }   
+     
+    /**
      * Add roles
      *
      * @param \Wf3\WikiBundle\Entity\Role $roles
@@ -739,20 +746,6 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
             return true;
         }
     return false;
-    }
-
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return UserKikologue
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     /**

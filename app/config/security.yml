@@ -6,7 +6,6 @@ security:
             encode_as_base64: false
 
     role_hierarchy:
-
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
@@ -22,7 +21,7 @@ security:
             form_login:
                 login_path:  /login
                 check_path:  /login_check
-                default_target_path: /kikologue/
+                default_target_path: /redirect/
             logout:
                 path:   /logout
                 target: /home/

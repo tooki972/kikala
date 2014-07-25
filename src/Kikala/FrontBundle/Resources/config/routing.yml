@@ -18,6 +18,7 @@ kikala_front_login:
     path:     /login/
     defaults: { _controller: KikalaFrontBundle:User:login }
 
+
 kikala_front_forgot:
     path:     /forgot/
     defaults: { _controller: KikalaFrontBundle:User:forgot }
@@ -28,6 +29,11 @@ kikala_front_newPass:
     defaults: { _controller: KikalaFrontBundle:User:newpass }
 
 
+kikala_front_redirect:
+    path:     /redirect/
+    defaults: { _controller: KikalaFrontBundle:User:redirect }
+    requirements:
+         _method:  GET
 kikala_front_lsForma:
     path:     /lsForma/
     defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
@@ -46,8 +52,9 @@ kikala_front_kikoDetail:
     defaults: { _controller: KikalaFrontBundle:User:kikoDetail }
 
 kikala_front_kikologue:
-    path:     /kikologue/
+    path:     /kikologue/{id}
     defaults: { _controller: KikalaFrontBundle:User:kikologue }
+
 
 kikala_front_profil:
     path:     /profil/

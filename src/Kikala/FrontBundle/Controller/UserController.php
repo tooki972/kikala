@@ -78,7 +78,6 @@ class UserController extends Controller
             $user->setRoles(array("ROLE_USER"));
     
             //récupération du manager pour sauvegarder l'entity
-            $user
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
 
@@ -95,28 +94,33 @@ class UserController extends Controller
 
     public function loginAction()
     {
- 	      $request = $this->getRequest();
-      $session = $request->getSession();
-      // get the login error if there is one
-	     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-          $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-          return $this->redirect($this->generateUrl('kikala_front_kikologue'));
-      } else {
-          $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-          $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
-             return $this->render('KikalaFrontBundle:User:login.html.twig', array(
-          // last username entered by the user
-          'last_username' => $session->get(SecurityContext::LAST_USERNAME),  
-          'error'         => $error,
-      ));
-       
-    }
+ 	    $request = $this->getRequest();
+        $session = $request->getSession();
+        // get the login error if there is one
+	       if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+            return $this->redirect($this->generateUrl('kikala_front_redirect'));
+            } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
+            return $this->render('KikalaFrontBundle:User:login.html.twig', array(
+            // last username entered by the user
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),  
+            'error'         => $error,
+            ));
+            }
     }
 
-    public function loginRedirect() {
-        $redirect = $this->getUser()->getRole;
-        //array('id'=>$this->getUser()->getId))
-    
+    public function redirectAction(){
+        $redirect = $this->getUser()->getRoles();
+
+        if (in_array("ROLE_USER", $redirect)){
+            $id=$this->getUser()->getId();
+            return $this->redirect($this->generateUrl("kikala_front_kikologue", array('id'=>$id)));
+        } else if ($this->get('security.context')->isGranted("ROLE_ADMIN")) {
+            return $this->redirect($this->generateUrl("kikala_front_home"));
+        }
+        return $this->render('KikalaFrontBundle:User:home.html.twig');
     }
 
     public function forgotAction(Request $request)
@@ -125,59 +129,50 @@ class UserController extends Controller
         $email=$request->request->get('email');
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
 
-       $user=$mailreposytory->findOneByEmail($email);
-       if(!empty($user)){
-       $token = $user->getToken();
-        $url=$this->generateUrl("kikala_front_newPass",array('token'=>$token,
-                                                            'email'=>$email),true);
-        $message = \Swift_Message::newInstance()
-        ->setSubject('mot de pass oublier')
-        ->setFrom('kikalabundle@gmail.com')
-        ->setTo($email)
-        ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
-       
-         $this->get('mailer')->send($message);
-         $mailsend=true;
+        $user=$mailreposytory->findOneByEmail($email);
+        if(!empty($user)){
+            $token = $user->getToken();
+            $url=$this->generateUrl("kikala_front_newPass",array('token'=>$token,'email'=>$email),true);
+            $message = \Swift_Message::newInstance()
+            ->setSubject('mot de pass oublier')
+            ->setFrom('kikalabundle@gmail.com')
+            ->setTo($email)
+            ->setBody("pour recupere votre email veiller cliquer sur ce lien <br/> <a href='$url'>$url</a>",'text/html');
+            $this->get('mailer')->send($message);
+            $mailsend=true;
         }
-
        $params =array();
-       
-
         return $this->render('KikalaFrontBundle:User:forgot.html.twig',$params);
     }
+
     public function newPassAction(Request $request,$token,$email)
     {
         $mdp=$request->request->get('pass');
         $confirm=$request->request->get('pass2');
-    if(!empty($mdp)){
-    if($mdp==$confirm){
-        $tokenReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
-       $user=$tokenReposytory->findOneByToken($token);
-       $user->setPassword($mdp);
-       $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-            $user->setPassword($password);
-        $em = $this->getDoctrine()->getManager();
-       $em->flush();
-
-        return $this->redirect($this->generateUrl('kikala_front_homepage'));
-    }
-}
-return $this->render('KikalaFrontBundle:User:newPass.html.twig');
-
+        if(!empty($mdp)){
+            if($mdp==$confirm){
+                $tokenReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
+                $user=$tokenReposytory->findOneByToken($token);
+                $user->setPassword($mdp);
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                $user->setPassword($password);
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirect($this->generateUrl('kikala_front_homepage'));
+            }
+        }
+        return $this->render('KikalaFrontBundle:User:newPass.html.twig');
     }
    
-
     public function kikoDetailAction()
     {
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
     }
 
-
-    public function kikologueAction($id){
-
-        
+    public function kikologueAction($id)
+    {
         $userKikologueReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
         $monAccount=$userKikologueReposytory->findById($id);
 
@@ -185,7 +180,6 @@ return $this->render('KikalaFrontBundle:User:newPass.html.twig');
         print_r ($monAccount)
         );
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig', $params);
-
     }
 
     public function profilAction()
