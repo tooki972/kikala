@@ -17,5 +17,12 @@ Le nombre de kikos en banque est affiché. Auprès de celui-ci, un lien permet d
 Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions </p>
 {% endblock %}
 {% block aside %}
-<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="320" width="285" />
+	
+	{% if user.filename %}
+		<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="320" width="285" />
+	{% else %}
+		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="320" width="285" />
+	{% endif %}
+
 {% endblock %}
+
