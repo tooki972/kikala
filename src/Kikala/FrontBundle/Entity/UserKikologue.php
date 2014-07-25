@@ -147,15 +147,14 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      * @var string
      * @Assert\Image(
      *     minWidth = 200,
-     *     maxWidth = 1200,
+     *     maxWidth = 2400,
      *     minHeight = 200,
-     *     maxHeight = 1200,
+     *     maxHeight = 2400,
      *     maxSize = "1024k",
      *     maxSizeMessage = "choisissez une photo de moins de 1M",
      *     mimeTypes = {"image/jpeg", "image/jpg"},
      *     mimeTypesMessage = "choisissez une photo en jpg"
      * )
-     * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
 
@@ -204,9 +203,9 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="filename", type="string", length=255,nullable=true)
      */
-    private $image;
+    private $filename;
     /**
     *
     * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm", mappedBy="user")
@@ -635,26 +634,26 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set image
+     * Set filename
      *
-     * @param string $image
+     * @param string $filename
      * @return UserKikologue
      */
-    public function setImage($image)
+    public function setFilename($filename)
     {
-        $this->image = $image;
+        $this->filename = $filename;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get filename
      *
      * @return string 
      */
-    public function getImage()
+    public function getFilename()
     {
-        return $this->image;
+        return $this->filename;
     }
 
     

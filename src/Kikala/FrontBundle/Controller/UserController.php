@@ -36,17 +36,16 @@ class UserController extends Controller
                     $user->setKikos(2);
                     //redCross
                     $user->setRedCross(0);
-                    //Photo
-                        // $dir = $this->get('kernel')->getRootDir() . '/../web';
-                        // $file = $UserKikologue->getFile();
-                        // comput a random name and try to guess the extension
-                        // $extension = $file->guessExtension();
-                        // $newFilename = time().'.'.$extension;
-                        // $file->move($dir, $newFilename);
-                        //$user->setImage($newFilename);
-                    $user->setPhoto(0);
-                    //Image
-                        $user->setImage(0);
+                    //Photo et Filename
+                    if(!empty($user->getPhoto())){
+                        $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
+                        $photo = $user->getPhoto();
+                            // comput a random name and try to guess the extension
+                            $extension = $photo->guessExtension();
+                            $newFilename = base64_encode(microtime()).'.'.$extension;
+                            $photo->move($dir, $newFilename);
+                            $user->setFilename($newFilename);
+                    }
                     //salt
                     $generator = new SecureRandom();
                     $salt = bin2hex($generator->nextBytes(30));
