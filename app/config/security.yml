@@ -6,8 +6,8 @@ security:
             encode_as_base64: false
 
     role_hierarchy:
-        ROLE_USER:        ROLE_USER
-        ROLE_ADMIN:       ROLE_ADMIN
+
+        ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -36,4 +36,5 @@ security:
             #    realm: "Secured Demo Area"
 
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http}
+        - { path: ^/kikologue/, roles: ROLE_USER, requires_channel: http }

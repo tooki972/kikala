@@ -226,7 +226,8 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function __construct()
     {
-        $this->roles = Array();
+        $this->roles =Array();
+
     }
 
     /**
@@ -693,7 +694,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function getRoles()
     {
-        return $this->roles->toArray();
+        return $this->roles;
         //return array('ROLE_USER');
     }
 

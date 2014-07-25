@@ -73,8 +73,10 @@ class UserController extends Controller
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
 
-            //roles
-            $user ->setRole(array'ROLE_USER');
+
+            //Roles
+            $user->setRoles(array("ROLE_USER"));
+    
             //récupération du manager pour sauvegarder l'entity
             $user
             $em = $this->getDoctrine()->getManager();
@@ -98,6 +100,7 @@ class UserController extends Controller
       // get the login error if there is one
 	     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
           $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+          return $this->redirect($this->generateUrl('kikala_front_kikologue'));
       } else {
           $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
           $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
@@ -108,13 +111,20 @@ class UserController extends Controller
       ));
        
     }
-}
+    }
+
+    public function loginRedirect() {
+        $redirect = $this->getUser()->getRole;
+        //array('id'=>$this->getUser()->getId))
+    
+    }
 
     public function forgotAction(Request $request)
     {
         $mailsend=false;
         $email=$request->request->get('email');
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
+
        $user=$mailreposytory->findOneByEmail($email);
        if(!empty($user)){
        $token = $user->getToken();
@@ -155,6 +165,7 @@ class UserController extends Controller
     }
 }
 return $this->render('KikalaFrontBundle:User:newPass.html.twig');
+
     }
    
 
@@ -163,17 +174,18 @@ return $this->render('KikalaFrontBundle:User:newPass.html.twig');
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
     }
 
-    public function kikologueAction($id)
-    {
-        //affiche tous les contenus
+
+    public function kikologueAction($id){
+
         
-        $userKikologueRepository=$this->getDoctrine()->getRepository("KikalaFrontBundle:UserKikologue");
+        $userKikologueReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
+        $monAccount=$userKikologueReposytory->findById($id);
 
-        $monAccount=$userKikologueRepository->findById($id);
-       
-        print_r($monAccount);
+        $params =array(
+        print_r ($monAccount)
+        );
+        return $this->render('KikalaFrontBundle:User:kikologue.html.twig', $params);
 
-        return $this->render('KikalaFrontBundle:User:kikologue.html.twig');
     }
 
     public function profilAction()

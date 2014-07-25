@@ -22,23 +22,27 @@ kikala_front_forgot:
     path:     /forgot/
     defaults: { _controller: KikalaFrontBundle:User:forgot }
 
+
 kikala_front_newPass:
     path:     /forgot/{token}/{email}
     defaults: { _controller: KikalaFrontBundle:User:newpass }
+
 
 kikala_front_lsForma:
     path:     /lsForma/
     defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
 
+
 logout:
     path:     /logout
+
 
 kikala_front_formaDetail:
     path:     /formaDetail/
     defaults: { _controller: KikalaFrontBundle:Formation:formaDetail }
 
 kikala_front_kikoDetail:
-    path:     /kikoDetail/
+    path:     /kikoDetail/{id}
     defaults: { _controller: KikalaFrontBundle:User:kikoDetail }
 
 kikala_front_kikologue:
