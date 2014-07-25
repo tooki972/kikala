@@ -74,7 +74,7 @@ class UserController extends Controller
             $user->setPassword($password);
 
             //Roles
-            $user->addRole(array("ROLE_USER"));
+            $user->setRoles(array("ROLE_USER"));
     
             //récupération du manager pour sauvegarder l'entity
             $em = $this->getDoctrine()->getManager();
@@ -98,7 +98,7 @@ class UserController extends Controller
       // get the login error if there is one
 	     if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
           $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-          return $this->redirect($this->generateUrl('kikala_front_kikologue', array('id'=>$this->getUser()->getId)));
+          return $this->redirect($this->generateUrl('kikala_front_kikologue'));
       } else {
           $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
           $session->remove(SecurityContext::AUTHENTICATION_ERROR);   
@@ -113,6 +113,7 @@ class UserController extends Controller
 
     public function loginRedirect() {
         $redirect = $this->getUser()->getRole;
+        //array('id'=>$this->getUser()->getId))
     
     }
 

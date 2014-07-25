@@ -227,7 +227,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function __construct()
     {
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles =Array();
     }
     /**
      * Get id
@@ -688,7 +688,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function getRoles()
     {
-        return $this->roles->toArray();
+        return $this->roles;
         //return array('ROLE_USER');
     }
 
