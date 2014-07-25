@@ -13,14 +13,11 @@ use \abeautifulsite\simpleimage;
 
 
 class UserController extends Controller
-{
-    //affiche et traite le formulaire d'inscription
-    //page formulaire
-    
 
+{ 
+    // 1. Traitement et affichage du formulaire d'inscription, ainsi que sauvegarde des resultats (données) dans la DB
     public function registerAction(Request $request)
     {
-
         //instanciation d'un objet
         $user = new UserKikologue();
 
@@ -29,69 +26,58 @@ class UserController extends Controller
 
         //traitement de requête
         $register_form->handleRequest($request);
-
-         //si le formulaire est soumis et valide
-        if ($register_form->isValid()){
-
-            //errors
-
-            //go pour l'inscription
-            //Active
-            $user->setIsActive(true);
-            $user->setDateRegistered(new DateTime());
-
-            //Kikos
-            $user->setKikos(2);
-            
-            //redCross
-            $user->setRedCross(0);
-
-            //image
-           // $dir = $this->get('kernel')->getRootDir() . '/../web';
-           // $file = $UserKikologue->getFile();
-            // comput a random name and try to guess the extension
-           // $extension = $file->guessExtension();
-           // $newFilename = time().'.'.$extension;
-           // $file->move($dir, $newFilename);
-            //$user->setImage($newFilename);
-            $user->setImage(0);
-            $user->setPhoto(0);
-
-            //salt
-            $generator = new SecureRandom();
-            $salt = bin2hex($generator->nextBytes(30));
-            $user->setSalt($salt);
-            
-            //token
-            $generator = new SecureRandom();
-            $token = bin2hex($generator->nextBytes(30));
-            $user->setToken($token);
-
-            //hache le mot de passe
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-            $user->setPassword($password);
-
-
-            //Roles
-            $user->setRoles(array("ROLE_USER"));
-    
-            //récupération du manager pour sauvegarder l'entity
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-
-            $em->flush();
-            }
-
+        //si le formulaire est soumis et valide
+            if ($register_form->isValid()){ 
+                // Traitement de chaque donnée de notre formulaire
+                    // Active
+                    $user->setIsActive(true);
+                    $user->setDateRegistered(new DateTime());
+                    //Kikos
+                    $user->setKikos(2);
+                    //redCross
+                    $user->setRedCross(0);
+                    //Photo
+                        // $dir = $this->get('kernel')->getRootDir() . '/../web';
+                        // $file = $UserKikologue->getFile();
+                        // comput a random name and try to guess the extension
+                        // $extension = $file->guessExtension();
+                        // $newFilename = time().'.'.$extension;
+                        // $file->move($dir, $newFilename);
+                        //$user->setImage($newFilename);
+                    $user->setPhoto(0);
+                    //Image
+                        $user->setImage(0);
+                    //salt
+                    $generator = new SecureRandom();
+                    $salt = bin2hex($generator->nextBytes(30));
+                    $user->setSalt($salt);                    
+                    //token
+                    $generator = new SecureRandom();
+                    $token = bin2hex($generator->nextBytes(30));
+                    $user->setToken($token);
+                    //hache le mot de passe
+                    $factory = $this->get('security.encoder_factory');
+                    $encoder = $factory->getEncoder($user);
+                    $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                    $user->setPassword($password);
+                    //Roles
+                    $user->setRoles(array("ROLE_USER"));
+        
+                //récupération du manager pour sauvegarder l'entity
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                //Sauvegarde de l'entity (exécute la requête)
+                    $em->flush();
+                }
+        // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
             $params = array(
             "register_form" => $register_form->createView()
             );
-
-        return $this->render('KikalaFrontBundle:User:register.html.twig', $params);
+            return $this->render('KikalaFrontBundle:User:register.html.twig', $params);
     }
             
 
+    //2 . Mise en place de l'authentification (Roles et Redirections selon le type d'utilisateur)
     public function loginAction()
     {
  	    $request = $this->getRequest();
@@ -116,7 +102,7 @@ class UserController extends Controller
 
         if (in_array("ROLE_USER", $redirect)){
             $id=$this->getUser()->getId();
-            return $this->redirect($this->generateUrl("kikala_front_kikologue", array('id'=>$id)));
+            return $this->redirect($this->generateUrl("kikala_front_kikologue"));
         } else if ($this->get('security.context')->isGranted("ROLE_ADMIN")) {
             return $this->redirect($this->generateUrl("kikala_front_home"));
         }
@@ -166,21 +152,19 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:newPass.html.twig');
     }
    
+    public function kikologueAction()
+    { //
+        $user=$this->getUser();
+        return $this->render('KikalaFrontBundle:User:kikologue.html.twig',array(
+        'user'=>$user));
+    }
+    
+
     public function kikoDetailAction()
     {
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
     }
 
-    public function kikologueAction($id)
-    {
-        $userKikologueReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
-        $monAccount=$userKikologueReposytory->findById($id);
-
-        $params =array(
-        print_r ($monAccount)
-        );
-        return $this->render('KikalaFrontBundle:User:kikologue.html.twig', $params);
-    }
 
     public function profilAction()
     {
