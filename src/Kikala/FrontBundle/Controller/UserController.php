@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\UserKikologue;
-use Kikala\FrontBundle\Form\UserProfiltype;
+use Kikala\FrontBundle\Form\UserProfilType;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
 use \abeautifulsite\simpleimage;
