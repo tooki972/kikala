@@ -5,28 +5,30 @@
 
 {% block body %}
 
-	<h1>Mon compte</h1>
+	<h2 class="pageTitle">Mon compte</h2>
 
 
+	<div id="userMetier" class="col-xs-12 col-md-8">
+		<p> {{user.metier}}</p>
+	</div>
+	<div id="userInfoFormateur" class="col-xs-12 col-md-8">
+		<p> {{user.infoFormateur}}</p>
+	</div>
+	<div id="userKikos" class="col-xs-12 col-md-8">
+		<p>vous avez : {{user.kikos}} kikos</p>
+	</div>
 
-	<p> {{user.metier}}</p>
-
-	<p> {{user.infoFormateur}}</p>
-
-	<p>vous avez: {{user.kikos}}kikos</p>
-
-
-	<div class="col-xs-12 col-md-8">
-		<a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12 col-md-4" role="button">Cree une Formation</a> </p>
+	<div class="col-xs-12 col-md-4">
+		<a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12" role="button">Cree une Formation</a> </p>
 	</div>
 	<div class="col-xs-12 col-md-8">
 		<p>Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions</p>
 	</div>
-	<div class="col-xs-12 col-md-8">
-		<a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12 col-md-4" role="button">Mes  Formation</a>
+	<div class="col-xs-12 col-md-4">
+		<a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12" role="button">Mes  Formation</a>
 	</div>	
-	<div class="col-xs-12 col-md-8">
-	<a href="{{ path('kikala_front_mes_inscriptions') }}" class="btn btn-default col-xs-12 col-md-4" role="button">mes inscription</a>
+	<div class="col-xs-12 col-md-4">
+	<a href="{{ path('kikala_front_mes_inscriptions') }}" class="btn btn-default col-xs-12" role="button">mes inscription</a>
 	</div>
 
 {% endblock %}

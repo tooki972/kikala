@@ -4,10 +4,16 @@
 {% endblock %}
 {% block body %}
 
-<p>Le nom du site
-Le slogan
-Le nombre de formations en cours
-Le nombre d'inscrit est de  {{ nbUser}}
+	<h2 class="pageTitle">Kikala !</h2>
+<div class="col-xs-12">
+	<h3 id="slogan">Echange de connaissance accessible à tous</h3>
+</div>
+<div class="col-xs-12"class="col-xs-12">
+	<p>Le nombre de formations en cours</p>
+</div>
+<div class="col-xs-12" class="nbUser">
+	<p>Le nombre d'inscrit est de <span id="nbUser">  {{ nbUser}} </span></p>
+</div>
 
 Un bouton “inscription”
 Un bouton “connexion”</p>

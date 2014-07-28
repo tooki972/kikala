@@ -79,10 +79,7 @@ h2{
  	margin-bottom: 15px;
  	letter-spacing: -1px;
 }
-#namePseudo{
-	color: #b8c945;
-	font-weight: bold;
-}
+
 #une{
 	margin-top: 15px;
 }
@@ -121,7 +118,56 @@ h3{
 	color: #3276b1;
 	margin-right: 15px;
 }
-
+.pageTitle{
+	border-radius: 8px;
+	background: #b8c945;
+	color: #fff;
+ 	font-size: 1.5em;
+ 	letter-spacing: -1px;
+ 	margin-bottom: 15px;
+ 	padding: 2px;
+}
+/************** HOME ******************************/
+#nbUser{
+	background: url(../img/bulle-rouge.png) no-repeat;
+	color: #fff;
+	font-size: 2em;
+	height: 68px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	padding-top: 10px;
+	width: 83px;
+	text-align: center;
+	display: inline-block;
+}
+.nbUser{
+	width: 83px;
+}
+/************** PROFIL ****************************/
+#namePseudo{
+	color: #b8c945;
+	font-weight: bold;
+	margin-top: 5px;
+}
+#userMetier, #userInfoFormateur{
+	border-bottom: 1px solid #b8c945;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+#userKikos{
+	background: url(../img/bulle-verteB.png) no-repeat;
+	color: #fff;
+	height: 68px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	width: 83px;
+	text-align: center;
+}
+#slogan{
+	background: none;
+	color: #ca5745;
+	font-style: italic;
+}
 /**************FORMULAIRE AJOUT *****************/
 
 #kikala_frontbundle_userkikologue label, #loginForm label{

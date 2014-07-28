@@ -23,21 +23,38 @@ class Formation
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Le nom de la formation doit être renseigné!")
      *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 2400,
+     *     minHeight = 200,
+     *     maxHeight = 2400,
+     *     maxSize = "1024k",
+     *     maxSizeMessage = "choisissez une photo de moins de 1M",
+     *     mimeTypes = {"image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "choisissez une photo en jpg"
+     * )
      * @ORM\Column(name="miImage", type="string", length=255)
      */
     private $miImage;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank(message="La date doit être renseigné!")
+     * @Assert\DateTime()
      * @ORM\Column(name="dateFormation", type="datetime")
      */
     private $dateFormation;
@@ -51,14 +68,15 @@ class Formation
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="La lieu doit être renseigné!")
      * @ORM\Column(name="lieu", type="string", length=255)
      */
     private $lieu;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank(message="La durée doit être renseigné!")
+     * @Assert\Time()
      * @ORM\Column(name="duree", type="time")
      */
     private $duree;
@@ -72,7 +90,7 @@ class Formation
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank(message="Descriptif de la formation !")
      * @ORM\Column(name="nbTotal", type="integer")
      */
     private $nbTotal;
@@ -87,7 +105,7 @@ class Formation
     /**
      * @var \Date
      *
-     * @ORM\Column(name="cancelDate", type="date")
+     * @ORM\Column(name="cancelDate", type="date", nullable=true)
      */
     private $cancelDate;
     

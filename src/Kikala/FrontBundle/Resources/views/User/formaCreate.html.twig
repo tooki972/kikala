@@ -1,11 +1,12 @@
 {% extends "::base.html.twig"%}
+{% form_theme formation_form '::bootstrap-form.html.twig' %}
 {%block title%} 
 {{ parent()}} - formaCreate
 {% endblock %}
 {% block body %}
 
 <p>create_formation
-
+{{ form(formation_form, {'attr':{'novalidate': 'novalidate'}}) }}
 Cet écran permet d’offrir une nouvelle formation, par le biais d’un formulaire.
 
 Les champs du formulaire sont les suivants : 
