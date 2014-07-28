@@ -68,8 +68,10 @@ aside{
 	padding: 15px;
 }
 h1{
- 	color: #3276b1;
- 	font-size: 2em;
+ 	color: #330a03;
+ 	font-size: 1.75em;
+ 	margin-bottom: 15px;
+ 	letter-spacing: -1px;
 }
 #une{
 	margin-top: 15px;
@@ -112,13 +114,23 @@ h3{
 
 /**************FORMULAIRE AJOUT *****************/
 
-#kikala_frontbundle_userkikologue label{
+#kikala_frontbundle_userkikologue label, #loginForm label{
 	text-align: right;
 }
 #wf3_wikibundle_content ul li, #kikala_frontbundle_userkikologue ul li{
 	color: red; clear: left;
 }
+#loginForm{
+	overflow: hidden;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+	color: #fff;
+	background-color: #ca5745;
+	border-color: red;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
 	color: #fff;
 	background-color: #ca5745;
 	border-color: red;
@@ -128,6 +140,12 @@ h3{
 	background-color: #b8c945;
 	border-color: #adc50c;
 	margin-top: 15px
+}
+.form-control{
+	margin-bottom: 10px;
+}
+.form-link{
+	margin-top: 10px;
 }
 /***************  footer   ****************/
 #bas{

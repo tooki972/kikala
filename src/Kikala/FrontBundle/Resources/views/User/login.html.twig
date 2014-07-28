@@ -6,26 +6,33 @@
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
-
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Login :</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="_password" />
- 
- <input type="checkbox" id="remember_me" name="_remember_me" checked />
-    <label for="remember_me">Keep me logged in</label>
-    {#
-        Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
-        (plus de détails ci-dessous)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-
-    <button type="submit">login</button>
-</form>
-<a href="{{path('kikala_front_register')}}" title="inscription">Inscription</a>
-
-<a class="forget" href="{{path('kikala_front_forgot')}}" title='mot de pass oublier'>mot de pass oublier???</a>
+    <h1>Vous êtes un Kikologue !</h1>
+    <form action="{{ path('login_check') }}" method="post" id="loginForm">
+        <div class="form-group">
+            <label for="username" class="col-xs-12 col-md-4 control-label required">Login :</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="col-xs-12 col-md-8 form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-xs-12 col-md-4 control-label required">Mot de passe :</label>
+            <input type="password" id="password" name="_password" class="col-xs-12 col-md-8 form-control"/>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="remember_me" name="_remember_me" checked />
+            <label for="remember_me" class="col-xs-12 col-md-4 control-label required">Se souvenir du moi</label>
+        </div>
+        {#
+            Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+            (plus de détails ci-dessous)
+            <input type="hidden" name="_target_path" value="/account" />
+        #}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4">login</button>
+        </div>    
+    </form>
+    <h1>Vous voulez devenir un Kikologue !</h1>
+    <div class="form-link col-xs-12 col-md-8 col-md-offset-4">
+        <a href="{{path('kikala_front_register')}}" title="inscription" class="btn btn-default col-xs-12 col-md-4" role="button">Inscription</a>
+        <a class="forget btn btn-default col-xs-12 col-md-4" href="{{path('kikala_front_forgot')}}" title='mot de pass oublier'  role="button">mot de pass oublier???</a>
+    </div>    
 
 {% endblock %}
