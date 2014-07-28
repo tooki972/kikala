@@ -73,6 +73,16 @@ h1{
  	margin-bottom: 15px;
  	letter-spacing: -1px;
 }
+h2{
+ 	color: #330a03;
+ 	font-size: 1.5em;
+ 	margin-bottom: 15px;
+ 	letter-spacing: -1px;
+}
+#namePseudo{
+	color: #b8c945;
+	font-weight: bold;
+}
 #une{
 	margin-top: 15px;
 }

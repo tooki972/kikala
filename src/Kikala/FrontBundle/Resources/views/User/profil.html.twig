@@ -1,8 +1,12 @@
 {% extends "::base.html.twig"%}
+{% form_theme profil_form '::bootstrap-form.html.twig' %}
 {%block title%} 
 {{ parent()}} - Profil
 {% endblock %}
 {% block body %}
 
 <p>Cet page permet de modifier son profil, par un formulaire. Le seul champs qui n’est pas modifiable est l’email (cela impliquerait de redemander une validation, et donc d’invalider le compte...)   </p>
+
+{{ form(profil_form, {'attr':{'novalidate': 'novalidate'}}) }}
+
 {% endblock %}

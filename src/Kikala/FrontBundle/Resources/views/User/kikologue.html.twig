@@ -5,28 +5,40 @@
 
 {% block body %}
 
+	<h1>Mon compte</h1>
 
+	<p>Cet écran présente un résumé des informations pertinentes sur un kikologue, et permet de naviguer aisément vers les autres pages du “compte”. 
+	Le pseudo et l’image de profil sont affichés au haut de l’écran. Auprès de ceux-ci, un bouton permet de “Modifier son profil”.
 
+	<p> {{user.metier}}</p>
 
-Bonjour {{user.pseudo}}
-<p>Cet écran présente un résumé des informations pertinentes sur un kikologue, et permet de naviguer aisément vers les autres pages du “compte”. 
-Le pseudo et l’image de profil sont affichés au haut de l’écran. Auprès de ceux-ci, un bouton permet de “Modifier son profil”.
+	<p> {{user.infoFormateur}}</p>
 
-Le nombre de kikos en banque est affiché. Auprès de celui-ci, un lien permet d’accéder à la page de “Création d’une formation”.
+	<p>vous avez: {{user.kikos}}kikos</p>
 
-Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions
-vous avez: {{user.kikos}}kikos
-<a href="{{ path('kikala_front_formaCreate') }}">Cree une Formation</a> </p>
-<a href="{{ path('kikala_front_myForma') }}">Mes  Formation</a>
-<a href="{{ path('kikala_front_inscriptions') }}">mes inscription</a>
+	<div class="col-xs-12 col-md-8">
+		<a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12 col-md-4" role="button">Cree une Formation</a> </p>
+	</div>
+	<div class="col-xs-12 col-md-8">
+		<p>Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions</p>
+	</div>
+	<div class="col-xs-12 col-md-8">
+		<a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12 col-md-4" role="button">Mes  Formation</a>
+	</div>	
+	<div class="col-xs-12 col-md-8">
+	<a href="{{ path('kikala_front_mes_inscriptions') }}" class="btn btn-default col-xs-12 col-md-4" role="button">mes inscription</a>
+	</div>
 {% endblock %}
-{% block aside %}
-	
-	{% if user.filename %}
-		<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="320" width="285" />
-	{% else %}
-		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="320" width="285" />
-	{% endif %}
 
+{% block aside %}
+	<p>Bonjour</p><h2 id="namePseudo"> {{user.pseudo}}</h2>
+	{% if user.filename %}
+		<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="300" width="255" />
+	{% else %}
+		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
+	{% endif %}
+	<div>
+		<a href="{{ path('kikala_front_profil') }}" class="btn btn-default col-xs-12 col-md-8" role="button">Modifier son profil</a>
+	</div>	
 {% endblock %}
 
