@@ -45,13 +45,13 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
-            ->add('heureFormation', null, array(
+           /* ->add('heureFormation', null, array(
                 'required' => true,
                 "label" => "heure de la formation",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
-                ))
+                ))*/
             //->add('dateCreated')
             ->add('lieu', null, array(
                 'required' => true,
@@ -64,7 +64,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-8"
                 )  
                 ))
-            ->add('duree', null, array(
+            /*->add('duree', null, array(
                 'required' => true,
                 "label" => "duree",
                 'label_attr' => array(
@@ -74,7 +74,7 @@ class FormationType extends AbstractType
                  'placeholder' => 'duree de la formation',
                  'class'=> "col-xs-12 col-md-8"
                 )  
-                ))
+                ))*/
             ->add('descriptif', 'textarea', array(
                 'required' => true,
                 "label" => "descriptif",
@@ -100,7 +100,7 @@ class FormationType extends AbstractType
             //->add('cancelDate')
             ->add('tag', 'entity', array(
                 'property'=>'name',
-                'class'=>'Kikala\FrontBundle\Entity\Category',
+                'class'=>'Kikala\FrontBundle\Entity\Tag',
                 'required' => true,
                 "label" => "tag",
                 'label_attr' => array(

@@ -222,6 +222,9 @@ class UserController extends Controller
 
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
+
+print_r($formation_form->getData());
+
                  $forma->setIsActive(true);
                     $forma->setDateCreated(new DateTime());
                         if(!empty($forma->getMiImage())){

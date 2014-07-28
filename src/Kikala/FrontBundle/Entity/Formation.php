@@ -52,15 +52,15 @@ class Formation
      *     mimeTypes = {"image/jpeg", "image/jpg"},
      *     mimeTypesMessage = "choisissez une photo en jpg"
      * )
-     * @ORM\Column(name="miImage", type="string", length=255)
+     * @ORM\Column(name="miImage", type="string", length=255, nullable=true)
      */
     private $miImage;
 
     /**
-     * @var \Date
+     * @var \DateTime
      * @Assert\NotBlank(message="La date doit être renseignée!")
-     * @Assert\Date()
-     * @ORM\Column(name="dateFormation", type="date")
+     * @Assert\DateTime()
+     * @ORM\Column(name="dateFormation", type="datetime")
      */
     private $dateFormation;
 
@@ -70,7 +70,7 @@ class Formation
      * @Assert\time()
      * @ORM\Column(name="heureFormation", type="time")
      */
-    private $heureFormation;
+ //   private $heureFormation;
 
     /**
      * @var \Date
@@ -87,12 +87,12 @@ class Formation
     private $lieu;
 
     /**
-     * @var \DateTime
+     * @var \Time
      * @Assert\NotBlank(message="La durée doit être renseigné!")
      * @Assert\Time()
      * @ORM\Column(name="duree", type="time")
      */
-    private $duree;
+ //   private $duree;
 
     /**
      * @var string
@@ -206,7 +206,7 @@ class Formation
     /**
      * Set dateFormation
      *
-     * @param \Date $dateFormation
+     * @param \DateTime $dateFormation
      * @return Formation
      */
     public function setDateFormation($dateFormation)
@@ -219,7 +219,7 @@ class Formation
     /**
      * Get dateFormation
      *
-     * @return \Date 
+     * @return \DateTime 
      */
     public function getDateFormation()
     {
@@ -298,7 +298,7 @@ class Formation
     /**
      * Set duree
      *
-     * @param \DateTime $duree
+     * @param \Time $duree
      * @return Formation
      */
     public function setDuree($duree)
@@ -311,7 +311,7 @@ class Formation
     /**
      * Get duree
      *
-     * @return \DateTime 
+     * @return \Time 
      */
     public function getDuree()
     {
