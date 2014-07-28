@@ -3,6 +3,11 @@
 namespace Kikala\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Formation
@@ -126,6 +131,13 @@ class Formation
     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
     **/
     private $inscriptionForms;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="filename", type="string", length=255,nullable=true)
+     */
+    private $filename;
 
     /**
      * Get id
