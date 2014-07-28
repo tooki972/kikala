@@ -2,14 +2,13 @@
 {%block title%} 
 {{ parent()}} - kikologue
 {% endblock %}
-<<<<<<< HEAD
+
 {% block body %}
 
 {{ user.pseudo }}
 {{ user.kikos }}
 
-=======
->>>>>>> 50e5b9e38adfd752fb8b7fb3d068b9385c98ad83
+
 
 
 Bonjour {{user.pseudo}}
@@ -22,7 +21,7 @@ Le nombre de formation dispensées et le nombre de formations suivies sont aussi
 vous avez: {{user.kikos}}kikos
 <a href="{{ path('kikala_front_formaCreate') }}">Cree une Formation</a> </p>
 <a href="{{ path('kikala_front_myForma') }}">Mes  Formation</a>
-<a href="{{ path('kikala_front_inscriptions') }}">mes inscription</a>
+<a href="{{ path('kikala_front_mes_inscriptions') }}">mes inscription</a>
 {% endblock %}
 {% block aside %}
 	

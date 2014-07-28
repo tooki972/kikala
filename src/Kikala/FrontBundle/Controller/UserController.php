@@ -67,7 +67,7 @@ class UserController extends Controller
                     $em->persist($user);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-                 return $this->redirect($this->generateUrl("kikala_front_home"));
+                 return $this->redirect($this->generateUrl("kikala_front_homepage"));
                 }
         // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
             $params = array(
@@ -104,7 +104,7 @@ class UserController extends Controller
             $id=$this->getUser()->getId();
             return $this->redirect($this->generateUrl("kikala_front_kikologue"));
         } else if ($this->get('security.context')->isGranted("ROLE_ADMIN")) {
-            return $this->redirect($this->generateUrl("kikala_front_home"));
+            return $this->redirect($this->generateUrl("kikala_front_homepage"));
         }
         return $this->render('KikalaFrontBundle:User:home.html.twig');
     }
