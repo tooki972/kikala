@@ -220,7 +220,7 @@ class UserController extends Controller
                     }
                 }
                  $params = array(
-            "formation_form" => $formation_form->createView(),
+            "formation_form" => $formation_form->createView(),);
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
 

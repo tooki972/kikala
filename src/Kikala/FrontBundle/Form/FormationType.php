@@ -102,7 +102,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-8"
                 )  
                 ))
-            ->add('category', null, array(
+            ->add('category', 'null', array(
                 'required' => true,
                 "label" => "category",
                 'label_attr' => array(
