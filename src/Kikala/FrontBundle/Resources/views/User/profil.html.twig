@@ -10,3 +10,11 @@
 {{ form(profil_form, {'attr':{'novalidate': 'novalidate'}}) }}
 
 {% endblock %}
+{% block aside %}
+
+	{% if user.filename %}
+		<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="300" width="255" />
+	{% else %}
+		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
+	{% endif %}
+	{% endblock %}
