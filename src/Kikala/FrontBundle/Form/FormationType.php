@@ -45,6 +45,13 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
+            ->add('heureFormation', null, array(
+                'required' => true,
+                "label" => "heure de la formation",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                ))
             //->add('dateCreated')
             ->add('lieu', null, array(
                 'required' => true,

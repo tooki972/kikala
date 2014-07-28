@@ -57,12 +57,20 @@ class Formation
     private $miImage;
 
     /**
-     * @var \DateTime
-     * @Assert\NotBlank(message="La date doit être renseigné!")
-     * @Assert\DateTime()
-     * @ORM\Column(name="dateFormation", type="datetime")
+     * @var \Date
+     * @Assert\NotBlank(message="La date doit être renseignée!")
+     * @Assert\Date()
+     * @ORM\Column(name="dateFormation", type="date")
      */
     private $dateFormation;
+
+    /**
+     * @var \Time
+     * @Assert\NotBlank(message="L'heure doit être renseignée!")
+     * @Assert\time()
+     * @ORM\Column(name="heureFormation", type="time")
+     */
+    private $heureFormation;
 
     /**
      * @var \Date
@@ -198,7 +206,7 @@ class Formation
     /**
      * Set dateFormation
      *
-     * @param \DateTime $dateFormation
+     * @param \Date $dateFormation
      * @return Formation
      */
     public function setDateFormation($dateFormation)
@@ -211,11 +219,34 @@ class Formation
     /**
      * Get dateFormation
      *
-     * @return \DateTime 
+     * @return \Date 
      */
     public function getDateFormation()
     {
         return $this->dateFormation;
+    }
+
+    /**
+     * Set heureFormation
+     *
+     * @param \Time $heureFormation
+     * @return Formation
+     */
+    public function setHeureFormation($heureFormation)
+    {
+        $this->heureFormation = $heureFormation;
+
+        return $this;
+    }
+
+    /**
+     * Get heureFormation
+     *
+     * @return \Time 
+     */
+    public function getHeureFormation()
+    {
+        return $this->heureFormation;
     }
 
     /**
