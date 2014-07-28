@@ -17,12 +17,12 @@ class TagType extends AbstractType
         $builder
             ->add('name', null, array(
                 'required' => true,
-                "label" => "name",
+                "label" => "Tag",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
-                 'placeholder' => 'nom de la formation',
+                 'placeholder' => 'nom du tag',
                  'class'=> "col-xs-12 col-md-8"
                 )  
                 ))

@@ -11,8 +11,11 @@ use Kikala\FrontBundle\Form\UserProfilType;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
 use Kikala\FrontBundle\Entity\Formation;
+use Kikala\FrontBundle\Entity\Category;
+use Kikala\FrontBundle\Entity\Tag;
 use Kikala\FrontBundle\Form\FormationType;
 use \abeautifulsite\simpleimage;
+use Kikala\FrontBundle\Form\TagType;
 
 
 class UserController extends Controller
@@ -116,8 +119,9 @@ class UserController extends Controller
     {
         $mailsend=false;
         $email=$request->request->get('email');
+        //select sur userkikologue
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
-
+//trouve un email dans userkiologue
         $user=$mailreposytory->findOneByEmail($email);
         if(!empty($user)){
             $token = $user->getToken();
@@ -198,13 +202,24 @@ class UserController extends Controller
 
     public function formaCreateAction(Request $request)
     {
+        
          $forma = new Formation();
-
+         
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
 
         //traitement de requête
         $formation_form->handleRequest($request);
+
+        //instanciation d'un objet
+        $tag = new tag();
+
+        //crée une instance de Form
+        $tag_form =$this->createForm(new TagType, $tag);
+
+        //traitement de requête
+        $tag_form->handleRequest($request);
+
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
                  $forma->setIsActive(true);
@@ -218,9 +233,32 @@ class UserController extends Controller
                             $MiImage->move($dir, $newFilename);
                             $forma->setFilename($newFilename);
                     }
+                     //récupération du manager pour sauvegarder l'entity
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($forma);
+                //Sauvegarde de l'entity (exécute la requête)
+                    $em->flush();
                 }
+            //si le formulaire est soumis et valide
+            if ($tag_form->isValid()){ 
+                // Traitement de chaque donnée de notre formulaire
+
+
+                //récupération du manager pour sauvegarder l'entity
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($tag);
+                //Sauvegarde de l'entity (exécute la requête)
+                    $em->flush();
+
+                return $this->redirect($this->generateUrl("kikala_front_formaCreate"));
+            }    
                  $params = array(
-            "formation_form" => $formation_form->createView(),);
+
+            "formation_form" => $formation_form->createView(),
+            "tag_form" => $tag_form->createView(),
+
+            );
+
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
 
@@ -233,5 +271,6 @@ class UserController extends Controller
     {
         return $this->render('KikalaFrontBundle:User:summary.html.twig');
     } 
-
+   
+    
 }
