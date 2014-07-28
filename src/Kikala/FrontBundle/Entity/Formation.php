@@ -87,7 +87,7 @@ class Formation
     /**
      * @var \Date
      *
-     * @ORM\Column(name="cancelDate", type="date")
+     * @ORM\Column(name="cancelDate", type="date",nullable=true)
      */
     private $cancelDate;
     
@@ -108,6 +108,13 @@ class Formation
     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
     **/
     private $inscriptionForms;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="filename", type="string", length=255,nullable=true)
+     */
+    private $filename;
 
     /**
      * Get id

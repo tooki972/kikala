@@ -10,6 +10,8 @@ use Kikala\FrontBundle\Entity\UserKikologue;
 use Kikala\FrontBundle\Form\UserProfilType;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
+use Kikala\FrontBundle\Entity\Formation;
+use Kikala\FrontBundle\Form\FormationType;
 use \abeautifulsite\simpleimage;
 
 
@@ -194,9 +196,32 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:profil.html.twig',$params);
     }
 
-    public function formaCreateAction()
+    public function formaCreateAction(Request $request)
     {
-        return $this->render('KikalaFrontBundle:User:formaCreate.html.twig');
+         $forma = new Formation();
+
+        //crée une instance de Form
+        $formation_form =$this->createForm(new FormationType, $forma);
+
+        //traitement de requête
+        $formation_form->handleRequest($request);
+        //si le formulaire est soumis et valide
+            if ($formation_form->isValid()){ 
+                 $forma->setIsActive(true);
+                    $forma->setDateCreated(new DateTime());
+                        if(!empty($forma->getMiImage())){
+                        $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
+                        $MiImage = $forma->getMiImage();
+                            // comput a random name and try to guess the extension
+                            $extension = $MiImage->guessExtension();
+                            $newFilename = base64_encode(microtime()).'.'.$extension;
+                            $MiImage->move($dir, $newFilename);
+                            $forma->setFilename($newFilename);
+                    }
+                }
+                 $params = array(
+            "formation_form" => $formation_form->createView(),
+        return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
 
     public function myFormaAction()
