@@ -177,16 +177,21 @@ class UserController extends Controller
      if ($profil_form->isValid()){ 
              $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
                         $photo = $user->getPhoto();
+             if($photo){
                             // comput a random name and try to guess the extension
                             $extension = $photo->guessExtension();
                             $newFilename = base64_encode(microtime()).'.'.$extension;
                             $photo->move($dir, $newFilename);
                             $user->setFilename($newFilename);
-                    }
+                        }
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-
-        return $this->render('KikalaFrontBundle:User:profil.html.twig');
+                    }
+                 $params = array(
+            "profil_form" => $profil_form->createView(),
+            "user"=>$this->getUser(),
+            );
+        return $this->render('KikalaFrontBundle:User:profil.html.twig',$params);
     }
 
     public function formaCreateAction()
