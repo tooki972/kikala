@@ -203,7 +203,7 @@ class UserController extends Controller
     {
         
          $forma = new Formation();
-         $tag =new tag();
+
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
 
@@ -230,7 +230,7 @@ class UserController extends Controller
                 }
                  $params = array(
             "formation_form" => $formation_form->createView(),
-            'category'=>$category,
+           
 
             );
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
