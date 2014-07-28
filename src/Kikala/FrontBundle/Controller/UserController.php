@@ -204,7 +204,7 @@ class UserController extends Controller
     {
         
          $forma = new Formation();
-         
+
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
 
@@ -255,6 +255,7 @@ class UserController extends Controller
                  $params = array(
 
             "formation_form" => $formation_form->createView(),
+
             "tag_form" => $tag_form->createView(),
 
             );
