@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\UserKikologue;
+use Kikala\FrontBundle\Form\UserProfiltype;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
 use \abeautifulsite\simpleimage;
@@ -155,6 +156,8 @@ class UserController extends Controller
     public function kikologueAction()
     { //
         $user=$this->getUser();
+    
+
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig',array(
         'user'=>$user));
     }
@@ -166,8 +169,23 @@ class UserController extends Controller
     }
 
 
-    public function profilAction()
+    public function profilAction(Request $request)
     {
+        $user=$this->getUser();
+     $profil_form =$this->createForm(new UserProfilType, $user);
+     $profil_form->handleRequest($request);
+     if ($profil_form->isValid()){ 
+             $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
+                        $photo = $user->getPhoto();
+                            // comput a random name and try to guess the extension
+                            $extension = $photo->guessExtension();
+                            $newFilename = base64_encode(microtime()).'.'.$extension;
+                            $photo->move($dir, $newFilename);
+                            $user->setFilename($newFilename);
+                    }
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
         return $this->render('KikalaFrontBundle:User:profil.html.twig');
     }
 
