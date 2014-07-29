@@ -67,10 +67,10 @@ class Formation
     /**
      * @var \Time
      * @Assert\NotBlank(message="L'heure doit être renseignée!")
-     * @Assert\time()
+     * @Assert\Time()
      * @ORM\Column(name="heureFormation", type="time")
      */
- //   private $heureFormation;
+    private $heureFormation;
 
     /**
      * @var \Date
@@ -81,18 +81,33 @@ class Formation
 
     /**
      * @var string
-     * @Assert\NotBlank(message="La lieu doit être renseigné!")
-     * @ORM\Column(name="lieu", type="string", length=255)
+     * @Assert\NotBlank(message="l'adresse doit être renseignée!")
+     * @ORM\Column(name="adresse", type="string", length=255)
      */
-    private $lieu;
+    private $adresse;
 
     /**
-     * @var \Time
-     * @Assert\NotBlank(message="La durée doit être renseigné!")
-     * @Assert\Time()
-     * @ORM\Column(name="duree", type="time")
+     * @var string
+     * @Assert\NotBlank(message="La ville doit être renseignée!")
+     * @ORM\Column(name="ville", type="string", length=255)
      */
- //   private $duree;
+    private $ville;
+
+    /**
+     * @var \integer
+     * @Assert\NotBlank(message="Le code postal doit être renseigné!")
+     * 
+     * @ORM\Column(name="cp", type="integer")
+     */
+    private $cp;
+
+    /**
+     * @var \integer
+     * @Assert\NotBlank(message="La durée doit être renseigné!")
+     * 
+     * @ORM\Column(name="duree", type="integer")
+     */
+    private $duree;
 
     /**
      * @var string
@@ -165,7 +180,7 @@ class Formation
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name=strip_tags($name);
 
         return $this;
     }
@@ -273,26 +288,72 @@ class Formation
     }
 
     /**
-     * Set lieu
+     * Set adresse
      *
-     * @param string $lieu
+     * @param string $adresse
      * @return Formation
      */
-    public function setLieu($lieu)
+    public function setAdresse($adresse)
     {
-        $this->lieu = $lieu;
+        $this->adresse=strip_tags($adresse);
 
         return $this;
     }
 
     /**
-     * Get lieu
+     * Get adresse
      *
      * @return string 
      */
-    public function getLieu()
+    public function getAdresse()
     {
-        return $this->lieu;
+        return $this->adresse;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     * @return Formation
+     */
+    public function setVille($ville)
+    {
+        $this->ville=strip_tags($ville);
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string 
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set cp
+     *
+     * @param integer $cp
+     * @return Formation
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * Get cp
+     *
+     * @return integer 
+     */
+    public function getCp()
+    {
+        return $this->cp;
     }
 
     /**
@@ -326,7 +387,7 @@ class Formation
      */
     public function setDescriptif($descriptif)
     {
-        $this->descriptif = $descriptif;
+        $this->descriptif=strip_tags($descriptif);
 
         return $this;
     }

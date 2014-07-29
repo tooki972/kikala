@@ -46,7 +46,7 @@ class Tag
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name=strip_tags($name);
 
         return $this;
     }

@@ -119,9 +119,11 @@ class UserController extends Controller
     {
         $mailsend=false;
         $email=$request->request->get('email');
+        
         //select sur userkikologue
         $mailreposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue');
-//trouve un email dans userkiologue
+        
+        //trouve un email dans userkiologue
         $user=$mailreposytory->findOneByEmail($email);
         if(!empty($user)){
             $token = $user->getToken();
@@ -178,25 +180,29 @@ class UserController extends Controller
     public function profilAction(Request $request)
     {
         $user=$this->getUser();
-     $profil_form =$this->createForm(new UserProfilType, $user);
-     $profil_form->handleRequest($request);
-     if ($profil_form->isValid()){ 
-             $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
+        $profil_form =$this->createForm(new UserProfilType, $user);
+        $profil_form->handleRequest($request);
+            if ($profil_form->isValid())
+                { 
+                $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
                         $photo = $user->getPhoto();
-             if($photo){
-                            // comput a random name and try to guess the extension
-                            $extension = $photo->guessExtension();
-                            $newFilename = base64_encode(microtime()).'.'.$extension;
-                            $photo->move($dir, $newFilename);
-                            $user->setFilename($newFilename);
-                        }
+                if($photo)
+                    {
+                    // comput a random name and try to guess the extension
+                        $extension = $photo->guessExtension();
+                        $newFilename = base64_encode(microtime()).'.'.$extension;
+                        $photo->move($dir, $newFilename);
+                        $user->setFilename($newFilename);
+                }
+               
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-                    }
+            }
                  $params = array(
             "profil_form" => $profil_form->createView(),
             "user"=>$this->getUser(),
             );
+
         return $this->render('KikalaFrontBundle:User:profil.html.twig',$params);
     }
 
