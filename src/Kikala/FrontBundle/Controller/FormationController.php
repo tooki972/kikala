@@ -9,30 +9,33 @@ use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Tag;
 
 
-class FormationController extends Controller
+class FormationController extends Controller 
 {
-	public function lsFormaAction(){
+    public function lsFormaAction($page){
+    	$maxFormations=30;
 
-		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
-        $formations=$formationReposytory->findAll();
+        $formations_count = $this->getDoctrine()
+        		->getRepository('KikalaFrontBundle:Formation')
+                ->countFormation();
 
-        
-
-
-     	/*echo "<pre>";
-     	print_r($formation);
-     	echo "</pre>";*/
-       $params=array(
-    		'formations'=>$formations
-    	);
-
-        return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
-		
+        $pagination = array(
+            'page' => $page,
+            'route' => 'kikala_front_lsForma',
+            'pages_count' => ceil($formations_count / $maxFormations),
+        );
+ 
+        $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
+                ->getList($page, $maxFormations);
+ 
+        return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig', array(
+            'formations' => $formations,
+            'pagination' => $pagination
+        	)
+        );
 	}
 
 	public function formaDetailAction(){
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig');
 	}
 
-	
 }

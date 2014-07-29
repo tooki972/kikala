@@ -165,7 +165,6 @@ class UserController extends Controller
     { //
         $user=$this->getUser();
     
-
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig',array(
         'user'=>$user));
     }

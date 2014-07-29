@@ -143,6 +143,12 @@ h3{
 .nbUser{
 	width: 83px;
 }
+/************** lsforma ***************************/
+.description{
+	border-bottom: 1px solid #b8c945;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
 /************** PROFIL ****************************/
 #namePseudo{
 	color: #b8c945;

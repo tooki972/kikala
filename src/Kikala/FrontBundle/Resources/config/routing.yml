@@ -34,9 +34,10 @@ kikala_front_redirect:
     defaults: { _controller: KikalaFrontBundle:User:redirect }
     requirements:
          _method:  GET
+
 kikala_front_lsForma:
-    path:     /lsForma/
-    defaults: { _controller: KikalaFrontBundle:Formation:lsForma }
+    path:     /lsForma/{page}
+    defaults: { _controller: KikalaFrontBundle:Formation:lsForma, page:1 }
 
 
 logout:

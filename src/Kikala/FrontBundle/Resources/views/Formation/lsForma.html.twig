@@ -5,14 +5,14 @@
 
 {% block body %}
 
-{% for formation in formations slice(0, 30) %}
-{{ formation.name }}
-{{ formation.dateFormation }}
+{% for formation in formations|slice(0, 1) %}
+	<h1>{{ formation.name}}</h1>
+	<p class="description">{{ formation.descriptif }}</p>
+	<p class="description">{{ formation.dateFormation|date("d/m/y") }}</p>
+	
 {% endfor %}
 
-{% for i in 0..10 %}
-    * {{ i }}
-{% endfor %}
+
 
 
 <p> Cet écran affiche les formations en cours (futures), au nombre de 30. Elles sont affichées par date de formation, croissant (la plus proche d’abord). 
