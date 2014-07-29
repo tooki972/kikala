@@ -23,7 +23,8 @@ class TagType extends AbstractType
                 ),
                 'attr' => array(
                  'placeholder' => 'nom du tag',
-                 'class'=> "col-xs-12 col-md-8"
+                 'class'=> "col-xs-12 col-md-8",
+                 'id'=>'tag',
                 )  
                 ))
             ->add('Valider', 'submit', array(
