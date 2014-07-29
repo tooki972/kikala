@@ -16,6 +16,8 @@ class FormationController extends Controller
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
         $formations=$formationReposytory->findAll();
 
+        
+
 
      	/*echo "<pre>";
      	print_r($formation);
