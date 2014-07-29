@@ -162,6 +162,12 @@ class Formation
      */
     private $filename;
 
+
+    /**
+    *
+    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue",inversedBy="mesForms")
+    **/
+    private $creator;
     /**
      * Get id
      *
@@ -562,4 +568,27 @@ class Formation
         return $this->filename;
     }
 
-     }
+     
+    /**
+     * Set creator
+     *
+     * @param \Kikala\FrontBundle\Entity\UserKikologue $creator
+     * @return Formation
+     */
+    public function setCreator(\Kikala\FrontBundle\Entity\UserKikologue $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return \Kikala\FrontBundle\Entity\UserKikologue 
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+}

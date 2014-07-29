@@ -12,7 +12,7 @@
 	<p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
 	
 {% endfor %}
-
+		
         {% if pagination.page>1 %}
             <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}"><<</a>
             <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>

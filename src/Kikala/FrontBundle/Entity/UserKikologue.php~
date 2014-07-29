@@ -5,6 +5,10 @@ namespace Kikala\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * UserKikologue
  *
@@ -25,13 +29,24 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le pseudo doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre pseudo doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre pseudo ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="pseudo", type="string", length=255)
      */
     private $pseudo;
 
     /**
      * @var string
-     *
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -39,6 +54,14 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le mot de passe doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "4",
+     *      max = "255",
+     *      minMessage = "Votre mot de passe doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre mot de passe ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
@@ -46,6 +69,14 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le nom doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -53,13 +84,22 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le prénom doit être renseigné!")
+     *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre prénom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre prénom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank(message="La date doit être renseigné!")
+     * @Assert\DateTime()
      * @ORM\Column(name="birthday", type="date")
      */
     private $birthday;
@@ -67,19 +107,29 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Le gender doit être renseigné!")
+     * @Assert\Choice(choices = {"m", "f"}, message = "Choose a valid gender.")
      * @ORM\Column(name="gender", type="string", length=255)
      */
     private $gender;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Le métier doit être renseigné!")
      *
+     * @Assert\Length(
+     *      min = "5",
+     *      max = "255",
+     *      minMessage = "Votre métier doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre métier ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="metier", type="text")
      */
     private $metier;
 
     /**
      * @var string
+     * @Assert\NotBlank(message="quelques infos sur vous !")
      *
      * @ORM\Column(name="infoFormateur", type="text")
      */
@@ -87,6 +137,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @var string
+     * @Assert\NotBlank(message="quelques infos sur vous !")
      *
      * @ORM\Column(name="infoEtudiant", type="text")
      */
@@ -94,8 +145,16 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="photo", type="string", length=255)
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 2400,
+     *     minHeight = 200,
+     *     maxHeight = 2400,
+     *     maxSize = "1024k",
+     *     maxSizeMessage = "choisissez une photo de moins de 1M",
+     *     mimeTypes = {"image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "choisissez une photo en jpg"
+     * )
      */
     private $photo;
 
@@ -144,9 +203,9 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="filename", type="string", length=255,nullable=true)
      */
-    private $image;
+    private $filename;
     /**
     *
     * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm", mappedBy="user")
@@ -158,23 +217,27 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     * 
     * @ORM\Column(name="roles", type="array")
     */
-
     private $roles;
-
+    /**
+    *
+    * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\formation", mappedBy="creator")
+    **/
+    private $mesForms;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+
+
     }
+
     /**
      * Get id
      *
      * @return integer 
      */
-
     public function getId()
     {
         return $this->id;
@@ -186,10 +249,9 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      * @param string $pseudo
      * @return UserKikologue
      */
-
     public function setPseudo($pseudo)
     {
-        $this->pseudo = $pseudo;
+       $this->pseudo=strip_tags($pseudo);
 
         return $this;
     }
@@ -216,7 +278,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email = strip_tags($email);
 
         return $this;
     }
@@ -239,7 +301,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = strip_tags($password);
 
         return $this;
     }
@@ -262,7 +324,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strip_tags($name);
 
         return $this;
     }
@@ -285,8 +347,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setPrenom($prenom)
     {
-        $this->prenom = $prenom;
-
+        $this->prenom = strip_tags($prenom);
         return $this;
     }
 
@@ -354,7 +415,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setMetier($metier)
     {
-        $this->metier = $metier;
+        $this->metier = strip_tags($metier);
 
         return $this;
     }
@@ -377,7 +438,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setInfoFormateur($infoFormateur)
     {
-        $this->infoFormateur = $infoFormateur;
+        $this->infoFormateur = strip_tags($infoFormateur);
 
         return $this;
     }
@@ -400,7 +461,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function setInfoEtudiant($infoEtudiant)
     {
-        $this->infoEtudiant = $infoEtudiant;
+        $this->infoEtudiant = strip_tags($infoEtudiant);
 
         return $this;
     }
@@ -577,27 +638,42 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set image
+     * Set filename
      *
-     * @param string $image
+     * @param string $filename
      * @return UserKikologue
      */
-    public function setImage($image)
+    public function setFilename($filename)
     {
-        $this->image = $image;
+        $this->filename = $filename;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get filename
      *
      * @return string 
      */
-    public function getImage()
+    public function getFilename()
     {
-        return $this->image;
+        return $this->filename;
     }
+
+    
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return UserKikologue
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }   
+     
     /**
      * Add roles
      *
@@ -628,7 +704,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      */
     public function getRoles()
     {
-        return $this->roles->toArray();
+        return $this->roles;
         //return array('ROLE_USER');
     }
 
@@ -675,4 +751,44 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     return false;
     }
 
+    /**
+     * Add inscriptionForms
+     *
+     * @param \Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms
+     * @return UserKikologue
+     */
+    public function addInscriptionForm(\Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms)
+    {
+        $this->inscriptionForms[] = $inscriptionForms;
+
+        return $this;
+    }
+
+    /**
+     * Remove inscriptionForms
+     *
+     * @param \Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms
+     */
+    public function removeInscriptionForm(\Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms)
+    {
+        $this->inscriptionForms->removeElement($inscriptionForms);
+    }
+
+    /**
+     * Get inscriptionForms
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInscriptionForms()
+    {
+        return $this->inscriptionForms;
+    }
+    public function count()
+    {
+        return $this->createQueryBuilder('id')
+            ->select('COUNT(id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

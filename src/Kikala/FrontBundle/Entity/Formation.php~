@@ -3,12 +3,18 @@
 namespace Kikala\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Formation
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Kikala\FrontBundle\Entity\FormationRepository")
  */
 class Formation
 {
@@ -23,24 +29,49 @@ class Formation
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Le nom de la formation doit être renseigné!")
      *
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="miImage", type="string", length=255)
+     * @Assert\Image(
+     *     minWidth = 200,
+     *     maxWidth = 2400,
+     *     minHeight = 200,
+     *     maxHeight = 2400,
+     *     maxSize = "1024k",
+     *     maxSizeMessage = "choisissez une photo de moins de 1M",
+     *     mimeTypes = {"image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "choisissez une photo en jpg"
+     * )
+     * @ORM\Column(name="miImage", type="string", length=255, nullable=true)
      */
     private $miImage;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank(message="La date doit être renseignée!")
+     * @Assert\DateTime()
      * @ORM\Column(name="dateFormation", type="datetime")
      */
     private $dateFormation;
+
+    /**
+     * @var \Time
+     * @Assert\NotBlank(message="L'heure doit être renseignée!")
+     * @Assert\Time()
+     * @ORM\Column(name="heureFormation", type="time")
+     */
+    private $heureFormation;
 
     /**
      * @var \Date
@@ -51,15 +82,31 @@ class Formation
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="lieu", type="string", length=255)
+     * @Assert\NotBlank(message="l'adresse doit être renseignée!")
+     * @ORM\Column(name="adresse", type="string", length=255)
      */
-    private $lieu;
+    private $adresse;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="duree", type="time")
+     * @var string
+     * @Assert\NotBlank(message="La ville doit être renseignée!")
+     * @ORM\Column(name="ville", type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @var \integer
+     * @Assert\NotBlank(message="Le code postal doit être renseigné!")
+     * 
+     * @ORM\Column(name="cp", type="integer")
+     */
+    private $cp;
+
+    /**
+     * @var \integer
+     * @Assert\NotBlank(message="La durée doit être renseigné!")
+     * 
+     * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
 
@@ -72,7 +119,7 @@ class Formation
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank(message="Descriptif de la formation !")
      * @ORM\Column(name="nbTotal", type="integer")
      */
     private $nbTotal;
@@ -87,7 +134,7 @@ class Formation
     /**
      * @var \Date
      *
-     * @ORM\Column(name="cancelDate", type="date")
+     * @ORM\Column(name="cancelDate", type="date", nullable=true)
      */
     private $cancelDate;
     
@@ -108,7 +155,20 @@ class Formation
     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\InscriptionForm",inversedBy="Formation")
     **/
     private $inscriptionForms;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="filename", type="string", length=255,nullable=true)
+     */
+    private $filename;
 
+
+    /**
+    *
+    * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue",inversedBy="mesForms")
+    **/
+    private $creator;
     /**
      * Get id
      *
@@ -127,7 +187,7 @@ class Formation
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name=strip_tags($name);
 
         return $this;
     }
@@ -181,11 +241,34 @@ class Formation
     /**
      * Get dateFormation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateFormation()
     {
         return $this->dateFormation;
+    }
+
+    /**
+     * Set heureFormation
+     *
+     * @param \Time $heureFormation
+     * @return Formation
+     */
+    public function setHeureFormation($heureFormation)
+    {
+        $this->heureFormation = $heureFormation;
+
+        return $this;
+    }
+
+    /**
+     * Get heureFormation
+     *
+     * @return \Time 
+     */
+    public function getHeureFormation()
+    {
+        return $this->heureFormation;
     }
 
     /**
@@ -212,32 +295,78 @@ class Formation
     }
 
     /**
-     * Set lieu
+     * Set adresse
      *
-     * @param string $lieu
+     * @param string $adresse
      * @return Formation
      */
-    public function setLieu($lieu)
+    public function setAdresse($adresse)
     {
-        $this->lieu = $lieu;
+        $this->adresse=strip_tags($adresse);
 
         return $this;
     }
 
     /**
-     * Get lieu
+     * Get adresse
      *
      * @return string 
      */
-    public function getLieu()
+    public function getAdresse()
     {
-        return $this->lieu;
+        return $this->adresse;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     * @return Formation
+     */
+    public function setVille($ville)
+    {
+        $this->ville=strip_tags($ville);
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string 
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set cp
+     *
+     * @param integer $cp
+     * @return Formation
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * Get cp
+     *
+     * @return integer 
+     */
+    public function getCp()
+    {
+        return $this->cp;
     }
 
     /**
      * Set duree
      *
-     * @param \DateTime $duree
+     * @param \Time $duree
      * @return Formation
      */
     public function setDuree($duree)
@@ -250,7 +379,7 @@ class Formation
     /**
      * Get duree
      *
-     * @return \DateTime 
+     * @return \Time 
      */
     public function getDuree()
     {
@@ -265,7 +394,7 @@ class Formation
      */
     public function setDescriptif($descriptif)
     {
-        $this->descriptif = $descriptif;
+        $this->descriptif=strip_tags($descriptif);
 
         return $this;
     }
@@ -302,4 +431,142 @@ class Formation
     {
         return $this->nbTotal;
     }
-}
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Formation
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set cancelDate
+     *
+     * @param \DateTime $cancelDate
+     * @return Formation
+     */
+    public function setCancelDate($cancelDate)
+    {
+        $this->cancelDate = $cancelDate;
+
+        return $this;
+    }
+
+    /**
+     * Get cancelDate
+     *
+     * @return \DateTime 
+     */
+    public function getCancelDate()
+    {
+        return $this->cancelDate;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param \Kikala\FrontBundle\Entity\Tag $tag
+     * @return Formation
+     */
+    public function setTag(\Kikala\FrontBundle\Entity\Tag $tag = null)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Kikala\FrontBundle\Entity\Tag 
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Kikala\FrontBundle\Entity\Category $category
+     * @return Formation
+     */
+    public function setCategory(\Kikala\FrontBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Kikala\FrontBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set inscriptionForms
+     *
+     * @param \Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms
+     * @return Formation
+     */
+    public function setInscriptionForms(\Kikala\FrontBundle\Entity\InscriptionForm $inscriptionForms = null)
+    {
+        $this->inscriptionForms = $inscriptionForms;
+
+        return $this;
+    }
+
+    /**
+     * Get inscriptionForms
+     *
+     * @return \Kikala\FrontBundle\Entity\InscriptionForm 
+     */
+    public function getInscriptionForms()
+    {
+        return $this->inscriptionForms;
+    }
+    /**
+     * Set filename
+     *
+     * @param string $filename
+     * @return Formation
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Get filename
+     *
+     * @return string 
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+     }
