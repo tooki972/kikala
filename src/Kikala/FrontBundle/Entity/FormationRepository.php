@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityRepository;
      * @return Paginator
      */
 class FormationRepository extends EntityRepository
+
 {
     public function getList($page=1, $maxperpage=2){
         $query = $this->createQueryBuilder('form')
