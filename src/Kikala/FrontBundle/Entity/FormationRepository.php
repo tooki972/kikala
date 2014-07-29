@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
      */
 class FormationRepository extends EntityRepository
 {
-    public function getList($page=1, $maxperpage=30){
+    public function getList($page=1, $maxperpage=2){
         $query = $this->createQueryBuilder('form')
             ->select('form')
             ->orderBy('form.dateFormation', 'ASC')

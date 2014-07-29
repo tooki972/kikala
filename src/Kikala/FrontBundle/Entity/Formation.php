@@ -13,7 +13,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Formation
  *
  * @ORM\Table()
- * @ORM\Entity
  * @ORM\Entity(repositoryClass="Kikala\FrontBundle\Entity\FormationRepository")
  */
 class Formation
