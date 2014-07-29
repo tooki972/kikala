@@ -36,7 +36,9 @@ class FormationController extends Controller
             'pagination' => $pagination
         	)
         );
+
 	}
+
 
 	public function formaDetailAction($id){
 
