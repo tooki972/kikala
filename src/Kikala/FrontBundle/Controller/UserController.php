@@ -229,7 +229,7 @@ class UserController extends Controller
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
 
-print_r($formation_form->getData());
+//print_r($formation_form->getData());
 
                  $forma->setIsActive(true);
                     $forma->setDateCreated(new DateTime());
@@ -248,6 +248,7 @@ print_r($formation_form->getData());
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
                 }
+          
             //si le formulaire est soumis et valide
             if ($tag_form->isValid()){ 
                 // Traitement de chaque donnée de notre formulaire
