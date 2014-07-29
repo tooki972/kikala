@@ -58,11 +58,19 @@ class Formation
 
     /**
      * @var \DateTime
-     * @Assert\NotBlank(message="La date doit être renseigné!")
+     * @Assert\NotBlank(message="La date doit être renseignée!")
      * @Assert\DateTime()
-     * @ORM\Column(name="dateFormation", type="datetime")
+     * @ORM\Column(name="dateFormation", type="dateTime")
      */
     private $dateFormation;
+
+    /**
+     * @var \Time
+     * @Assert\NotBlank(message="L'heure doit être renseignée!")
+     * @Assert\time()
+     * @ORM\Column(name="heureFormation", type="time")
+     */
+    private $heureFormation;
 
     /**
      * @var \Date
@@ -211,11 +219,34 @@ class Formation
     /**
      * Get dateFormation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateFormation()
     {
         return $this->dateFormation;
+    }
+
+    /**
+     * Set heureFormation
+     *
+     * @param \Time $heureFormation
+     * @return Formation
+     */
+    public function setHeureFormation($heureFormation)
+    {
+        $this->heureFormation = $heureFormation;
+
+        return $this;
+    }
+
+    /**
+     * Get heureFormation
+     *
+     * @return \Time 
+     */
+    public function getHeureFormation()
+    {
+        return $this->heureFormation;
     }
 
     /**
@@ -447,7 +478,7 @@ class Formation
     {
         return $this->inscriptionForms;
     }
-      /**
+    /**
      * Set filename
      *
      * @param string $filename
@@ -469,4 +500,5 @@ class Formation
     {
         return $this->filename;
     }
-}
+
+     }

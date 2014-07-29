@@ -40,7 +40,14 @@ class FormationType extends AbstractType
                 "label" => "Date de la formation",
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'MM/dd/yyyy',
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                ))
+            ->add('heureFormation', null, array(
+                'required' => true,
+                "label" => "heure de la formation",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -93,7 +100,7 @@ class FormationType extends AbstractType
             //->add('cancelDate')
             ->add('tag', 'entity', array(
                 'property'=>'name',
-                'class'=>'Kikala\FrontBundle\Entity\Category',
+                'class'=>'Kikala\FrontBundle\Entity\Tag',
                 'required' => true,
                 "label" => "tag",
                 'label_attr' => array(
