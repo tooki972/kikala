@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Kikala\FrontBundle\Entity\UserKikologue;
 use Kikala\FrontBundle\Form\UserProfilType;
 use \DateTime;
@@ -16,6 +18,7 @@ use Kikala\FrontBundle\Entity\Tag;
 use Kikala\FrontBundle\Form\FormationType;
 use \abeautifulsite\simpleimage;
 use Kikala\FrontBundle\Form\TagType;
+use Symfony\Component\HttpFoundation\Session\Session; 
 
 
 class UserController extends Controller
@@ -207,7 +210,10 @@ class UserController extends Controller
 
     public function formaCreateAction(Request $request)
     {
-        
+         $tag = new tag();
+
+          $tag_form =$this->createForm(new TagType, $tag);
+
          $forma = new Formation();
 
         //crée une instance de Form
@@ -216,15 +222,7 @@ class UserController extends Controller
         //traitement de requête
         $formation_form->handleRequest($request);
 
-        //instanciation d'un objet
-        $tag = new tag();
-
-        //crée une instance de Form
-        $tag_form =$this->createForm(new TagType, $tag);
-
-        //traitement de requête
-        $tag_form->handleRequest($request);
-
+         
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
 
@@ -248,8 +246,27 @@ class UserController extends Controller
                     $em->flush();
                 }
           
-            //si le formulaire est soumis et valide
-            if ($tag_form->isValid()){ 
+         
+               
+                 $params = array(
+            "tag_form" => $tag_form->createView(),
+            "formation_form" => $formation_form->createView(),
+
+            );
+
+        return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
+    }
+     public function tagCreateAction(Request $request)
+    {
+      //instanciation d'un objet
+        $tag = new tag();
+
+        //crée une instance de Form
+        $tag_form =$this->createForm(new TagType, $tag);
+
+        //traitement de requête
+        $tag_form->handleRequest($request);
+         if ($tag_form->isValid()){ 
                 // Traitement de chaque donnée de notre formulaire
 
 
@@ -259,19 +276,22 @@ class UserController extends Controller
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
 
-                return $this->redirect($this->generateUrl("kikala_front_formaCreate"));
+                $response = new JsonResponse();
+                $response->setData(array(
+                    'id'=>$tag->getId(),
+                    'name'=>$tag->getname(),
+                    ));
+                return $response;
             }    
-                 $params = array(
+     $params = array(
 
-            "formation_form" => $formation_form->createView(),
 
             "tag_form" => $tag_form->createView(),
 
             );
 
-        return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
+        return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
-
     public function myFormaAction()
     {
         return $this->render('KikalaFrontBundle:User:myForma.html.twig');

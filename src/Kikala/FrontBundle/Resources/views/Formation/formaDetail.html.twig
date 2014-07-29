@@ -4,14 +4,41 @@
 {% endblock %}
 {% block body %}
 
-<p>Cette page affiche toutes les informations publiques disponibles sur la formation. 
+	<h1 class="pageTitle">{{ formation.name }}</h1>
+	<h2 class="col-xs-12">Descriptif</h2>
+	<p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+	<h2 class="col-xs-12">Infos</h2>
+	<p class="description col-xs-12 col-md-4">Date : {{ formation.dateFormation|date("d/m/y") }}</p>
+	<p class="description col-xs-12 col-md-4">Durée : {{ formation.duree }} h</p>
+	<p class="description col-xs-12 col-md-4">Heure : {{ formation.heureFormation|date("H:i") }}</p>
+	<p class="description col-xs-12 col-md-4">Adresse : {{ formation.adresse }}</p>
+	<p class="description col-xs-12 col-md-4">Ville : {{ formation.ville }}</p>
+	<p class="description col-xs-12 col-md-4">Code postal : {{ formation.cp }}</p>
+	<p class="description col-xs-12 col-md-4"> <span class="nbUserA">{{ formation.nbTotal }}</span><br />Nombre de place :</p>
+	
 
-L’image affichée est de taille moyenne.
+<div class="col-xs-12">
+	<p>Cette page affiche toutes les informations publiques disponibles sur la formation. 
 
-Si l’internaute visitant cette page est connecté et inscrit à la formation, une indication visuelle du genre “Vous êtes inscrit !” est affichée. 
-S’il est connecté et non-inscrit, qu’il possède suffisamment de kikos, et qu’il reste des places, un bouton “Inscrivez-vous !” est affiché. S’il n’a pas assez de kikos, une indication le précise.  
-S’il n’est pas connecté et qu’il reste des places, un bouton “Connectez-vous pour vous inscrire” est affiché. 
-S’il ne reste plus de places, une indication visuelle du genre “Cette formation est complète” est indiquée. 
+	L’image affichée est de taille moyenne.
 
-Cette page affiche également une mini-fiche sur le kikologue formateur. Un clic sur son nom mène à la page de détail du kikologue. </p>
+	Si l’internaute visitant cette page est connecté et inscrit à la formation, une indication visuelle du genre “Vous êtes inscrit !” est affichée. 
+	S’il est connecté et non-inscrit, qu’il possède suffisamment de kikos, et qu’il reste des places, un bouton “Inscrivez-vous !” est affiché. S’il n’a pas assez de kikos, une indication le précise.  
+	S’il n’est pas connecté et qu’il reste des places, un bouton “Connectez-vous pour vous inscrire” est affiché. 
+	S’il ne reste plus de places, une indication visuelle du genre “Cette formation est complète” est indiquée. 
+
+	Cette page affiche également une mini-fiche sur le kikologue formateur. Un clic sur son nom mène à la page de détail du kikologue. </p>
+</div>
+{% endblock %}
+
+{% block aside %}
+	<p>Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
+	{% if formation.filename %}
+		<img src="{{ asset('img/formapicture/'~formation.filename) }}" height="300" width="255" />
+	{% else %}
+		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
+	{% endif %}
+	<div class="form-group">
+        <button type="submit" class="btn btn-primary btn-xs col-xs-12">S'inscrire</button>
+    </div> 	
 {% endblock %}

@@ -3,30 +3,22 @@
 {%block title%} 
 {{ parent()}} - formaCreate
 {% endblock %}
-{% block body %}
-<h2 class="pageTitle">Créer une formation</h2>
-
-{{ form(formation_form, {'attr':{'novalidate': 'novalidate'}}) }}
-
-
 {% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.min.css')}}
 	"/>
 	{{ parent()}}
 
-{% endblock %}
 
 {% endblock %}
+{% block body %}
 
-{% block aside %}
 {{ form(tag_form, {'attr':{'id': 'monForm','novalidate': 'novalidate'}}) }}
 {% endblock %}
-
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
 	<script>
-		$('#kikala_frontbundle_formation_dateFormation').datepicker($.datepicker.regional["fr"]);
+
 	$(document).ready(function() {
     // Lorsque je soumets le formulaire
     $('#monForm').on('submit', function(e) {
@@ -43,8 +35,6 @@
  				data : $('#monForm').serialize(),
  				success:function(html){
  					console.log(html);
- 					var option= $("<option>").html(html.name).attr({id : html.id,value : html.name});
- 					$('#kikala_frontbundle_formation_tag').append(option);
  				}
  			});
  		}
