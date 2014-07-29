@@ -12,18 +12,14 @@ use Kikala\FrontBundle\Entity\Tag;
 class FormationController extends Controller
 {
 	public function lsFormaAction(){
-
-		
-		
+		//requête à la base dans la table formation
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
-        $formation=$formationReposytory->findAll();
-     	/*echo "<pre>";
-     	print_r($formation);
-     	echo "</pre>";*/
-       $name=$formation->name;
+		//récupère toutes les données
+        $formations=$formationReposytory->findAll();
+        //dans un tableau
     	$params=array(
-    		'formation'=>$formation,
-    		'name'=>$formation->name);
+    		'formations'=>$formations,
+    		);
 
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
 		
