@@ -17,7 +17,7 @@ class FormationType extends AbstractType
         $builder
             ->add('name', null, array(
                 'required' => true,
-                "label" => "name",
+                "label" => "Nom de la formation",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -28,7 +28,7 @@ class FormationType extends AbstractType
                 ))
             ->add('miImage', 'file', array(
                 'required' => false,
-                "label" => "image",
+                "label" => "Photo illustrative",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -45,28 +45,52 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
-            ->add('heureFormation', null, array(
+
+            ->add('heureFormation', 'time', array(
+                'input'  => 'datetime',
                 'required' => true,
-                "label" => "heure de la formation",
+                "label" => "Heure de la formation",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
             //->add('dateCreated')
-            ->add('lieu', null, array(
+            ->add('adresse', null, array(
                 'required' => true,
-                "label" => "lieu",
+                "label" => "Adresse",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
-                 'placeholder' => 'lieu de la formation',
+                 'placeholder' => 'Adresse de la formation',
+                 'class'=> "col-xs-12 col-md-8"
+                )  
+                ))
+            ->add('ville', null, array(
+                'required' => true,
+                "label" => "Ville",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'Ville',
+                 'class'=> "col-xs-12 col-md-8"
+                )  
+                ))
+            ->add('cp', null, array(
+                'required' => true,
+                "label" => "Code postal",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'Code postal',
                  'class'=> "col-xs-12 col-md-8"
                 )  
                 ))
             ->add('duree', null, array(
                 'required' => true,
-                "label" => "duree",
+                "label" => "Durée de la formation (en heure)",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -77,7 +101,7 @@ class FormationType extends AbstractType
                 ))
             ->add('descriptif', 'textarea', array(
                 'required' => true,
-                "label" => "descriptif",
+                "label" => "Descriptif",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -87,7 +111,7 @@ class FormationType extends AbstractType
                 ) ))
             ->add('nbTotal', null, array(
                 'required' => true,
-                "label" => "nbTotal",
+                "label" => "Nombre de place",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
@@ -102,13 +126,13 @@ class FormationType extends AbstractType
                 'property'=>'name',
                 'class'=>'Kikala\FrontBundle\Entity\Tag',
                 'required' => true,
-                "label" => "tag",
+                "label" => "Tag",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
-                 'placeholder' => 'tag',
-                 'class'=> "col-xs-12 col-md-8"
+                 'placeholder' => 'Tag',
+                 'class'=> "col-xs-12 col-md-8 form-control"
                 )  
                 ))
 
@@ -116,13 +140,13 @@ class FormationType extends AbstractType
                 'property'=>'name',
                 'class'=>'Kikala\FrontBundle\Entity\Category',
                 'required' => true,
-                "label" => "category",
+                "label" => "Catégorie",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
                  'placeholder' => 'category',
-                 'class'=> "col-xs-12 col-md-8"
+                 'class'=> "col-xs-12 col-md-8 form-control"
                 )  
                 ))
             /*->add('inscriptionForms', null, array(

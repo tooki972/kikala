@@ -12,7 +12,21 @@ use Kikala\FrontBundle\Entity\Tag;
 class FormationController extends Controller
 {
 	public function lsFormaAction(){
-		return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig');
+
+		
+		
+		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
+        $formations=$formationReposytory->findAll();
+     	/*echo "<pre>";
+     	print_r($formation);
+     	echo "</pre>";*/
+     
+    	$params=array(
+    		'formations'=>$formations,
+    		);
+
+        return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
+		
 	}
 
 	public function formaDetailAction(){

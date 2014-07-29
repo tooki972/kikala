@@ -170,7 +170,7 @@ h3{
 }
 /**************FORMULAIRE AJOUT *****************/
 
-#kikala_frontbundle_userkikologue label, #loginForm label{
+#kikala_frontbundle_userkikologue label, #loginForm label, #kikala_frontbundle_formation label{
 	text-align: right;
 }
 #wf3_wikibundle_content ul li, #kikala_frontbundle_userkikologue ul li{

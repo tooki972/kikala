@@ -4,22 +4,10 @@
 {{ parent()}} - formaCreate
 {% endblock %}
 {% block body %}
+<h2 class="pageTitle">Créer une formation</h2>
 
-<p>create_formation
 {{ form(formation_form, {'attr':{'novalidate': 'novalidate'}}) }}
-Cet écran permet d’offrir une nouvelle formation, par le biais d’un formulaire.
 
-Les champs du formulaire sont les suivants : 
-
-L’intitulé
-Une image représentant la formation
-Le descriptif
-La date et l’heure de la formation
-La durée (en heures)
-L’adresse, la ville, le code postal, le pays
-Le nombre de places
-
-commentaire </p>
 
 {% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.min.css')}}
