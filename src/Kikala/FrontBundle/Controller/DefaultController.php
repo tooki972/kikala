@@ -9,11 +9,9 @@ class DefaultController extends Controller
 	 public function homeAction()
     {
 
-      
-         $em = $this->getDoctrine()->getEntityManager();
-    $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();
- 
- 
+        $em = $this->getDoctrine()->getEntityManager();
+        $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();
+  
         return $this->render('KikalaFrontBundle:Default:home.html.twig',array('nbUser' => $nbUser));
     }
     public function legalAction()

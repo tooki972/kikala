@@ -545,7 +545,7 @@ class Formation
      * @param string $filename
      * @return Formation
      */
-    public function setFilename($Filename)
+    public function setFilename($filename)
     {
         $this->filename = $filename;
 

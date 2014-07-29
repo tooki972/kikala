@@ -30,11 +30,23 @@ class FormationController extends Controller
 
     	//envoi à la vue
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
+
+        //comptes les formations
+        
 		
 	}
 
-	public function formaDetailAction(){
-		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig');
+	public function formaDetailAction($id){
+
+		//requête à la base dans la table formation
+		$formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);;
+		
+	    //création d'un array associatif pour stocker les données
+    	$params=array(
+    		'formation'=>$formation,
+    		);
+
+		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
 
 	

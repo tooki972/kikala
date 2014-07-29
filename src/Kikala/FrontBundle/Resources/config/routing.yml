@@ -44,7 +44,7 @@ logout:
 
 
 kikala_front_formaDetail:
-    path:     /formaDetail/
+    path:     /formaDetail/{id}
     defaults: { _controller: KikalaFrontBundle:Formation:formaDetail }
 
 kikala_front_kikoDetail:
