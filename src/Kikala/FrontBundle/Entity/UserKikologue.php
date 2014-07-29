@@ -218,7 +218,11 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     * @ORM\Column(name="roles", type="array")
     */
     private $roles;
-
+    /**
+    *
+    * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\formation", mappedBy="creator")
+    **/
+    private $mesForms;
 
     /**
      * Constructor
@@ -786,5 +790,38 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    /**
+     * Add mesForms
+     *
+     * @param \Kikala\FrontBundle\Entity\formation $mesForms
+     * @return UserKikologue
+     */
+    public function addMesForm(\Kikala\FrontBundle\Entity\formation $mesForms)
+    {
+        $this->mesForms[] = $mesForms;
+
+        return $this;
+    }
+
+    /**
+     * Remove mesForms
+     *
+     * @param \Kikala\FrontBundle\Entity\formation $mesForms
+     */
+    public function removeMesForm(\Kikala\FrontBundle\Entity\formation $mesForms)
+    {
+        $this->mesForms->removeElement($mesForms);
+    }
+
+    /**
+     * Get mesForms
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMesForms()
+    {
+        return $this->mesForms;
     }
 }

@@ -13,7 +13,7 @@ class FormationController extends Controller
 {
 
     public function lsFormaAction($page){
-    	$maxFormations=30;
+    	$maxFormations=2;
 
         $formations_count = $this->getDoctrine()
         		->getRepository('KikalaFrontBundle:Formation')
@@ -23,6 +23,7 @@ class FormationController extends Controller
             'page' => $page,
             'route' => 'kikala_front_lsForma',
             'pages_count' => ceil($formations_count / $maxFormations),
+            'route_params' => array()
         );
  
         $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
@@ -34,7 +35,9 @@ class FormationController extends Controller
         	)
         );
 
-}
+	}
+
+
 	public function formaDetailAction($id){
 
 		//requête à la base dans la table formation
