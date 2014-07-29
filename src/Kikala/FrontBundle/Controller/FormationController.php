@@ -16,10 +16,13 @@ class FormationController extends Controller
 		
 		
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
-        $formations=$formationReposytory->findAll();
-     	/*echo "<pre>";
-     	print_r($formation);
-     	echo "</pre>";*/
+
+		
+        $query=$formationReposytory->createQueryBuilder('f')
+        	->orderBy('f.dateFormation', 'ASC')
+        	->getQuery();
+        	
+        	$formations=$query->getResult();
      
     	$params=array(
     		'formations'=>$formations,

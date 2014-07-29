@@ -60,7 +60,7 @@ class Formation
      * @var \DateTime
      * @Assert\NotBlank(message="La date doit être renseignée!")
      * @Assert\DateTime()
-     * @ORM\Column(name="dateFormation", type="dateTime")
+     * @ORM\Column(name="dateFormation", type="datetime")
      */
     private $dateFormation;
 
