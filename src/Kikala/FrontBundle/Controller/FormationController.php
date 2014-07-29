@@ -15,19 +15,20 @@ class FormationController extends Controller
 		//requête à la base dans la table formation
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
 
-
-		
+		//Création d'un table 'f' pour classer les formations		
         $query=$formationReposytory->createQueryBuilder('f')
         	->orderBy('f.dateFormation', 'ASC')
         	->getQuery();
-        	
+
+        //récupération des données dans $formations	
         	$formations=$query->getResult();
      
-
+        //création d'un array associatif pour stocker les données
     	$params=array(
     		'formations'=>$formations,
     		);
 
+    	//envoi à la vue
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
 		
 	}
