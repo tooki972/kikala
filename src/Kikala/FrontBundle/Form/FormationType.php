@@ -45,6 +45,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 ))
+
             ->add('heureFormation', 'time', array(
                 'input'  => 'datetime',
                 'required' => true,

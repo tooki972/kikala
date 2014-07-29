@@ -14,9 +14,16 @@ class FormationController extends Controller
 	public function lsFormaAction(){
 		//requête à la base dans la table formation
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
-		//récupère toutes les données
-        $formations=$formationReposytory->findAll();
-        //dans un tableau
+
+
+		
+        $query=$formationReposytory->createQueryBuilder('f')
+        	->orderBy('f.dateFormation', 'ASC')
+        	->getQuery();
+        	
+        	$formations=$query->getResult();
+     
+
     	$params=array(
     		'formations'=>$formations,
     		);

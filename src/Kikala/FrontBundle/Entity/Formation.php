@@ -234,7 +234,7 @@ class Formation
     /**
      * Get dateFormation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateFormation()
     {
@@ -539,4 +539,27 @@ class Formation
     {
         return $this->inscriptionForms;
     }
-}
+    /**
+     * Set filename
+     *
+     * @param string $filename
+     * @return Formation
+     */
+    public function setFilename($Filename)
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Get filename
+     *
+     * @return string 
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+     }
