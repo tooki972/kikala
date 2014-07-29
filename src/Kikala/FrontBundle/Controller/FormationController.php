@@ -13,17 +13,16 @@ class FormationController extends Controller
 {
 	public function lsFormaAction(){
 
-		
-		
 		$formationReposytory=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation');
-        $formation=$formationReposytory->findAll();
+        $formations=$formationReposytory->findAll();
+
+
      	/*echo "<pre>";
      	print_r($formation);
      	echo "</pre>";*/
-       $name=$formation->name;
-    	$params=array(
-    		'formation'=>$formation,
-    		'name'=>$formation->name);
+       $params=array(
+    		'formations'=>$formations
+    	);
 
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig',$params);
 		
