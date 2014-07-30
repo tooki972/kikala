@@ -11,10 +11,12 @@ class DefaultController extends Controller
     {
 
         $em = $this->getDoctrine()->getEntityManager();
-        $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();  
-        $nbFormations= $em->getRepository('KikalaFrontBundle:Formation')->countFormation();  
+
+        $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();
+        $nbFormation= $em->getRepository('KikalaFrontBundle:Formation')->countFormation();
+
         return $this->render('KikalaFrontBundle:Default:home.html.twig',array('nbUser' => $nbUser,
-            'nbFormations'=>$nbFormations));
+            'nbFormation' => $nbFormation));
 
     }
 

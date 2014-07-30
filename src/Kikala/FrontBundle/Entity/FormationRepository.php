@@ -16,9 +16,10 @@ use Doctrine\ORM\EntityRepository;
 class FormationRepository extends EntityRepository
 
 {
-    public function getList($page=1, $maxperpage=2){
+    public function getList($page=1, $maxperpage=30){
         $query = $this->createQueryBuilder('form')
             ->select('form')
+            ->where ('form.dateFormation >= current_timestamp()')
             ->orderBy('form.dateFormation', 'ASC')
             ->setFirstResult(($page-1) * $maxperpage)
             ->setMaxResults($maxperpage)
@@ -33,8 +34,7 @@ class FormationRepository extends EntityRepository
 				->getQuery()
 				->getSingleScalarResult();
 				return $count;
-	}
+	
+    }
+
 }
-
-
-
