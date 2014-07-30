@@ -171,6 +171,9 @@ h1 >a:hover{
  	color: #b8c945;
  	text-decoration: none;
 }
+.new{
+	background: url('../img/new.png');
+}
 /************** PROFIL ****************************/
 #namePseudo{
 	color: #b8c945;
@@ -183,7 +186,7 @@ h1 >a:hover{
 	padding-bottom: 15px;
 }
 #userKikos{
-	background: url(../img/bulle-verteB.png) no-repeat;
+	background: url('../img/bulle-verteB.png') no-repeat;
 	color: #fff;
 	height: 68px;
 	margin-bottom: 15px;

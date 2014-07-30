@@ -40,6 +40,10 @@ class FormationController extends Controller
 	}
 
 
+	public function desactive(){
+		
+	}
+
 	public function formaDetailAction($id){
 
 		//requête à la base dans la table formation

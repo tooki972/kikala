@@ -33,6 +33,7 @@ class FormationRepository extends EntityRepository
 				->getSingleScalarResult();
 				return $count;
 	}
+
 }
 
 
