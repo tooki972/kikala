@@ -45,6 +45,7 @@
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
 	<div class="form-group">
-        <button type="submit" class="btn btn-primary btn-xs col-xs-12">S'inscrire</button>
+        <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
     </div> 	
 {% endblock %}
+

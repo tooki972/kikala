@@ -661,41 +661,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     }
 
     
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return UserKikologue
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
 
-        return $this;
-    }   
-     
-    /**
-     * Add roles
-     *
-     * @param \Wf3\WikiBundle\Entity\Role $roles
-     * @return User
-     */
-    public function addRole(\Wf3\WikiBundle\Entity\Role $roles)
-    {
-        $this->roles[] = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Remove roles
-     *
-     * @param \Wf3\WikiBundle\Entity\Role $roles
-     */
-    public function removeRole(\Wf3\WikiBundle\Entity\Role $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
 
     /**
      * Get roles
@@ -823,5 +789,41 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     public function getMesForms()
     {
         return $this->mesForms;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return UserKikologue
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Add mesForms
+     *
+     * @param \Kikala\FrontBundle\Entity\Formation $mesForms
+     * @return UserKikologue
+     */
+    public function addMesForm(\Kikala\FrontBundle\Entity\Formation $mesForms)
+    {
+        $this->mesForms[] = $mesForms;
+
+        return $this;
+    }
+
+    /**
+     * Remove mesForms
+     *
+     * @param \Kikala\FrontBundle\Entity\Formation $mesForms
+     */
+    public function removeMesForm(\Kikala\FrontBundle\Entity\Formation $mesForms)
+    {
+        $this->mesForms->removeElement($mesForms);
     }
 }
