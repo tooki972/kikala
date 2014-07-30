@@ -674,29 +674,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
         return $this;
     }   
      
-    /**
-     * Add roles
-     *
-     * @param \Wf3\WikiBundle\Entity\Role $roles
-     * @return User
-     */
-    public function addRole(\Wf3\WikiBundle\Entity\Role $roles)
-    {
-        $this->roles[] = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Remove roles
-     *
-     * @param \Wf3\WikiBundle\Entity\Role $roles
-     */
-    public function removeRole(\Wf3\WikiBundle\Entity\Role $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
-
+    
     /**
      * Get roles
      *

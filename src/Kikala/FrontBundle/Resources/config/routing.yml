@@ -49,7 +49,7 @@ kikala_front_formaDetail:
     defaults: { _controller: KikalaFrontBundle:Formation:formaDetail }
 
 kikala_front_kikoDetail:
-    path:     /kikoDetail/
+    path:     /kikoDetail/{id}
     defaults: { _controller: KikalaFrontBundle:User:kikoDetail }
 
 kikala_front_kikologue:

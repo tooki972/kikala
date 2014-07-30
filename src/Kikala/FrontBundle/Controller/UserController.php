@@ -173,13 +173,15 @@ class UserController extends Controller
     }
     
 
-    public function kikoDetailAction()
+    public function kikoDetailAction($id)
     {
-        $user=$this->getUser();
+        $user=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue')->findOneById($id);
         
+        $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
         
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
-        'user'=>$user));
+        'user'=>$user,
+        'formations'=>$formations));
     }
 
 
@@ -253,6 +255,7 @@ class UserController extends Controller
                     $em->persist($forma);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
+
             }
                
             $params = array(
