@@ -140,8 +140,20 @@ h3{
 	text-align: center;
 	display: inline-block;
 }
-.nbUser{
+.nbUserB{
+	background: url(../img/bulle-verte.png) no-repeat;
+	color: #fff;
+	font-size: 2em;
+	height: 68px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	padding-top: 10px;
 	width: 83px;
+	text-align: center;
+	display: inline-block;
+}
+.nbUser{
+	width: 50%;
 }
 /************** lsforma ***************************/
 .description{

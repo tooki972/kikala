@@ -26,11 +26,11 @@
                     <ul class="nav nav-pills">
 
                         <li class="dropdown col-xs-12 col-md-2">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_lsForma') }}">lsForma</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_lsForma') }}">Les formations</a>
                         </li>
                         {% if app.user %}
-                        <li class="dropdown col-xs-12 col-md-2 ">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_formaCreate') }}">formaCreate</a>
+                        <li class="dropdown col-xs-12 col-md-3 ">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_formaCreate') }}">Créer une formation</a>
                         </li>
                         <li class="dropdown col-xs-12 col-md-1 ">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('logout') }}">Logout</a>
@@ -41,7 +41,7 @@
                         {% else %}
 
                         <li class="dropdown col-xs-12 col-md-1 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_login') }}">Login</a></li>
-                        <li class="dropdown col-xs-12 col-md-1 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_register') }}">register</a></li>
+                        <li class="dropdown col-xs-12 col-md-1 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_register') }}">Créer un compte</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -61,10 +61,10 @@
                 <div id="bas" class="container">
                 <nav id="navbas" class="col-xs-12 col-md-8">
                     <ul class="nav nav-pills">
-                        <li class="dropdown col-xs-12 col-md-2"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_homepage') }}">home</a></li>
+                        <li class="dropdown col-xs-12 col-md-2"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_homepage') }}">Accueil</a></li>
                         <li class="dropdown col-xs-12 col-md-2 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_legal') }}">Légal</a></li>
                         <li class="dropdown col-xs-12 col-md-2 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_about') }}">A propos</a></li>
-                        <li class="dropdown col-xs-12 col-md-2 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_register') }}">register</a></li>
+                        <li class="dropdown col-xs-12 col-md-3 "><a class="dropdown-toggle" data-toggle="dropdown" href="{{ path('kikala_front_register') }}">Créer un compte</a></li>
                     </ul>
                 </nav>               
                 </div>             
