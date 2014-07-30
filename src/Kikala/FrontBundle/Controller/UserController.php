@@ -175,7 +175,9 @@ class UserController extends Controller
 
     public function kikoDetailAction()
     {
-        return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
+        $user=$this->getUser();
+        return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
+        'user'=>$user));
     }
 
 
@@ -210,11 +212,11 @@ class UserController extends Controller
 
     public function formaCreateAction(Request $request)
     {
-         $tag = new tag();
+        $tag = new tag();
 
-          $tag_form =$this->createForm(new TagType, $tag);
+        $tag_form =$this->createForm(new TagType, $tag);
 
-         $forma = new Formation();
+        $forma = new Formation();
 
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
@@ -226,11 +228,13 @@ class UserController extends Controller
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
 
-//print_r($formation_form->getData());
+    //print_r($formation_form->getData());
 
-                 $forma->setIsActive(true);
-                    $forma->setDateCreated(new DateTime());
-                        if(!empty($forma->getMiImage())){
+                $forma->setIsActive(true);
+                $forma->setDateCreated(new DateTime());
+                $user=$this->getUser();
+                $forma->setCreator($user);
+                    if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
                             // comput a random name and try to guess the extension
@@ -244,18 +248,16 @@ class UserController extends Controller
                     $em->persist($forma);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-                }
-          
-         
+            }
                
-                 $params = array(
-            "tag_form" => $tag_form->createView(),
-            "formation_form" => $formation_form->createView(),
-
+            $params = array(
+                "tag_form" => $tag_form->createView(),
+                "formation_form" => $formation_form->createView(),
             );
 
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
+
      public function tagCreateAction(Request $request)
     {
       //instanciation d'un objet

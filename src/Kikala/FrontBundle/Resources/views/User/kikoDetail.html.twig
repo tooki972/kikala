@@ -5,29 +5,42 @@
 {% block body %}
 
 
-pseudo {{ user.pseudo }}
-{% if date(user.birthday)>date('-10years') %}
-Vous avez  menti sur votre age('sinon va te coucher kevin')
-{% elseif date(user.birthday)>date('-20years') %}
- Vous avez la dizaine
- {% elseif date(user.birthday)>date('-30years') %}
-Vous avez la vingtaine
- {% elseif date(user.birthday)>date('-40years') %}
- Vous avez la trentaine
+<h2 class="pageTitle"> pseudo {{ user.pseudo }}</h2>
+  {% if date(user.birthday)>date('-10years') %}
+    <p>Vous avez  menti sur votre age('sinon va te coucher kevin')</p>
+  {% elseif date(user.birthday)>date('-20years') %}
+    <p>Vous avez la dizaine</p>
+  {% elseif date(user.birthday)>date('-30years') %}
+    <p>Vous avez la vingtaine</p>
+  {% elseif date(user.birthday)>date('-40years') %}
+    <p>Vous avez la trentaine</p>
   {% elseif date(user.birthday)>date('-50years') %}
-  Vous avez la quarantaine
-    {% elseif date(user.birthday)>date('-60years') %}
-    Vous avez la cinquantaine
-      {% elseif date(user.birthday)>date('-70years') %}
-      Vous avez la soixantaine
-        {% elseif date(user.birthday)>date('-80years') %}
-        Vous avez la soixantedizaine
-          {% elseif date(user.birthday)>date('-90years') %}
-          Vous avez quatre-vingtaine
-{% endif %}
-<p>Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
-À noter que l’âge du kikologue est affiché par tranche de 10 ans. 
+    <p>Vous avez la quarantaine</p>
+  {% elseif date(user.birthday)>date('-60years') %}
+    <p>Vous avez la cinquantaine</p>
+  {% elseif date(user.birthday)>date('-70years') %}
+    <p>Vous avez la soixantaine</p>
+  {% elseif date(user.birthday)>date('-80years') %}
+    <p>Vous avez la soixantedizaine</p>
+  {% elseif date(user.birthday)>date('-90years') %}
+    <p>Vous avez quatre-vingtaine</p>
+  {% endif %}
+<p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.kikos }}</p>
 
-La liste des formations (passées et futures) dispensées par ce kikologue est affichée. 
-La liste des formations (passées et futures) suivies par ce kikologue est affichée. </p>
+<p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.metier }}</p>
+<p class="description col-xs-12 col-md-8">Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
+À noter que l’âge du kikologue est affiché par tranche de 10 ans. </p>
+<p>
+La liste des formations (passées et futures) dispensées par ce kikologue est affichée. </p>
+<p>La liste des formations (passées et futures) suivies par ce kikologue est affichée. </p>
+{% endblock %}
+
+{% block aside %}
+  <h2 id="namePseudo"> {{user.pseudo}}</h2>
+  {% if user.filename %}
+    <img src="{{ asset('img/profilpicture/'~user.filename) }}" height="300" width="255" />
+  {% else %}
+    <img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
+  {% endif %}
+
 {% endblock %}
