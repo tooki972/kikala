@@ -167,7 +167,7 @@ class UserController extends Controller
     public function kikologueAction()
     { //
         $user=$this->getUser();
-    
+        
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig',array(
         'user'=>$user));
     }
@@ -176,8 +176,12 @@ class UserController extends Controller
     public function kikoDetailAction()
     {
         $user=$this->getUser();
+        $mesformations=$user->getMesForms();
+                
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
-        'user'=>$user));
+        'user'=>$user,
+        'mesformations'=>$mesformations));
+
     }
 
 
@@ -229,10 +233,12 @@ class UserController extends Controller
 
                 $forma->setIsActive(true);
                 $forma->setDateCreated(new DateTime());
+                //récupère l'objet user
                 $user=$this->getUser();
 
-               
+                //pour remplir id du crateur de la formation
                 $forma->setCreator($user);
+
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
@@ -289,6 +295,8 @@ class UserController extends Controller
     
     public function myFormaAction()
     {
+
+
         return $this->render('KikalaFrontBundle:User:myForma.html.twig');
     } 
 

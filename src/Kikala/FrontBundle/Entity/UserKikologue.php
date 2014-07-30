@@ -798,7 +798,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      * @param \Kikala\FrontBundle\Entity\formation $mesForms
      * @return UserKikologue
      */
-    public function addMesForm(\Kikala\FrontBundle\Entity\formation $mesForms)
+    public function addMesForms(\Kikala\FrontBundle\Entity\formation $mesForms)
     {
         $this->mesForms[] = $mesForms;
 
@@ -810,7 +810,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
      *
      * @param \Kikala\FrontBundle\Entity\formation $mesForms
      */
-    public function removeMesForm(\Kikala\FrontBundle\Entity\formation $mesForms)
+    public function removeMesForms(\Kikala\FrontBundle\Entity\formation $mesForms)
     {
         $this->mesForms->removeElement($mesForms);
     }

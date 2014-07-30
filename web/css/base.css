@@ -159,6 +159,7 @@ h3{
 	margin-bottom: 15px;
 	padding-bottom: 15px;
 	padding-top: 10px;
+
 }
 h1 >a{
  	color: #330a03;
@@ -172,7 +173,16 @@ h1 >a:hover{
 }
 .new{
 	background: url('../img/new.png') no-repeat;
-	background-position: 100px; 
+	padding-left: 35px;
+}
+/*************** formation detail *****************/
+.intitule{
+	background: #b8c945;
+	color: #fff;
+	padding: 2px;
+	margin-right: 4px;
+	letter-spacing: 1px;
+	float: left;
 }
 /************** PROFIL ****************************/
 #namePseudo{
