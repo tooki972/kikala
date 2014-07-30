@@ -200,10 +200,10 @@ class UserController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
             }
-                 $params = array(
+        $params = array(
             "profil_form" => $profil_form->createView(),
             "user"=>$this->getUser(),
-            );
+        );
 
         return $this->render('KikalaFrontBundle:User:profil.html.twig',$params);
     }
@@ -211,14 +211,11 @@ class UserController extends Controller
     public function formaCreateAction(Request $request)
     {
         $tag = new tag();
-
         $tag_form =$this->createForm(new TagType, $tag);
-
         $forma = new Formation();
 
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
-
         //traitement de requête
         $formation_form->handleRequest($request);
 
@@ -256,39 +253,34 @@ class UserController extends Controller
 
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
-     public function tagCreateAction(Request $request)
+    
+    public function tagCreateAction(Request $request)
     {
-      //instanciation d'un objet
+        //instanciation d'un objet
         $tag = new tag();
-
         //crée une instance de Form
         $tag_form =$this->createForm(new TagType, $tag);
 
         //traitement de requête
         $tag_form->handleRequest($request);
-         if ($tag_form->isValid()){ 
-                // Traitement de chaque donnée de notre formulaire
-
-
-                //récupération du manager pour sauvegarder l'entity
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($tag);
+        if ($tag_form->isValid()){ 
+            // Traitement de chaque donnée de notre formulaire
+            //récupération du manager pour sauvegarder l'entity
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($tag);
                 //Sauvegarde de l'entity (exécute la requête)
-                    $em->flush();
-
+                $em->flush();
                 $response = new JsonResponse();
                 $response->setData(array(
                     'id'=>$tag->getId(),
                     'name'=>$tag->getname(),
-                    ));
+                    )
+                );
                 return $response;
-            }    
-     $params = array(
-
-            "tag_form" => $tag_form->createView(),
-
-            );
-
+        }    
+        $params = array(
+                "tag_form" => $tag_form->createView(),
+        );
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
     
@@ -301,6 +293,5 @@ class UserController extends Controller
     {
         return $this->render('KikalaFrontBundle:User:summary.html.twig');
     } 
-   
-    
+ 
 }

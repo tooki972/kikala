@@ -9,7 +9,6 @@ class DefaultController extends Controller
 {
 	 public function homeAction()
     {
-
         $em = $this->getDoctrine()->getEntityManager();
 
         $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();

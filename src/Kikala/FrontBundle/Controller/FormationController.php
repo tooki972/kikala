@@ -11,7 +11,6 @@ use Kikala\FrontBundle\Entity\Tag;
 
 class FormationController extends Controller 
 {
-
     public function lsFormaAction($page){
     	
     // Affichage de la liste des formations par date de formation et par page (30 formation par page)
