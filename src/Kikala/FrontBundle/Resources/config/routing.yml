@@ -76,3 +76,7 @@ kikala_front_mes_inscriptions:
 kikala_front_tagCreate:
     path:     /tagCreate/
     defaults: { _controller: KikalaFrontBundle:User:tagCreate }
+
+kikala_front_formaIns:
+    path:     /formaIns/{id}
+    defaults: { _controller: KikalaFrontBundle:Formation:formaIns }

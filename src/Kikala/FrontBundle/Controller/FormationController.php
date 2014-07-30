@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Tag;
-
+use Kikala\FrontBundle\Entity\InscriptionForm;
 
 class FormationController extends Controller 
 {
@@ -48,15 +48,32 @@ class FormationController extends Controller
 	public function formaDetailAction($id){
 
 		//requête à la base dans la table formation
-		$formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);;
-		
+		$formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
+	
 	    //création d'un array associatif pour stocker les données
     	$params=array(
+
     		'formation'=>$formation
+
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
+    public function formaInsAction($id){
+        $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
+        $inscri= new Inscriptionform();
+        $inscri->setFormation($formation);
+        $inscri->setUser($this->getUser());
+         //récupération du manager pour sauvegarder l'entity
+           
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($inscri);
+                //Sauvegarde de l'entity (exécute la requête)
+                    $em->flush();
+                     $params=array(
+                    'id'=>$id);
+        return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));      
 
+    }
 
 }
