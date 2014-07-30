@@ -13,12 +13,14 @@ class FormationController extends Controller
 {
 
     public function lsFormaAction($page){
-    	$maxFormations=2;
+
+    	$maxFormations=5;
+
 
         $formations_count = $this->getDoctrine()
         		->getRepository('KikalaFrontBundle:Formation')
                 ->countFormation();
-
+                
         $pagination = array(
             'page' => $page,
             'route' => 'kikala_front_lsForma',
