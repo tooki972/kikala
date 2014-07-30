@@ -230,6 +230,8 @@ class UserController extends Controller
                 $forma->setIsActive(true);
                 $forma->setDateCreated(new DateTime());
                 $user=$this->getUser();
+
+               
                 $forma->setCreator($user);
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
@@ -254,13 +256,8 @@ class UserController extends Controller
 
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
-<<<<<<< HEAD
     
     public function tagCreateAction(Request $request)
-=======
-
-     public function tagCreateAction(Request $request)
->>>>>>> 428d415efa977a5240fffb2d2a05683ee7fa6b1b
     {
         //instanciation d'un objet
         $tag = new tag();

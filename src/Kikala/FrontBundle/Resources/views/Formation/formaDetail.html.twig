@@ -8,6 +8,8 @@
 	<h2 class="col-xs-12">Descriptif</h2>
 	<p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
 	<h3 class="description col-xs-12 col-md-3 col-md-offset-1 ">Formateur : <a href="{{ path('kikala_front_kikoDetail') }}">{{ formation.getCreator.pseudo }}</a></h3>
+
+
 	<h2 class="col-xs-12">Infos</h2>
 	<p class="description col-xs-12 col-md-4">Date : {{ formation.dateFormation|date("d/m/y") }}</p>
 	<p class="description col-xs-12 col-md-4">Durée : {{ formation.duree }} h</p>
