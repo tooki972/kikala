@@ -5,16 +5,24 @@
 {% block body %}
 
 	<h2 class="pageTitle">Kikala !</h2>
-<div class="col-xs-12">
-	<h3 id="slogan">Echange de connaissance accessible à tous</h3>
-</div>
-<div class="col-xs-12"class="col-xs-12">
-	<p>Le nombre de formations en cours {{ nbFormation }}</p>
-</div>
-<div class="col-xs-12" class="nbUser">
-	<p>Le nombre d'inscrit est de <span class="nbUserA">  {{ nbUser}} </span></p>
-</div>
+	
+	<div class="col-xs-12">
+		<h3 id="slogan">Echange de connaissance accessible à tous</h3>
+	</div>
+	
+	<div class="col-xs-12 nbUser">
+		<p><span class="nbUserB"> {{ nbFormation }}</span> Formations en cours </p>
+	</div>
+	
+	<div class="col-xs-12 nbUser">
+		<p>Le nombre d'inscrit est de <span class="nbUserA">  {{ nbUser}} </span></p>
+	</div>
 
-Un bouton “inscription”
-Un bouton “connexion”</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
 {% endblock %}
+
+
+
+    {% block aside %}
+	<img src="{{ asset('img/science.png') }}" />
+    {% endblock %}

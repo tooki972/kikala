@@ -220,7 +220,7 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
     private $roles;
     /**
     *
-    * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\formation", mappedBy="creator")
+    * * @ORM\OneToMany (targetEntity="Kikala\FrontBundle\Entity\Formation", mappedBy="creator")
     **/
     private $mesForms;
 
