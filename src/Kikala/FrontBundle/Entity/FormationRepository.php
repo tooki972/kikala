@@ -34,7 +34,8 @@ class FormationRepository extends EntityRepository
 				->getQuery()
 				->getSingleScalarResult();
 				return $count;
-	
-    }
+
+	}
 
 }
+

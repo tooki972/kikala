@@ -7,6 +7,7 @@
 
 
 {% for formation in formations|slice(0, 10) %}
+
     {% if formation.dateCreated|date("m/d/Y") >= twoday|date("m/d/Y") %}
     <h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
     <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
@@ -18,6 +19,7 @@
         <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
         <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
     {% endif %}
+
 {% endfor %}
 		
         {% if pagination.page>1 %}

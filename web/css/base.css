@@ -92,11 +92,9 @@ h2{
  	font-size: 1.3em;
 }
 h3{
-	background: #3276b1;
- 	color: #fff;
+ 	color: #b8c945;
  	font-size: 1.25em;
  	margin-bottom: 15px;
- 	margin-top: 15px;
  	padding: 2px;
 }
 #cat{
@@ -129,7 +127,7 @@ h3{
 }
 /************** HOME ******************************/
 .nbUserA{
-	background: url(../img/bulle-rouge.png) no-repeat;
+	background: url('../img/bulle-rouge.png') no-repeat;
 	color: #fff;
 	font-size: 2em;
 	height: 68px;
@@ -141,7 +139,7 @@ h3{
 	display: inline-block;
 }
 .nbUserB{
-	background: url(../img/bulle-verte.png) no-repeat;
+	background: url('../img/bulle-verte.png') no-repeat;
 	color: #fff;
 	font-size: 2em;
 	height: 68px;
@@ -160,6 +158,7 @@ h3{
 	border-bottom: 1px solid #b8c945;
 	margin-bottom: 15px;
 	padding-bottom: 15px;
+	padding-top: 10px;
 }
 h1 >a{
  	color: #330a03;
@@ -170,6 +169,10 @@ h1 >a{
 h1 >a:hover{
  	color: #b8c945;
  	text-decoration: none;
+}
+.new{
+	background: url('../img/new.png') no-repeat;
+	background-position: 100px; 
 }
 /************** PROFIL ****************************/
 #namePseudo{
@@ -183,7 +186,7 @@ h1 >a:hover{
 	padding-bottom: 15px;
 }
 #userKikos{
-	background: url(../img/bulle-verteB.png) no-repeat;
+	background: url('../img/bulle-verteB.png') no-repeat;
 	color: #fff;
 	height: 68px;
 	margin-bottom: 15px;

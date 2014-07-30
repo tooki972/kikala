@@ -175,7 +175,9 @@ class UserController extends Controller
 
     public function kikoDetailAction()
     {
-        return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig');
+        $user=$this->getUser();
+        return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
+        'user'=>$user));
     }
 
 
@@ -223,11 +225,13 @@ class UserController extends Controller
         //si le formulaire est soumis et valide
             if ($formation_form->isValid()){ 
 
-//print_r($formation_form->getData());
+    //print_r($formation_form->getData());
 
-                 $forma->setIsActive(true);
-                    $forma->setDateCreated(new DateTime());
-                        if(!empty($forma->getMiImage())){
+                $forma->setIsActive(true);
+                $forma->setDateCreated(new DateTime());
+                $user=$this->getUser();
+                $forma->setCreator($user);
+                    if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
                             // comput a random name and try to guess the extension
@@ -241,20 +245,22 @@ class UserController extends Controller
                     $em->persist($forma);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-                }
-          
-         
+            }
                
-                 $params = array(
-            "tag_form" => $tag_form->createView(),
-            "formation_form" => $formation_form->createView(),
-
+            $params = array(
+                "tag_form" => $tag_form->createView(),
+                "formation_form" => $formation_form->createView(),
             );
 
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
+<<<<<<< HEAD
     
     public function tagCreateAction(Request $request)
+=======
+
+     public function tagCreateAction(Request $request)
+>>>>>>> 428d415efa977a5240fffb2d2a05683ee7fa6b1b
     {
         //instanciation d'un objet
         $tag = new tag();

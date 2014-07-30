@@ -43,6 +43,7 @@ class FormationController extends Controller
 
 	}
 
+
 	public function formaDetailAction($id){
 
 		//requête à la base dans la table formation
