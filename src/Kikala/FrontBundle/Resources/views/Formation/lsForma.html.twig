@@ -7,10 +7,19 @@
 
 
 {% for formation in formations|slice(0, 10) %}
-	<h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
-	<p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
-	<p class="description col-xs-12 col-md-4 new">{{ formation.dateFormation|date("d/m/y") }}</p>
-	
+
+    {% if formation.dateCreated|date("m/d/Y") >= twoday|date("m/d/Y") %}
+    <h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+    <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+    <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
+	<div class="new"> new </div>
+    {% else %}
+        
+        <h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+        <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+        <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
+    {% endif %}
+
 {% endfor %}
 		
         {% if pagination.page>1 %}
@@ -27,6 +36,7 @@
             <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
             <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a>
         {% endif %}
+
 
 
 <p> Cet écran affiche les formations en cours (futures), au nombre de 30. Elles sont affichées par date de formation, croissant (la plus proche d’abord). 

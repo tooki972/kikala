@@ -162,12 +162,12 @@ class Formation
      */
     private $filename;
 
-
     /**
     *
     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue",inversedBy="mesForms")
     **/
     private $creator;
+
     /**
      * Get id
      *

@@ -13,13 +13,13 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $nbUser= $em->getRepository('KikalaFrontBundle:UserKikologue')->countUser();
-  
         $nbFormation= $em->getRepository('KikalaFrontBundle:Formation')->countFormation();
 
         return $this->render('KikalaFrontBundle:Default:home.html.twig',array('nbUser' => $nbUser,
             'nbFormation' => $nbFormation));
 
     }
+
     public function legalAction()
     {
         return $this->render('KikalaFrontBundle:Default:legal.html.twig');

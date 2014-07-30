@@ -13,9 +13,10 @@ class FormationController extends Controller
 {
 
     public function lsFormaAction($page){
-
-    	$maxFormations=5;
-
+    	
+    // Affichage de la liste des formations par date de formation et par page (30 formation par page)
+    	//1. Aller sur formationRepository et crée deux function que nous avons appelle ici.
+    	$maxFormations=30;
 
         $formations_count = $this->getDoctrine()
         		->getRepository('KikalaFrontBundle:Formation')
@@ -27,22 +28,22 @@ class FormationController extends Controller
             'pages_count' => ceil($formations_count / $maxFormations),
             'route_params' => array()
         );
- 
+       
+        $twoday=date('Y-m-d', strtotime('2 day ago'));
+        
         $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
                 ->getList($page, $maxFormations);
- 
+        
+
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig', array(
             'formations' => $formations,
-            'pagination' => $pagination
-        	)
+            'pagination' => $pagination,
+            'twoday' => $twoday
+         	)
         );
 
 	}
 
-
-	public function desactive(){
-		
-	}
 
 	public function formaDetailAction($id){
 
@@ -56,5 +57,6 @@ class FormationController extends Controller
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
+
 
 }

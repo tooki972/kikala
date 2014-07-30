@@ -287,13 +287,13 @@ class UserController extends Controller
             }    
      $params = array(
 
-
             "tag_form" => $tag_form->createView(),
 
             );
 
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
+    
     public function myFormaAction()
     {
         return $this->render('KikalaFrontBundle:User:myForma.html.twig');
