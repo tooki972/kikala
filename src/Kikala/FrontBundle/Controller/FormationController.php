@@ -35,12 +35,46 @@ class FormationController extends Controller
         
         $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
                 ->getList($page, $maxFormations);
-        
+        //gestion des kikos
+            $pastFormas=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->giveKikos();
+            foreach ($pastFormas as $pastForma ) {
+                $creator=$pastForma->getCreator();
+            $payer= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findBy(array('toUser'=>$creator,'transactionType'=>'formation','formation'=>$pastForma));
+            
+            if($payer == false){
+             
+
+                    $em = $this->getDoctrine()->getManager();
+                      $inscri=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($pastForma->getId()); 
+                      $temp=$pastForma->getDuree();
+                      $due=$inscri*$temp;
+                      $kikosnow=$creator->getKikos();
+                      $creator->setKikos($kikosnow+$due);
+                    $transaction= new KikoTransactionHistory();
+                    $transaction->setFormation($pastForma);
+                     $transaction->setDateTransaction(new DateTime());
+                     $transaction->setKikosTransfered($due);
+                     $transaction->setTransactionType('formation');
+                     $transaction->setToUser($creator);
+                     $transaction->setFromUser('eleves');
+                     //récupération du manager pour sauvegarder l'entity
+                       
+                                $em->persist($creator);
+                                 $em->persist($transaction);
+                            //Sauvegarde de l'entity (exécute la requête)
+                                $em->flush();
+                              
+                  
+                    
+                          }
+            }
+
 
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig', array(
             'formations' => $formations,
             'pagination' => $pagination,
-            'twoday' => $twoday
+            'twoday' => $twoday,
+
          	)
         );
 
@@ -82,7 +116,8 @@ class FormationController extends Controller
          $transaction->setKikosTransfered($dure);
          $transaction->setTransactionType('inscription');
          $transaction->setToUser($formation->getCreator());
-         $transaction->setFromUser($this->getUser());
+         $transaction->setFormation($formation);
+         $transaction->setFromUser($this->getUser()->getId());
          //récupération du manager pour sauvegarder l'entity
            
             $em = $this->getDoctrine()->getManager();

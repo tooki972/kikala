@@ -36,5 +36,25 @@ class FormationRepository extends EntityRepository
 				return $count;
 
 	}
+
+    public function giveKikos(){
+        $query = $this->createQueryBuilder('form')
+            ->select('form')
+            ->where ('form.dateFormation <= current_timestamp()')
+            ->orderBy('form.dateFormation', 'ASC')
+            ->getQuery();
+        $pastformation=$query->getResult();
+        return $pastformation;
+    }
+
+    public function countFormas($forma){
+        $count=$this->createQueryBuilder('nb')
+            ->select('COUNT(nb.formation)')
+            ->where('nb.formation',$forma)
+            ->getQuery()
+            ->getSingleScalarResult();
+            return $count;
+    }
+
 }
 

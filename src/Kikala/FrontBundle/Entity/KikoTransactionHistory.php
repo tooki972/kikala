@@ -48,11 +48,11 @@ class KikoTransactionHistory
      **/
      private $toUser;
 
-      /**
+     /**
+     * @var string
      *
-     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue")
-     * @ORM\JoinColumn(nullable=true)
-     **/
+     * @ORM\Column(name="fromUser", type="text")
+     */
      private $fromUser;
 
     /**
@@ -60,6 +60,12 @@ class KikoTransactionHistory
      *
      * @return integer 
      */
+    /**
+     *
+     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Formation")
+     **/
+     private $formation;
+
     public function getId()
     {
         return $this->id;
@@ -158,13 +164,17 @@ class KikoTransactionHistory
         return $this->toUser;
     }
 
+   
+
+    
+
     /**
      * Set fromUser
      *
-     * @param \Kikala\FrontBundle\Entity\UserKikologue $fromUser
+     * @param string $fromUser
      * @return KikoTransactionHistory
      */
-    public function setFromUser(\Kikala\FrontBundle\Entity\UserKikologue $fromUser = null)
+    public function setFromUser($fromUser)
     {
         $this->fromUser = $fromUser;
 
@@ -174,10 +184,33 @@ class KikoTransactionHistory
     /**
      * Get fromUser
      *
-     * @return \Kikala\FrontBundle\Entity\UserKikologue 
+     * @return string 
      */
     public function getFromUser()
     {
         return $this->fromUser;
+    }
+
+    /**
+     * Set formation
+     *
+     * @param \Kikala\FrontBundle\Entity\Formation $formation
+     * @return KikoTransactionHistory
+     */
+    public function setFormation(\Kikala\FrontBundle\Entity\Formation $formation = null)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Kikala\FrontBundle\Entity\Formation 
+     */
+    public function getFormation()
+    {
+        return $this->formation;
     }
 }
