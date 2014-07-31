@@ -17,31 +17,31 @@
 	<div id="userKikos" class="col-xs-12 col-md-8">
 		<p>vous avez : {{user.kikos}} kikos</p>
 	</div>
-
-	<div class="col-xs-12 col-md-4">
-		<a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12" role="button">Cree une Formation</a> </p>
-	</div>
 	<div class="col-xs-12 col-md-8">
 		<p>Le nombre de formation dispensées et le nombre de formations suivies sont aussi affichées, de manière graphique. Auprès de ces éléments, un bouton permet d’accéder à la page “Mes formations” et à “Mes inscriptions</p>
 	</div>
 	<div class="col-xs-12 col-md-4">
-		<a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12" role="button">Mes  Formation</a>
+		<div class="col-xs-12">
+			<a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12" role="button">Cree une Formation</a> </p>
+		</div>
+		<div class="col-xs-12">
+			<a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12" role="button">Mes  Formation</a>
+		</div>	
+		<div class="col-xs-12">
+		<a href="{{ path('kikala_front_mes_inscriptions') }}" class="btn btn-default col-xs-12" role="button">mes inscription</a>
+		</div>
 	</div>	
-	<div class="col-xs-12 col-md-4">
-	<a href="{{ path('kikala_front_mes_inscriptions') }}" class="btn btn-default col-xs-12" role="button">mes inscription</a>
-	</div>
-
 {% endblock %}
 
 {% block aside %}
-	<p>Bonjour</p><h2 id="namePseudo"> {{user.pseudo}}</h2>
+	<p class="intituleLong">Bonjour</p><h2 id="namePseudo"> {{user.pseudo}}</h2>
 	{% if user.filename %}
 		<img src="{{ asset('img/profilpicture/'~user.filename) }}" height="300" width="255" />
 	{% else %}
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
 	<div>
-		<a href="{{ path('kikala_front_profil') }}" class="btn btn-default col-xs-12 col-md-8" role="button">Modifier son profil</a>
+		<a href="{{ path('kikala_front_profil') }}" class="btn btn-default col-xs-12" role="button">Modifier son profil</a>
 	</div>	
 {% endblock %}
 

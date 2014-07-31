@@ -15,9 +15,6 @@
 		<a href="{{ path('kikala_front_kikoDetail', {'id' : formation.getCreator.id})}}">{{ formation.getCreator.pseudo }}</a>
 
 	</h3>
-
-
-
 	<h2 class="col-xs-12">Infos</h2>
 	<p class="description col-xs-12 col-md-4"><span class="intitule">Date</span> {{ formation.dateFormation|date("d/m/y") }}</p>
 	<p class="description col-xs-12 col-md-4"><span class="intitule">Durée</span> {{ formation.duree }} h</p>
@@ -26,9 +23,13 @@
 		<p class=" col-xs-12 col-md-4"><span class="intitule">Adresse</span> {{ formation.adresse }}</p>
 		<p class=" col-xs-12 col-md-4"><span class="intitule">Ville</span> {{ formation.ville }}</p>
 		<p class=" col-xs-12 col-md-4"><span class="intitule">Code postal</span> {{ formation.cp }}</p>
+
 	</div>
 	<p class="description col-xs-12 col-md-4"> <span class="nbUserA">{{ formation.nbTotal }}</span><br />Nombre de place :</p>
-	<p class="description col-xs-12 col-md-4"> <span class="nbUserB">{{ formation.nbTotal }}</span><br />Nombre d'inscrit :</p>
+
+	<p class="description col-xs-12 col-md-4"> <span class="nbUserB">{{ nbInscriptionForm }}</span><br />Nombre d'inscrit' :</p>
+	
+
 
 <div class="col-xs-12">
 	<p>Cette page affiche toutes les informations publiques disponibles sur la formation. 
@@ -45,14 +46,14 @@
 {% endblock %}
 
 {% block aside %}
-	<p>Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
+	<p class="intituleLong">Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
 	{% if formation.filename %}
 		<img src="{{ asset('img/formapicture/'~formation.filename) }}" height="300" width="255" />
 	{% else %}
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
 	<div class="form-group">
-        <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
+        <a class="btn btn-default col-xs-12" role="button" href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</a>
     </div> 	
 {% endblock %}
 

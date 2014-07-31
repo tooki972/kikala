@@ -11,7 +11,6 @@ use Kikala\FrontBundle\Entity\InscriptionForm;
 
 class FormationController extends Controller 
 {
-
     public function lsFormaAction($page){
     	
     // Affichage de la liste des formations par date de formation et par page (30 formation par page)
@@ -47,13 +46,16 @@ class FormationController extends Controller
 
 	public function formaDetailAction($id){
 
+        $em = $this->getDoctrine()->getEntityManager();
+        $nbInscriptionForm= $em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm();
 		//requête à la base dans la table formation
 		$formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
-	
+	  
 	    //création d'un array associatif pour stocker les données
     	$params=array(
 
-    		'formation'=>$formation
+    		'formation'=>$formation,
+            'nbInscriptionForm'=>$nbInscriptionForm
 
     		);
 
@@ -75,5 +77,6 @@ class FormationController extends Controller
         return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));      
 
     }
+
 
 }

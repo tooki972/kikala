@@ -167,7 +167,7 @@ class UserController extends Controller
     public function kikologueAction()
     { //
         $user=$this->getUser();
-    
+        
         return $this->render('KikalaFrontBundle:User:kikologue.html.twig',array(
         'user'=>$user));
     }
@@ -175,6 +175,7 @@ class UserController extends Controller
 
     public function kikoDetailAction($id)
     {
+
         $user=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue')->findOneById($id);
         
         $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
@@ -182,6 +183,7 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
         'user'=>$user,
         'formations'=>$formations));
+
     }
 
 
@@ -206,10 +208,10 @@ class UserController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
             }
-                 $params = array(
+        $params = array(
             "profil_form" => $profil_form->createView(),
             "user"=>$this->getUser(),
-            );
+        );
 
         return $this->render('KikalaFrontBundle:User:profil.html.twig',$params);
     }
@@ -217,14 +219,11 @@ class UserController extends Controller
     public function formaCreateAction(Request $request)
     {
         $tag = new tag();
-
         $tag_form =$this->createForm(new TagType, $tag);
-
         $forma = new Formation();
 
         //crée une instance de Form
         $formation_form =$this->createForm(new FormationType, $forma);
-
         //traitement de requête
         $formation_form->handleRequest($request);
 
@@ -238,6 +237,7 @@ class UserController extends Controller
                 $forma->setDateCreated(new DateTime());
                 //récupère l'objet user
                 $user=$this->getUser();
+
                 //pour remplir id du crateur de la formation
                 $forma->setCreator($user);
 
@@ -255,7 +255,6 @@ class UserController extends Controller
                     $em->persist($forma);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-
             }
                
             $params = array(
@@ -265,26 +264,23 @@ class UserController extends Controller
 
         return $this->render('KikalaFrontBundle:User:formaCreate.html.twig',$params);
     }
-
-     public function tagCreateAction(Request $request)
+    
+    public function tagCreateAction(Request $request)
     {
-      //instanciation d'un objet
+        //instanciation d'un objet
         $tag = new tag();
-
         //crée une instance de Form
         $tag_form =$this->createForm(new TagType, $tag);
 
         //traitement de requête
         $tag_form->handleRequest($request);
-         if ($tag_form->isValid()){ 
-                // Traitement de chaque donnée de notre formulaire
-
-
-                //récupération du manager pour sauvegarder l'entity
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($tag);
+        if ($tag_form->isValid()){ 
+            // Traitement de chaque donnée de notre formulaire
+            //récupération du manager pour sauvegarder l'entity
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($tag);
                 //Sauvegarde de l'entity (exécute la requête)
-                    $em->flush();
+                $em->flush();
                 //Objet Json    
                 $response = new JsonResponse();
                 //Hydratation des données
@@ -294,17 +290,17 @@ class UserController extends Controller
                     ));
                 return $response;
             }    
+
         $params = array(
-
-            "tag_form" => $tag_form->createView(),
-
-            );
+                "tag_form" => $tag_form->createView(),
+        );
 
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
     
     public function myFormaAction()
     {
+
 
         return $this->render('KikalaFrontBundle:User:myForma.html.twig');
     } 
@@ -313,6 +309,5 @@ class UserController extends Controller
     {
         return $this->render('KikalaFrontBundle:User:summary.html.twig');
     } 
-   
-    
+ 
 }

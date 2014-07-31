@@ -4,42 +4,47 @@
 {% endblock %}
 {% block body %}
 
-
 <h2 class="pageTitle"> Informations sur : {{ user.pseudo }}</h2>
-  {% if date(user.birthday)>date('-10years') %}
-    <p>Vous avez  menti sur votre age('sinon va te coucher kevin')</p>
-  {% elseif date(user.birthday)>date('-20years') %}
-    <p>Vous avez la dizaine</p>
-  {% elseif date(user.birthday)>date('-30years') %}
-    <p>Vous avez la vingtaine</p>
-  {% elseif date(user.birthday)>date('-40years') %}
-    <p>Vous avez la trentaine</p>
-  {% elseif date(user.birthday)>date('-50years') %}
-    <p>Vous avez la quarantaine</p>
-  {% elseif date(user.birthday)>date('-60years') %}
-    <p>Vous avez la cinquantaine</p>
-  {% elseif date(user.birthday)>date('-70years') %}
-    <p>Vous avez la soixantaine</p>
-  {% elseif date(user.birthday)>date('-80years') %}
-    <p>Vous avez la soixantedizaine</p>
-  {% elseif date(user.birthday)>date('-90years') %}
-    <p>Vous avez quatre-vingtaine</p>
-  {% endif %}
-<p class="description col-xs-12 col-md-8"><span class="intituleLong">Nombre de kikos</span> {{ user.kikos }}</p>
-<div class="description col-xs-12 col-md-8"><span class="intituleLong">Formation qu'il a animé</span>
-  <ul class="description col-xs-12 col-md-8">
+  
+<div class="description col-xs-12 col-md-7"><span class="intituleLong">Formation qu'il a animé</span>
+  <ul class="description col-xs-12 col-md-7">
       {% for formation in formations %}
       <span class="glyphicon glyphicon-ok-sign"></span><li class="listeForm"> {{ formation.name }}</li>
       {% endfor %}
   </ul>
 </div>
-<p class="description col-xs-12 col-md-8"><span class="intitule">Métier </span>{{ user.metier }}</p>
-<p class="description col-xs-12 col-md-8">Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
+<div class="description col-xs-12 col-md-4 col-md-offset-1">
+  <span class="intitule">Métier </span><p class="description col-xs-12">{{ user.metier }}</p>
+  {% if date(user.birthday)>date('-10years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez  menti sur votre age('sinon va te coucher kevin')</p>
+  {% elseif date(user.birthday)>date('-20years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la dizaine</p>
+  {% elseif date(user.birthday)>date('-30years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la vingtaine</p>
+  {% elseif date(user.birthday)>date('-40years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la trentaine</p>
+  {% elseif date(user.birthday)>date('-50years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la quarantaine</p>
+  {% elseif date(user.birthday)>date('-60years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la cinquantaine</p>
+  {% elseif date(user.birthday)>date('-70years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la soixantaine</p>
+  {% elseif date(user.birthday)>date('-80years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez la soixantedizaine</p>
+  {% elseif date(user.birthday)>date('-90years') %}
+    <span class="intitule">Age </span><p class="description col-xs-12">Vous avez quatre-vingtaine</p>
+  {% endif %}
+    
+  <span class="intituleLong">Nombre de kikos</span><p class="description col-xs-12"> {{ user.kikos }}</p>
+</div>
+
+<p class="description col-xs-12">Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
 À noter que l’âge du kikologue est affiché par tranche de 10 ans. </p>
-<p>
+<p class="description col-xs-12">
 La liste des formations (passées et futures) dispensées par ce kikologue est affichée. </p>
-<p>La liste des formations (passées et futures) suivies par ce kikologue est affichée. </p>
+<p class="description col-xs-12">La liste des formations (passées et futures) suivies par ce kikologue est affichée. </p>
 {% endblock %}
+
 
 {% block aside %}
   <h2 id="namePseudo"> {{user.pseudo}}</h2>

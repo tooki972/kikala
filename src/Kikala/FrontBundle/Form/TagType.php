@@ -19,17 +19,17 @@ class TagType extends AbstractType
                 'required' => true,
                 "label" => "Tag",
                 'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-4"
+                 'class'=> "col-xs-12 intituleLong"
                 ),
                 'attr' => array(
                  'placeholder' => 'nom du tag',
-                 'class'=> "col-xs-12 col-md-8",
+                 'class'=> "col-xs-12",
                  'id'=>'tag',
                 )  
                 ))
             ->add('Valider', 'submit', array(
                 'attr'=> array(
-                'class'=>'btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4')))
+                'class'=>'btn btn-primary btn-xs col-xs-12')))
         ;
     }
     
