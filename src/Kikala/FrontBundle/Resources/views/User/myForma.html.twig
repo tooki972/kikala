@@ -12,7 +12,11 @@
     <div>
     {% if formation.isActive == 1 %}
     	<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4">Supprimer</button>
+            <a href="{{ path('kikala_front_formAnnul', {'id' : formation.id}) }}" 
+             class="btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4 supforma">Supprimer</a>
+        </div>
+        <div id="annuleAlerte">
+        	
         </div>
     {% else %}	
     	<p class="annule col-xs-12" >Annuler</p>
@@ -28,4 +32,14 @@ Un bouton permet d’annuler une formation à dispenser. </p>
 <p class="description col-xs-12">Sur clic de ce bouton, le kikologue est averti qu’il perdra la totalité de ses kikos en banques s’il confirme l’annulation, et que cette annulation sera conservée dans son historique (et affichée publiquement).</p>
 
 <p class="description col-xs-12">À noter qu’il n’est pas possible de modifier une formation publiée. Le kikologue doit contacter les administrateurs pour le faire.  </p>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+	<script type="text/javascript">
+    	$('.supforma').click(function(){
+	       return confirm('vous allez perdre vos kikos!')
+	   });
+	</script>
 {% endblock %}

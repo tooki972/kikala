@@ -314,14 +314,18 @@ class UserController extends Controller
     
     public function formAnnulAction($id)
     {
-
+        $em = $this->getDoctrine()->getManager();
+        $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);
+        
+        $formAnnul->setIsActive(false);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('kikala_front_myForma'));
     }
 
-    public function summaryAction()
+    public function mesInscriptionsAction()
     {
-        return $this->render('KikalaFrontBundle:User:summary.html.twig');
+        return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig');
     } 
  
 }
