@@ -48,11 +48,11 @@ class KikoTransactionHistory
      **/
      private $toUser;
 
-      /**
+     /**
+     * @var string
      *
-     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue")
-     * @ORM\JoinColumn(nullable=true)
-     **/
+     * @ORM\Column(name="fromUser", type="text")
+     */
      private $fromUser;
 
     /**
@@ -158,13 +158,17 @@ class KikoTransactionHistory
         return $this->toUser;
     }
 
+   
+
+    
+
     /**
      * Set fromUser
      *
-     * @param \Kikala\FrontBundle\Entity\UserKikologue $fromUser
+     * @param string $fromUser
      * @return KikoTransactionHistory
      */
-    public function setFromUser(\Kikala\FrontBundle\Entity\UserKikologue $fromUser = null)
+    public function setFromUser($fromUser)
     {
         $this->fromUser = $fromUser;
 
@@ -174,7 +178,7 @@ class KikoTransactionHistory
     /**
      * Get fromUser
      *
-     * @return \Kikala\FrontBundle\Entity\UserKikologue 
+     * @return string 
      */
     public function getFromUser()
     {

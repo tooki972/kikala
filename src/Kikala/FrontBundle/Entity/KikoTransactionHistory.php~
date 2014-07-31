@@ -48,11 +48,11 @@ class KikoTransactionHistory
      **/
      private $toUser;
 
-      /**
+     /**
+     * @var string
      *
-     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\UserKikologue")
-     * @ORM\JoinColumn(nullable=true)
-     **/
+     * @ORM\Column(name="from", type="text")
+     */
      private $fromUser;
 
     /**
@@ -65,29 +65,7 @@ class KikoTransactionHistory
         return $this->id;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     * @return KikoTransactionHistory
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime 
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
+    
     /**
      * Set kikosTransfered
      *
@@ -133,4 +111,54 @@ class KikoTransactionHistory
     {
         return $this->transactionType;
     }
+
+    /**
+     * Set dateTransaction
+     *
+     * @param \DateTime $dateTransaction
+     * @return KikoTransactionHistory
+     */
+    public function setDateTransaction($dateTransaction)
+    {
+        $this->dateTransaction = $dateTransaction;
+
+        return $this;
+    }
+
+    /**
+     * Get dateTransaction
+     *
+     * @return \DateTime 
+     */
+    public function getDateTransaction()
+    {
+        return $this->dateTransaction;
+    }
+
+    /**
+     * Set toUser
+     *
+     * @param \Kikala\FrontBundle\Entity\UserKikologue $toUser
+     * @return KikoTransactionHistory
+     */
+    public function setToUser(\Kikala\FrontBundle\Entity\UserKikologue $toUser = null)
+    {
+        $this->toUser = $toUser;
+
+        return $this;
+    }
+
+    /**
+     * Get toUser
+     *
+     * @return \Kikala\FrontBundle\Entity\UserKikologue 
+     */
+    public function getToUser()
+    {
+        return $this->toUser;
+    }
+
+   
+
+    
 }

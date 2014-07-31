@@ -36,7 +36,7 @@ class FormationRepository extends EntityRepository
 				return $count;
 
 	}
-    public function givekikos(){
+    public function giveKikos(){
            $query = $this->createQueryBuilder('form')
             ->select('form')
             ->where ('form.dateFormation <= current_timestamp()')
