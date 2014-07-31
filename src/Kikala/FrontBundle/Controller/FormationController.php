@@ -36,13 +36,32 @@ class FormationController extends Controller
         $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
                 ->getList($page, $maxFormations);
         //gestion des kikos
-            $pastFormas=givekikos();
+            $pastFormas=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->giveKikos();
             foreach ($pastFormas as $pastForma ) {
                 $creator=$pastForma->getCreator();
             $payer= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findBy(array('toUser'=>$creator,'transactionType'=>'formation'));
             if(!$payer){
-                
-            }
+
+                    $em = $this->getDoctrine()->getManager();
+              $inscri=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($pastForma); 
+              $temp=$pastForma->getDuree();
+              $due=$inscri*$temp;
+              $kikosnow=$creator->getKikos();
+              $creator->setKikos($kikosnow+$due);
+        $transaction= new KikoTransactionHistory();
+         $transaction->setDateTransaction(new DateTime());
+         $transaction->setKikosTransfered($due);
+         $transaction->setTransactionType('formation');
+         $transaction->setToUser($creator);
+         $transaction->setFromUser('eleves');
+         //récupération du manager pour sauvegarder l'entity
+           
+                    $em->persist($creator);
+                     $em->persist($transaction);
+                //Sauvegarde de l'entity (exécute la requête)
+                    $em->flush();
+                    
+                          }
             }
 
 
@@ -90,7 +109,7 @@ class FormationController extends Controller
          $transaction->setKikosTransfered($dure);
          $transaction->setTransactionType('inscription');
          $transaction->setToUser($formation->getCreator());
-         $transaction->setFromUser($this->getUser());
+         $transaction->setFromUser($this->getUser()->getId());
          //récupération du manager pour sauvegarder l'entity
            
                     $em = $this->getDoctrine()->getManager();
