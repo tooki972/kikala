@@ -51,8 +51,9 @@ class FormationController extends Controller
 	
 	    //création d'un array associatif pour stocker les données
     	$params=array(
-    		'formation'=>$formation,
-           
+
+    		'formation'=>$formation
+
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);

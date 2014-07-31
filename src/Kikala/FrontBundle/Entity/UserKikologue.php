@@ -662,6 +662,20 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
 
     
 
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     * @return UserKikologue
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }   
+     
+    
 
     /**
      * Get roles
@@ -791,18 +805,6 @@ class UserKikologue implements UserInterface, EquatableInterface, \Serializable
         return $this->mesForms;
     }
 
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return UserKikologue
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     /**
      * Add mesForms

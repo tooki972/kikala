@@ -25,15 +25,12 @@
     <p>Vous avez quatre-vingtaine</p>
   {% endif %}
 <p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.kikos }}</p>
-
 <h1>
-   <h3 class="description col-xs-12 col-md-3 col-md-offset-1 ">Formations : 
-  {{ mesformations.getMesForms.name }}
+    {% for formation in formations %}
+      {{ formation.name }}
+    {% endfor %}
 </h1>
-
-<p class="description col-xs-12 col-md-8">Metier {{ user.metier }}</p>
-
-
+<p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.metier }}</p>
 <p class="description col-xs-12 col-md-8">Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
 À noter que l’âge du kikologue est affiché par tranche de 10 ans. </p>
 <p>
