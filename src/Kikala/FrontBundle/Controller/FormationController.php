@@ -51,12 +51,14 @@ class FormationController extends Controller
         $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
 	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
+        $creator=$formation->getCreator();
 	    //création d'un array associatif pour stocker les données
     	$params=array(
             'user'=>$user,
     		'formation'=>$formation,
             'nbInscriptionForm'=>$nbInscriptionForm,
-            'quiEtIns'=>$quiEtIns
+            'quiEtIns'=>$quiEtIns,
+            'creator'=>$creator
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
@@ -72,6 +74,8 @@ class FormationController extends Controller
                     $em->persist($inscri);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
+        $this->getUser();
+
                      $params=array(
                     'id'=>$id);
         return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
