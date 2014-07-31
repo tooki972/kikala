@@ -53,9 +53,9 @@
 	<div class="form-group">
 		{% if formation.nbTotal == nbInscriptionForm %}
 		<p> La formation est complête</p>
-		{% elseif !quiEtIns %} 
+		{% elseif  quiEtIns == false %} 
 		   <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
-		{% elseif uiEtIns%}
+		{% elseif quiEtIns%}
 			<p> vous ete deja inscrit</p>
 		{% endif %}
     </div> 	

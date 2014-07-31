@@ -50,7 +50,7 @@ class FormationController extends Controller
         //requête à la base dans la table formation
         $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
-	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findByUser($user);
+	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
 	    //création d'un array associatif pour stocker les données
     	$params=array(
             'user'=>$user,
