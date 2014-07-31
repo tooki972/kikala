@@ -36,6 +36,5 @@ class FormationRepository extends EntityRepository
 				return $count;
 
 	}
-
 }
 

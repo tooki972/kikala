@@ -80,3 +80,7 @@ kikala_front_tagCreate:
 kikala_front_formaIns:
     path:     /formaIns/{id}
     defaults: { _controller: KikalaFrontBundle:Formation:formaIns }
+
+kikala_front_formAnnul:
+    path:     /formAnnul/{id}
+    defaults: { _controller: KikalaFrontBundle:User:formAnnul }

@@ -218,6 +218,7 @@ class UserController extends Controller
 
     public function formaCreateAction(Request $request)
     {
+        
         $tag = new tag();
         $tag_form =$this->createForm(new TagType, $tag);
         $forma = new Formation();
@@ -300,10 +301,23 @@ class UserController extends Controller
     
     public function myFormaAction()
     {
+        $user=$this->getUser();
 
+        $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
 
-        return $this->render('KikalaFrontBundle:User:myForma.html.twig');
+        return $this->render('KikalaFrontBundle:User:myForma.html.twig',array(
+        'user'=>$user,
+        'formations'=>$formations));
+
     } 
+    //update un contenu
+    
+    public function formAnnulAction($id)
+    {
+
+
+        return $this->redirect($this->generateUrl('kikala_front_myForma'));
+    }
 
     public function summaryAction()
     {

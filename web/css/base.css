@@ -224,6 +224,16 @@ h1 >a:hover{
 aside p{
 	margin-left: -15px;
 }
+/************** my forma ************************/
+.annule{
+	background: red;
+	color: #fff;
+	padding: 2px;
+	margin-right: 4px;
+	letter-spacing: 1px;
+	float: left;
+	width: 95px;
+}
 /**************FORMULAIRE AJOUT *****************/
 
 #kikala_frontbundle_userkikologue label, #loginForm label, #kikala_frontbundle_formation label{

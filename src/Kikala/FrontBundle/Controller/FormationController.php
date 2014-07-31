@@ -45,18 +45,20 @@ class FormationController extends Controller
 
 
 	public function formaDetailAction($id){
-
+        $user=$this->getUser();
         $em = $this->getDoctrine()->getEntityManager();
         //requête à la base dans la table formation
         $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
-	  
+	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
+        $creator=$formation->getCreator();
 	    //création d'un array associatif pour stocker les données
     	$params=array(
-
+            'user'=>$user,
     		'formation'=>$formation,
-            'nbInscriptionForm'=>$nbInscriptionForm
-
+            'nbInscriptionForm'=>$nbInscriptionForm,
+            'quiEtIns'=>$quiEtIns,
+            'creator'=>$creator
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
@@ -66,17 +68,18 @@ class FormationController extends Controller
         $inscri= new Inscriptionform();
         $inscri->setFormation($formation);
         $inscri->setUser($this->getUser());
-         //récupération du manager pour sauvegarder l'entity
+        //récupération du manager pour sauvegarder l'entity
            
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($inscri);
-                //Sauvegarde de l'entity (exécute la requête)
-                    $em->flush();
-                     $params=array(
-                    'id'=>$id);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($inscri);
+        //Sauvegarde de l'entity (exécute la requête)
+            $em->flush();
+            $this->getUser();
+
+            $params=array(
+                'id'=>$id);
+
         return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
-
     }
-
 
 }

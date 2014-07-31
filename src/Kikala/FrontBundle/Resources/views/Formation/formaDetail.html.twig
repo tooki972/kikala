@@ -55,9 +55,14 @@
 	{% endif %}
 	<div class="form-group">
 		{% if formation.nbTotal == nbInscriptionForm %}
-		<p class="intituleLong col-xs-12"> La formation est complête</p>
-		{% else %} 
+			<p class="intituleLong col-xs-12"> La formation est complête</p>
+		{% elseif creator == user %}
+			<p class="intituleLong col-xs-12"> vous ete le createur de la formation</p>
+		{% elseif  quiEtIns == false %} 
 		   <a class="btn btn-default col-xs-12" role="button" href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</a>
+		{% elseif quiEtIns%}
+			<p class="intituleLong col-xs-12"> vous ete deja inscrit</p>
+
 		{% endif %}
     </div> 	
 {% endblock %}
