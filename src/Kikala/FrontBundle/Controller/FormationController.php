@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Tag;
 use Kikala\FrontBundle\Entity\InscriptionForm;
+use Kikala\FrontBundle\Entity\KikoTransactionHistory;
+use \DateTime;
+use Kikala\FrontBundle\Entity\UserKikologue;
 
 class FormationController extends Controller 
 {
@@ -52,29 +55,42 @@ class FormationController extends Controller
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
 	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
         $creator=$formation->getCreator();
+         $kikos=$this->getUser()->getKikos();
 	    //création d'un array associatif pour stocker les données
     	$params=array(
             'user'=>$user,
     		'formation'=>$formation,
             'nbInscriptionForm'=>$nbInscriptionForm,
             'quiEtIns'=>$quiEtIns,
-            'creator'=>$creator
+            'creator'=>$creator,
+            'kikos'=>$kikos
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
     public function formaInsAction($id){
         $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
-        $inscri= new Inscriptionform();
+        $inscri= new InscriptionForm();
         $inscri->setFormation($formation);
         $inscri->setUser($this->getUser());
+        $dure=$formation->getDuree();
+         $kikos=$this->getUser()->getKikos();
+         $user=$this->getUser()->SetKikos($kikos-$dure);
+         $transaction= new KikoTransactionHistory();
+         $transaction->setDateTransaction(new DateTime());
+         $transaction->setKikosTransfered($dure);
+         $transaction->setTransactionType('inscription');
+         $transaction->setToUser($formation->getCreator());
+         $transaction->setFromUser($this->getUser());
          //récupération du manager pour sauvegarder l'entity
            
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($inscri);
+                    $em->persist($user);
+                     $em->persist($transaction);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-        $this->getUser();
+                    
 
                      $params=array(
                     'id'=>$id);
