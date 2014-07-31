@@ -255,7 +255,6 @@ class UserController extends Controller
                     $em->persist($forma);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-
             }
                
             $params = array(
