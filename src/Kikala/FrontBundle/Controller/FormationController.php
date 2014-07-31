@@ -47,9 +47,9 @@ class FormationController extends Controller
 	public function formaDetailAction($id){
 
         $em = $this->getDoctrine()->getEntityManager();
-        $nbInscriptionForm= $em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm();
-		//requête à la base dans la table formation
-		$formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
+        //requête à la base dans la table formation
+        $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
+        $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
 	  
 	    //création d'un array associatif pour stocker les données
     	$params=array(
@@ -74,7 +74,7 @@ class FormationController extends Controller
                     $em->flush();
                      $params=array(
                     'id'=>$id);
-        return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));      
+        return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
 
     }
 

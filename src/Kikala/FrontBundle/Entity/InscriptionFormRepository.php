@@ -12,9 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class InscriptionFormRepository extends EntityRepository
 {
-	public function countInscriptionForm(){
-		$count=$this->createQueryBuilder('id')
-				->select('COUNT(id)')
+	public function countInscriptionForm($formation){		
+
+			$count=$this->createQueryBuilder('i')
+				->select('COUNT(i.id)')
+				->where ('i.formation = :formation ')
+				->setParameter('formation', $formation)
 				->getQuery()
 				->getSingleScalarResult();
 				return $count;

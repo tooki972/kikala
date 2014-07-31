@@ -26,7 +26,7 @@
 
 	</div>
 	<p class="description col-xs-12 col-md-4"> <span class="nbUserA">{{ formation.nbTotal }}</span><br />Nombre de place :</p>
-	<p class="description col-xs-12 col-md-4"> <span class="nbUserB">{{ nbInscriptionForm }}</span><br />Nombre de place :</p>
+	<p class="description col-xs-12 col-md-4"> <span class="nbUserB">{{ nbInscriptionForm }}</span><br />Nombre d'inscrit :</p>
 	
 
 <div class="col-xs-12">
@@ -51,7 +51,11 @@
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
 	<div class="form-group">
-        <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
+		{% if formation.nbTotal == nbInscriptionForm %}
+		<p> La formation est complête</p>
+		{% else %} 
+		   <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
+		{% endif %}
     </div> 	
 {% endblock %}
 
