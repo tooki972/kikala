@@ -45,18 +45,18 @@ class FormationController extends Controller
 
 
 	public function formaDetailAction($id){
-
+        $user=$this->getUser();
         $em = $this->getDoctrine()->getEntityManager();
         //requête à la base dans la table formation
         $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
-	  
+	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findByUser($user);
 	    //création d'un array associatif pour stocker les données
     	$params=array(
-
+            'user'=>$user,
     		'formation'=>$formation,
-            'nbInscriptionForm'=>$nbInscriptionForm
-
+            'nbInscriptionForm'=>$nbInscriptionForm,
+            'quiEtIns'=>$quiEtIns
     		);
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
