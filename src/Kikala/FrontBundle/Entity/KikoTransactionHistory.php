@@ -60,6 +60,12 @@ class KikoTransactionHistory
      *
      * @return integer 
      */
+    /**
+     *
+     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Formation")
+     **/
+     private $formation;
+
     public function getId()
     {
         return $this->id;
@@ -183,5 +189,28 @@ class KikoTransactionHistory
     public function getFromUser()
     {
         return $this->fromUser;
+    }
+
+    /**
+     * Set formation
+     *
+     * @param \Kikala\FrontBundle\Entity\Formation $formation
+     * @return KikoTransactionHistory
+     */
+    public function setFormation(\Kikala\FrontBundle\Entity\Formation $formation = null)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Kikala\FrontBundle\Entity\Formation 
+     */
+    public function getFormation()
+    {
+        return $this->formation;
     }
 }

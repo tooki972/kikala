@@ -45,5 +45,13 @@ class FormationRepository extends EntityRepository
         $pastformation=$query->getResult();
         return $pastformation;
     }
+       public function countFormas($forma){
+        $count=$this->createQueryBuilder('nb')
+                ->select('COUNT(nb.formation)')
+                ->where('nb.formation',$forma)
+                ->getQuery()
+                ->getSingleScalarResult();
+                return $count;
+}
 }
 

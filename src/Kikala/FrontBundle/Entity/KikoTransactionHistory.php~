@@ -51,7 +51,7 @@ class KikoTransactionHistory
      /**
      * @var string
      *
-     * @ORM\Column(name="from", type="text")
+     * @ORM\Column(name="fromUser", type="text")
      */
      private $fromUser;
 
@@ -60,6 +60,12 @@ class KikoTransactionHistory
      *
      * @return integer 
      */
+    /**
+     *
+     * @ORM\ManyToOne (targetEntity="Kikala\FrontBundle\Entity\Formation")
+     **/
+     private $formation;
+
     public function getId()
     {
         return $this->id;
@@ -161,4 +167,27 @@ class KikoTransactionHistory
    
 
     
+
+    /**
+     * Set fromUser
+     *
+     * @param string $fromUser
+     * @return KikoTransactionHistory
+     */
+    public function setFromUser($fromUser)
+    {
+        $this->fromUser = $fromUser;
+
+        return $this;
+    }
+
+    /**
+     * Get fromUser
+     *
+     * @return string 
+     */
+    public function getFromUser()
+    {
+        return $this->fromUser;
+    }
 }
