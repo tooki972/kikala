@@ -285,15 +285,16 @@ class UserController extends Controller
                     $em->persist($tag);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
-
+                //Objet Json    
                 $response = new JsonResponse();
+                //Hydratation des données
                 $response->setData(array(
                     'id'=>$tag->getId(),
-                    'name'=>$tag->getname(),
+                    'name'=>$tag->getName(),
                     ));
                 return $response;
             }    
-     $params = array(
+        $params = array(
 
             "tag_form" => $tag_form->createView(),
 
