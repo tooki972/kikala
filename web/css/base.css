@@ -29,7 +29,7 @@ header{
 	padding-left: 0;
 	text-align: center;
 }
-.forget {float:right;}
+
 #navtop ul li, #navfoot ul li{
 	display: inline-block;
 	margin-right: 0px;
@@ -48,7 +48,10 @@ header{
 	transition: background-color .25s linear;
 	-moz-transition: background-color .25s linear;
 }
-
+#logo a{
+ 	color: #fff;
+ 	font-size: 1.25em;
+}
 section{
 	box-shadow: 0px 0px 10px rgba(0,0,0, 0.2);
 	border: 1px solid #b8c945;
@@ -79,18 +82,9 @@ h2{
  	margin-bottom: 15px;
  	letter-spacing: -1px;
 }
+.forget {float:right;}
 
-#une{
-	margin-top: 15px;
-}
-#logo a{
- 	color: #fff;
- 	font-size: 1.25em;
-}
-#logo a:hover{
- 	text-decoration: none;
- 	font-size: 1.3em;
-}
+
 h3{
  	color: #b8c945;
  	font-size: 1.25em;
@@ -103,19 +97,8 @@ h3{
 	color: red;
 	font-size: .8em;
 }
-.une{
-	border-bottom: 1px solid #3276b1;
-	margin-bottom: 15px;
-	margin-left: 0px;
-}
-#une h3{
-	border-radius:0 8px 0 8px;
-	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3);
-}
-.glyphicon {
-	color: #3276b1;
-	margin-right: 15px;
-}
+
+
 .pageTitle{
 	border-radius: 8px;
 	background: #b8c945;
@@ -182,6 +165,33 @@ h1 >a:hover{
 	padding: 2px;
 	margin-right: 4px;
 	letter-spacing: 1px;
+	float: left;
+	width: 95px;
+}
+.adress{
+	border-bottom: 1px solid #b8c945;
+	height: 55px;
+	overflow: hidden;
+	margin-left: 0px;
+	width: 100%;
+}
+.intituleLong{
+	background: #b8c945;
+	color: #fff;
+	padding: 2px;
+	margin-right: 4px;
+	letter-spacing: 1px;
+	float: left;
+}
+.glyphicon{
+	color: #b8c945;
+	width: 12px;
+	margin-right: 10px;
+	float: left;
+	clear: left;
+	margin-bottom: 15px;
+}
+.listeForm{
 	float: left;
 }
 /************** PROFIL ****************************/

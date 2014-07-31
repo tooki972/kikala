@@ -5,7 +5,7 @@
 {% block body %}
 
 
-<h2 class="pageTitle"> pseudo {{ user.pseudo }}</h2>
+<h2 class="pageTitle"> Informations sur : {{ user.pseudo }}</h2>
   {% if date(user.birthday)>date('-10years') %}
     <p>Vous avez  menti sur votre age('sinon va te coucher kevin')</p>
   {% elseif date(user.birthday)>date('-20years') %}
@@ -25,13 +25,15 @@
   {% elseif date(user.birthday)>date('-90years') %}
     <p>Vous avez quatre-vingtaine</p>
   {% endif %}
-<p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.kikos }}</p>
-<h1>
-    {% for formation in formations %}
-      {{ formation.name }}
-    {% endfor %}
-</h1>
-<p class="description col-xs-12 col-md-8">Nombre de kikos {{ user.metier }}</p>
+<p class="description col-xs-12 col-md-8"><span class="intituleLong">Nombre de kikos</span> {{ user.kikos }}</p>
+<div class="description col-xs-12 col-md-8"><span class="intituleLong">Formation qu'il a animé</span>
+  <ul class="description col-xs-12 col-md-8">
+      {% for formation in formations %}
+      <span class="glyphicon glyphicon-ok-sign"></span><li class="listeForm"> {{ formation.name }}</li>
+      {% endfor %}
+  </ul>
+</div>
+<p class="description col-xs-12 col-md-8"><span class="intitule">Métier </span>{{ user.metier }}</p>
 <p class="description col-xs-12 col-md-8">Cette page affiche toutes les informations publiques disponibles sur un kikologue, y compris son nombre de kikos en banque, et le nombre de formations qu’il a annulé. 
 À noter que l’âge du kikologue est affiché par tranche de 10 ans. </p>
 <p>

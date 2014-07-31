@@ -22,10 +22,10 @@
 	<p class="description col-xs-12 col-md-4"><span class="intitule">Date</span> {{ formation.dateFormation|date("d/m/y") }}</p>
 	<p class="description col-xs-12 col-md-4"><span class="intitule">Durée</span> {{ formation.duree }} h</p>
 	<p class="description col-xs-12 col-md-4"><span class="intitule">Heure</span> {{ formation.heureFormation|date("H:i") }}</p>
-	<div>
-		<p class="description col-xs-12 col-md-4"><span class="intitule">Adresse</span> {{ formation.adresse }}</p>
-		<p class="description col-xs-12 col-md-4"><span class="intitule">Ville</span> {{ formation.ville }}</p>
-		<p class="description col-xs-12 col-md-4"><span class="intitule">Code postal</span> {{ formation.cp }}</p>
+	<div class="row adress">
+		<p class=" col-xs-12 col-md-4"><span class="intitule">Adresse</span> {{ formation.adresse }}</p>
+		<p class=" col-xs-12 col-md-4"><span class="intitule">Ville</span> {{ formation.ville }}</p>
+		<p class=" col-xs-12 col-md-4"><span class="intitule">Code postal</span> {{ formation.cp }}</p>
 	</div>
 	<p class="description col-xs-12 col-md-4"> <span class="nbUserA">{{ formation.nbTotal }}</span><br />Nombre de place :</p>
 	
