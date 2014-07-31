@@ -78,5 +78,4 @@ class FormationController extends Controller
 
     }
 
-
 }

@@ -295,11 +295,11 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
     
-    public function myFormaAction()
+    public function myFormaAction($)
+
     {
-
-
-        return $this->render('KikalaFrontBundle:User:myForma.html.twig');
+        
+         return $this->render('KikalaFrontBundle:User:myForma.html.twig');
     } 
 
     public function summaryAction()
