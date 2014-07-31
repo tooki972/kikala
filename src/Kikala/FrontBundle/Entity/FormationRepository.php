@@ -36,6 +36,14 @@ class FormationRepository extends EntityRepository
 				return $count;
 
 	}
-
+    public function givekikos(){
+           $query = $this->createQueryBuilder('form')
+            ->select('form')
+            ->where ('form.dateFormation <= current_timestamp()')
+            ->orderBy('form.dateFormation', 'ASC')
+            ->getQuery();
+        $pastformation=$query->getResult();
+        return $pastformation;
+    }
 }
 
