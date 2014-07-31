@@ -35,7 +35,16 @@ class FormationController extends Controller
         
         $formations = $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')
                 ->getList($page, $maxFormations);
-        
+        //gestion des kikos
+            $pastFormas=givekikos();
+            foreach ($pastFormas as $pastForma ) {
+                $creator=$pastForma->getCreator();
+            $payer= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findBy(array('toUser'=>$creator,'transactionType'=>'formation'));
+            if(!$payer){
+                
+            }
+            }
+
 
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig', array(
             'formations' => $formations,
