@@ -37,3 +37,4 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http}
         - { path: ^/kikologue/, roles: ROLE_USER, requires_channel: http }
+        - { path: ^/formaIns/, roles: ROLE_USER, requires_channel: http }
