@@ -347,29 +347,33 @@ class UserController extends Controller
     public function cancelAction($id) // Id c'est l'id de la formation passe dans l'url
 
     {      
-        $user=$this->getUser();  // On récupères tout l'objet User avec tout ses données
-        $formation=$this->getFormation();
+        $user=$this->getUser();
+        // On récupères tout l'objet User avec tout ses données
+        $inscriptionRepository = $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm'); // On récupère toute la table inscriptions
+        $cancel=$inscriptionRepository->findOneBy(array('id'=>$id, 'user'=>$user)); // FindOneBy sécurité : pour s'assure que le user connecté est le user inscrit a cette formation 
        
-        $kikostran= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->find(array(
-            'toUser'=>$user,'transactionType'=>'inscription', 'formation'=>$formation));
+        $formation=$cancel->getFormation();
+
+        $kikostran= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findOneBy(array(
+            'fromUser'=>$user,'transactionType'=>'inscription', 'formation'=>$formation));
+
+
         $actkikos=$kikostran->getKikosTransfered();
         
-        $updatekiko=($actkikos/2);
-
+        $updatekikos=$actkikos/2;
+        $updatekiko=($updatekikos-0.5);
         $kikos=$user->getKikos();
         $newkikos=$kikos+$updatekiko;
         $user->setKikos($newkikos);
 
-        $inscriptionRepository = $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm'); // On récupère toute la table inscriptions
-        $cancel=$inscriptionRepository->findOneBy(array('id'=>$id, 'user'=>$user)); // FindOneBy sécurité : pour s'assure que le user connecté est le user inscrit a cette formation 
        
         $transaction= new KikoTransactionHistory();
         $transaction->setDateTransaction(new DateTime());
         $transaction->setKikosTransfered($updatekiko);
         $transaction->setTransactionType('remboursement');
-        $transaction->setToUser($formation->getCreator());
+        $transaction->setToUser($user);
         $transaction->setFormation($formation);
-        $transaction->setFromUser($this->getUser()->getId());
+        $transaction->setFromUser('kikosmaster');
 
         $em = $this->getDoctrine()->getManager(); // Enregister l'objet dans la variable em
         $em-> remove($cancel); // pour effacer toute la ligne de la table inscriptions
