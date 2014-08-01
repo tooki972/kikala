@@ -68,7 +68,7 @@ class FormationController extends Controller
                     
                           }
             }
-
+            //fonction de recherche
 
         return $this->render('KikalaFrontBundle:Formation:lsForma.html.twig', array(
             'formations' => $formations,
@@ -89,16 +89,29 @@ class FormationController extends Controller
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
 	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
         $creator=$formation->getCreator();
+        $securityContext = $this->container->get('security.context');
+        if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
          $kikos=$this->getUser()->getKikos();
-	    //création d'un array associatif pour stocker les données
     	$params=array(
             'user'=>$user,
     		'formation'=>$formation,
             'nbInscriptionForm'=>$nbInscriptionForm,
             'quiEtIns'=>$quiEtIns,
             'creator'=>$creator,
-            'kikos'=>$kikos
+            'kikos'=>$kikos,
+            'securityContext'=>$securityContext
     		);
+     }else{
+            $params=array(
+            'user'=>$user,
+            'formation'=>$formation,
+            'nbInscriptionForm'=>$nbInscriptionForm,
+            'quiEtIns'=>$quiEtIns,
+            'creator'=>$creator,
+            'securityContext'=>$securityContext
+            );
+     }
+        //création d'un array associatif pour stocker les données
 
 		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
@@ -112,7 +125,7 @@ class FormationController extends Controller
          $kikos=$this->getUser()->getKikos();
          $user=$this->getUser()->SetKikos($kikos-$dure);
          $transaction= new KikoTransactionHistory();
-         $transaction->setDateTransaction(new DateTime());
+         $transaction->setDateTransaction(new Dat());
          $transaction->setKikosTransfered($dure);
          $transaction->setTransactionType('inscription');
          $transaction->setToUser($formation->getCreator());

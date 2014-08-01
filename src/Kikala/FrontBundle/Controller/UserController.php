@@ -15,7 +15,7 @@ use Kikala\FrontBundle\Form\UserKikologueType;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Category;
 use Kikala\FrontBundle\Entity\Tag;
-use Kikala\FrontBundle\Form\FormationType;
+use Kikala\FrontBundle\Form\FormationCreateType;
 use \abeautifulsite\simpleimage;
 use Kikala\FrontBundle\Form\TagType;
 use Symfony\Component\HttpFoundation\Session\Session; 
@@ -223,7 +223,7 @@ class UserController extends Controller
         $forma = new Formation();
 
         //crée une instance de Form
-        $formation_form =$this->createForm(new FormationType, $forma);
+        $formation_form =$this->createForm(new FormationCreateType, $forma);
         //traitement de requête
         $formation_form->handleRequest($request);
 
@@ -305,7 +305,12 @@ class UserController extends Controller
 
     public function summaryAction()
     {
-        return $this->render('KikalaFrontBundle:User:summary.html.twig');
+
+
+        
+
+        return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig');
+
     } 
  
 }
