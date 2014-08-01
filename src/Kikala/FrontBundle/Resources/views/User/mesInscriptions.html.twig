@@ -23,3 +23,16 @@
 	   });
 	</script>
 {% endblock %}
+
+{% block aside %}
+
+    <div class="col-xs-12">
+        <div class="col-xs-12">
+            <a href="{{ path('kikala_front_formaCreate') }}" class="btn btn-default col-xs-12" role="button">Créer une Formation</a> </p>
+        </div>
+        <div class="col-xs-12">
+            <a href="{{ path('kikala_front_myForma') }}" class="btn btn-default col-xs-12" role="button">Mes Formations</a>
+        </div>  
+    </div>   
+
+{% endblock %} 
