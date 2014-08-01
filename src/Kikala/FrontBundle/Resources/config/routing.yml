@@ -84,3 +84,11 @@ kikala_front_formaIns:
 kikala_front_formAnnul:
     path:     /formAnnul/{id}
     defaults: { _controller: KikalaFrontBundle:User:formAnnul }
+
+kikala_front_cancel:
+    path:     /cancel/{id}
+    defaults: { _controller: KikalaFrontBundle:User:cancel }
+
+kikala_front_search:
+    path:     /search/
+    defaults: { _controller: KikalaFrontBundle:Formation:search }

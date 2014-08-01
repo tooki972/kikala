@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class FormationType extends AbstractType
+class SearchType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -23,23 +23,11 @@ class FormationType extends AbstractType
                 ),
                 'attr' => array(
                  'placeholder' => 'Recherche',
-                 'class'=> "col-xs-12 col-md-8"
-                )  
+                 'class'=> "col-xs-12 col-md-8",
+                 'name'=>'name'
+                )  ,
                 ))
-            ->add('tag', 'entity', array(
-                'property'=>'name',
-                'class'=>'Kikala\FrontBundle\Entity\Tag',
-                'required' => true,
-                "label" => "Tag",
-                'label_attr' => array(
-                 'class'=> "col-xs-12 col-md-4"
-                ),
-                'attr' => array(
-                 'placeholder' => 'Tag',
-                 'data' => 'Tag'
-                 'class'=> "col-xs-12 col-md-8 form-control"
-                )  
-                ))
+         
 
             ->add('category', 'entity', array(
                 'property'=>'name',
@@ -52,15 +40,32 @@ class FormationType extends AbstractType
                 'attr' => array(
                  'placeholder' => 'category',
                  'data' => 'category',
-                 'class'=> "col-xs-12 col-md-8 form-control"
+                 'class'=> "col-xs-12 col-md-8 form-control",
+                 'name'=>'category'
                 )  
                 ))
+               ->add('tag', 'entity', array(
+                'property'=>'name',
+                'class'=>'Kikala\FrontBundle\Entity\Tag',
+                'required' => true,
+                "label" => "Tag",
+                'label_attr' => array(
+                 'class'=> "col-xs-12 col-md-4"
+                ),
+                'attr' => array(
+                 'placeholder' => 'Tag',
+                 'data' => 'Tag',
+                 'class'=> "col-xs-12 col-md-8 form-control",
+                 'name'=>'tag'
+                )  ,
+                ))
+  ->add('Valider', 'submit', array(
+                'attr'=> array(
+                'class'=>'btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4'
+                 )))
         ;
         
         
-  ->add('Valider', 'submit', array(
-                'attr'=> array(
-                'class'=>'btn btn-primary btn-xs col-xs-12 col-md-8 col-md-offset-4')))
     }
     
     /**

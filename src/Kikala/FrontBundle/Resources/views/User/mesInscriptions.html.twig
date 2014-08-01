@@ -4,5 +4,22 @@
 {% endblock %}
 {% block body %}
 
+    <ul class="description col-xs-12">
+        {% for inscription in inscriptions %}
+        <span class="glyphicon glyphicon-ok-sign"></span><li class="listeForm col-xs-6"> {{ inscription.formation.name }}</li>
+        <a href="{{ path('kikala_front_cancel', {'id' : inscription.id}) }}" class="btn btn-primary btn-xs col-xs-12 cancel">Cancel</a>
+        {% endfor %}
+    </ul>
+
 <p>Empty Page  </p>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+	<script type="text/javascript">
+    	$('.cancel').click(function(){
+	       return confirm('on vous rembourse la moitié de vos kikos sur cette formation!')
+	   });
+	</script>
 {% endblock %}

@@ -298,19 +298,41 @@ class UserController extends Controller
     public function myFormaAction()
 
     {
+
+        $em = $this->getDoctrine()->getManager();
+        $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
+
         
         
          return $this->render('KikalaFrontBundle:User:myForma.html.twig');
     } 
 
-    public function summaryAction()
+
+
+    public function mesInscriptionsAction()
     {
+        $user=$this->getUser();
+        $inscriptions=$this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->getListInsByUser($user); 
+    
+        $params=array(
+            'inscriptions'=>$inscriptions
+        );                     
 
-
-        
-
-        return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig');
+        return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig', $params);
 
     } 
+
+    public function cancelAction($id) // Id c'est l'id de la formation passe dans l'url
+
+    {      
+        $user=$this->getUser();  // On récupères tout l'objet User avec tout ses données
+        $inscriptionRepository = $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm'); // On récupère toute la table inscriptions
+        $cancel=$inscriptionRepository->findOneBy(array('id'=>$id, 'user'=>$user)); // FindOneBy sécurité : pour s'assure que le user connecté est le user inscrit a cette formation 
+        $em = $this->getDoctrine()->getManager(); // Enregister l'objet dans la variable em
+        $em->remove($cancel); // pour effacer toute la ligne de la table inscriptions
+        $em->flush(); // Exécuter
+
+        return $this->redirect($this->generateUrl('kikala_front_mesInscriptions')); // Redirection sur la même page mesInscriptions
+    }
  
 }

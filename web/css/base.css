@@ -187,6 +187,14 @@ h1 >a:hover{
 	letter-spacing: 1px;
 	float: left;
 }
+.intituleLongRed{
+	background: #ca5745;
+	color: #fff;
+	padding: 2px;
+	margin-right: 4px;
+	letter-spacing: 1px;
+	float: left;
+}
 .glyphicon{
 	color: #b8c945;
 	width: 12px;
@@ -302,4 +310,7 @@ footer{
 #navfoot{
 	margin: 0;
 	
+}
+#kikala_frontbundle_formation li{
+				display:none;
 }

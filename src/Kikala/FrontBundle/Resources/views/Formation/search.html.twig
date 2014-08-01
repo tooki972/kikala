@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+{% block title %} 
+{{ parent() }} - lsForma
+{% endblock %}
+
+{% block body %}
+{% for formation in formations|slice(0, 6) %}
+
+    {% if formation.dateCreated|date("m/d/Y") >= twoday|date("m/d/Y") %}
+    <h1 class="col-xs-12  new"><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+    <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+    <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
+	<div ></div>
+    {% else %}
+        
+        <h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+        <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+        <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
+    {% endif %}
+
+{% endfor %}
+{% endblock %}
+{% block aside %}
+    <form action="{{path('kikala_front_search')}}" method="post">  
+        <div class="form-group">
+          {{ form(Search_form, {'attr':{'id': 'monForm','novalidate': 'novalidate'}}) }}
+        </div>
+    </form>
+{% endblock %}
