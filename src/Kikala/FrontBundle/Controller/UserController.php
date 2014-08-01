@@ -15,6 +15,7 @@ use Kikala\FrontBundle\Form\UserKikologueType;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Category;
 use Kikala\FrontBundle\Entity\Tag;
+use Kikala\FrontBundle\Entity\KikoTransactionHistory;
 use Kikala\FrontBundle\Form\FormationType;
 use \abeautifulsite\SimpleImage;
 use Kikala\FrontBundle\Form\TagType;
@@ -365,14 +366,43 @@ class UserController extends Controller
     public function cancelAction($id) // Id c'est l'id de la formation passe dans l'url
 
     {      
-        $user=$this->getUser();  // On récupères tout l'objet User avec tout ses données
+        $user=$this->getUser();
+        // On récupères tout l'objet User avec tout ses données
         $inscriptionRepository = $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm'); // On récupère toute la table inscriptions
         $cancel=$inscriptionRepository->findOneBy(array('id'=>$id, 'user'=>$user)); // FindOneBy sécurité : pour s'assure que le user connecté est le user inscrit a cette formation 
+       
+        $formation=$cancel->getFormation();
+
+        $kikostran= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findOneBy(array(
+            'fromUser'=>$user,'transactionType'=>'inscription', 'formation'=>$formation));
+
+
+        $actkikos=$kikostran->getKikosTransfered();
+        
+        $updatekikos=$actkikos/2;
+        $updatekiko=($updatekikos-0.5);
+        $kikos=$user->getKikos();
+        $newkikos=$kikos+$updatekiko;
+        $user->setKikos($newkikos);
+
+       
+        $transaction= new KikoTransactionHistory();
+        $transaction->setDateTransaction(new DateTime());
+        $transaction->setKikosTransfered($updatekiko);
+        $transaction->setTransactionType('remboursement');
+        $transaction->setToUser($user);
+        $transaction->setFormation($formation);
+        $transaction->setFromUser('kikosmaster');
+
         $em = $this->getDoctrine()->getManager(); // Enregister l'objet dans la variable em
-        $em->remove($cancel); // pour effacer toute la ligne de la table inscriptions
+        $em-> remove($cancel); // pour effacer toute la ligne de la table inscriptions
+        $em-> persist($transaction);
+        $em-> persist($user);
+
         $em->flush(); // Exécuter
 
         return $this->redirect($this->generateUrl('kikala_front_mesInscriptions')); // Redirection sur la même page mesInscriptions
     }
- 
+
+
 }
