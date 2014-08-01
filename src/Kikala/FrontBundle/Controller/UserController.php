@@ -17,7 +17,7 @@ use Kikala\FrontBundle\Entity\Category;
 use Kikala\FrontBundle\Entity\Tag;
 use Kikala\FrontBundle\Entity\KikoTransactionHistory;
 use Kikala\FrontBundle\Form\FormationType;
-use \abeautifulsite\simpleimage;
+use \abeautifulsite\SimpleImage;
 use Kikala\FrontBundle\Form\TagType;
 use Symfony\Component\HttpFoundation\Session\Session; 
 
@@ -50,10 +50,17 @@ class UserController extends Controller
                     if(!empty($user->getPhoto())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
                         $photo = $user->getPhoto();
+                        //print_r($photo);
+                        //die();
+                        $tmpFileName = $photo->getPathName();
                             // comput a random name and try to guess the extension
                             $extension = $photo->guessExtension();
                             $newFilename = base64_encode(microtime()).'.'.$extension;
-                            $photo->move($dir, $newFilename);
+                            $newPhoto = new SimpleImage($tmpFileName);
+                            $newPhoto->best_fit(300, 250)->save($dir.'/medium/'.$newFilename);
+                            $newPhoto->best_fit(150, 150)->save($dir.'/small/'.$newFilename);
+                            
+                            //$photo->move($dir, $newFilename);
                             $user->setFilename($newFilename);
                     }
                     //salt

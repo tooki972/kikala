@@ -110,6 +110,7 @@ class FormationController extends Controller
     return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
 
+
   public function formaInsAction($id){
     $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
 

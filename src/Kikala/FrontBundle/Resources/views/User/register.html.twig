@@ -3,12 +3,7 @@
 {%block title%} 
 {{ parent()}} - register
 {% endblock %}
-{% block stylesheets %}
-		<link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.min.css')}}
-		"/>
-		{{ parent()}}
 
-	{% endblock %}
 {% block body %}
 <h1>Créez votre Kikologue !</h1>
 
@@ -16,11 +11,4 @@
 
 
 
-{% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
-	<script>
-		$('#kikala_frontbundle_userkikologue_birthday').datepicker($.datepicker.regional["fr"]);
-	</script>
 {% endblock %}
