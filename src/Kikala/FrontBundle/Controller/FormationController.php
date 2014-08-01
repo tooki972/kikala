@@ -107,6 +107,7 @@ class FormationController extends Controller
         $inscri= new InscriptionForm();
         $inscri->setFormation($formation);
         $inscri->setUser($this->getUser());
+
         $dure=$formation->getDuree();
          $kikos=$this->getUser()->getKikos();
          $user=$this->getUser()->SetKikos($kikos-$dure);
@@ -119,18 +120,17 @@ class FormationController extends Controller
          $transaction->setFromUser($this->getUser()->getId());
          //récupération du manager pour sauvegarder l'entity
            
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($inscri);
-                    $em->persist($user);
-                     $em->persist($transaction);
-                //Sauvegarde de l'entity (exécute la requête)
-                    $em->flush();
-                    
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($inscri);
+            $em->persist($user);
+            $em->persist($transaction);
+        //Sauvegarde de l'entity (exécute la requête)
+            $em->flush();
 
-                     $params=array(
-                    'id'=>$id);
+            $params=array(
+                'id'=>$id);
+
         return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
-
     }
 
 }

@@ -295,17 +295,10 @@ class UserController extends Controller
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
     
-    public function myFormaAction($id)
+    public function myFormaAction()
 
     {
-        $contentRepository= $this->getDoctrine()->getRepository("Wf3WikiBundle:Content");
-        $content=$contentRepository->find($id);
-
-        $em= $this->getDoctrine()->getManager();
-        $em->remove($content);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl("wf3_wiki_home"));
+        
         
          return $this->render('KikalaFrontBundle:User:myForma.html.twig');
     } 

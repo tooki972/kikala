@@ -104,9 +104,8 @@ h3{
 	background: #b8c945;
 	color: #fff;
  	font-size: 1.5em;
- 	letter-spacing: -1px;
  	margin-bottom: 15px;
- 	padding: 2px;
+ 	padding: 2px 2px 2px 5px;
 }
 /************** HOME ******************************/
 .nbUserA{
@@ -196,9 +195,11 @@ h1 >a:hover{
 }
 /************** PROFIL ****************************/
 #namePseudo{
+	clear: left;
 	color: #b8c945;
 	font-weight: bold;
 	margin-top: 5px;
+	text-align: center;
 }
 #userMetier, #userInfoFormateur{
 	border-bottom: 1px solid #b8c945;
@@ -218,6 +219,20 @@ h1 >a:hover{
 	background: none;
 	color: #ca5745;
 	font-style: italic;
+}
+/************** kiko détail *********************/
+aside p{
+	margin-left: -15px;
+}
+/************** my forma ************************/
+.annule{
+	background: red;
+	color: #fff;
+	padding: 2px;
+	margin-right: 4px;
+	letter-spacing: 1px;
+	float: left;
+	width: 95px;
 }
 /**************FORMULAIRE AJOUT *****************/
 
@@ -256,6 +271,9 @@ h1 >a:hover{
 }
 .form-group {
     clear: left;
+}
+#kikala_frontbundle_tag, #kikala_frontbundle_tag input{
+	margin-top: 20px;
 }
 /***************  footer   ****************/
 #bas{

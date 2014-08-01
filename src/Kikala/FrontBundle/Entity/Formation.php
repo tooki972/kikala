@@ -103,8 +103,12 @@ class Formation
 
     /**
      * @var \integer
-     * @Assert\NotBlank(message="La durée doit être renseigné!")
-     * 
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 24,
+     *      minMessage = "You must be at least 1h tall to enter",
+     *      maxMessage = "You cannot be taller than 24h to enter"
+     * )
      * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
@@ -118,7 +122,12 @@ class Formation
 
     /**
      * @var integer
-     * @Assert\NotBlank(message="Descriptif de la formation !")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 24,
+     *      minMessage = "You must be at least 1h tall to enter",
+     *      maxMessage = "You cannot be taller than 24h to enter"
+     * )
      * @ORM\Column(name="nbTotal", type="integer")
      */
     private $nbTotal;
