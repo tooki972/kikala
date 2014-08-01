@@ -22,4 +22,29 @@ class InscriptionFormRepository extends EntityRepository
 				->getSingleScalarResult();
 				return $count;
 	}
+
+
+	public function getListInsByUser($user){
+        $query = $this->createQueryBuilder('inscriptions')
+            ->select('inscriptions', 'formation')
+            ->where ('inscriptions.user = :user')
+            ->leftJoin ('inscriptions.formation', 'formation')
+            ->setParameter	('user', $user)
+        	->getQuery();
+        $mesformations=$query->getResult();
+        return $mesformations;
+    }
+
+	public function cancelInsByUser($user, $formation){
+        $query = $this->createQueryBuilder('cancel')
+            ->select('cancel', 'formation')
+            ->where ('cancel.user = :user')
+            ->setParameter	('user', $user)
+            ->andWhere('cancel.formation = :formation')
+            ->setParameter	('formation', $formation)
+        	->getQuery();
+        $mesformations=$query->getResult();
+        return $mesformations;
+    }
+
 }
