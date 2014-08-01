@@ -42,3 +42,15 @@
 <p> Cet écran affiche les formations en cours (futures), au nombre de 30. Elles sont affichées par date de formation, croissant (la plus proche d’abord). 
 Un système de pagination est nécessairement mis en place, afin de voir les éventuelles formations plus lointaines. Les formations passées ne sont pas affichées. </p>
 {% endblock %}
+
+{% block aside %}
+    <form action="" method="post">  
+        <div class="form-group">
+            <label for="search" class="col-xs-12 control-label required intituleLong">Rechercher formation</label>
+            <input type="text" id="search" name="search" value="" class="col-xs-12 form-control"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-xs col-xs-12">Rechercher</button>
+        </div>
+    </form>
+{% endblock %}

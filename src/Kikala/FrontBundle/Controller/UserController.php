@@ -325,6 +325,8 @@ class UserController extends Controller
 
     public function mesInscriptionsAction()
     {
+        
+
         return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig');
     } 
  
