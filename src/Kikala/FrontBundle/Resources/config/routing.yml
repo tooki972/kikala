@@ -69,9 +69,9 @@ kikala_front_myForma:
     path:     /myForma/
     defaults: { _controller: KikalaFrontBundle:User:myForma }
 
-kikala_front_mes_inscriptions:
-    path:     /mes_inscriptions/
-    defaults: { _controller: KikalaFrontBundle:Default:mes_inscriptions }
+kikala_front_mesInscriptions:
+    path:     /mesInscriptions/
+    defaults: { _controller: KikalaFrontBundle:User:mesInscriptions }
 
 kikala_front_tagCreate:
     path:     /tagCreate/
@@ -80,3 +80,7 @@ kikala_front_tagCreate:
 kikala_front_formaIns:
     path:     /formaIns/{id}
     defaults: { _controller: KikalaFrontBundle:Formation:formaIns }
+
+kikala_front_formAnnul:
+    path:     /formAnnul/{id}
+    defaults: { _controller: KikalaFrontBundle:User:formAnnul }

@@ -218,6 +218,7 @@ class UserController extends Controller
 
     public function formaCreateAction(Request $request)
     {
+        
         $tag = new tag();
         $tag_form =$this->createForm(new TagType, $tag);
         $forma = new Formation();
@@ -281,30 +282,50 @@ class UserController extends Controller
                 $em->persist($tag);
                 //Sauvegarde de l'entity (exécute la requête)
                 $em->flush();
+                //Objet Json    
                 $response = new JsonResponse();
+                //Hydratation des données
                 $response->setData(array(
                     'id'=>$tag->getId(),
-                    'name'=>$tag->getname(),
-                    )
-                );
+                    'name'=>$tag->getName(),
+                    ));
                 return $response;
-        }    
+            }    
+
         $params = array(
                 "tag_form" => $tag_form->createView(),
         );
+
         return $this->render('KikalaFrontBundle:User:tagCreate.html.twig',$params);
     }
     
     public function myFormaAction()
     {
+        $user=$this->getUser();
 
+        $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
 
-        return $this->render('KikalaFrontBundle:User:myForma.html.twig');
+        return $this->render('KikalaFrontBundle:User:myForma.html.twig',array(
+        'user'=>$user,
+        'formations'=>$formations));
+
     } 
-
-    public function summaryAction()
+    //update un contenu
+    
+    public function formAnnulAction($id)
     {
-        return $this->render('KikalaFrontBundle:User:summary.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);
+        
+        $formAnnul->setIsActive(false);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('kikala_front_myForma'));
+    }
+
+    public function mesInscriptionsAction()
+    {
+        return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig');
     } 
  
 }

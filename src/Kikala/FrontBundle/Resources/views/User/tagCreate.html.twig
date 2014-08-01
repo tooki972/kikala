@@ -16,26 +16,29 @@
 	{{ parent() }}
 	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
 	<script>
-		$(document).ready(function() {
-	    // Lorsque je soumets le formulaire
-		    $('#monForm').on('submit', function(e) {
-		        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
-		        //recuperation des bvaleur
-		 		var tag=$('#kikala_frontbundle_tag_name').val();
-		 		//verif
-		 		if(tag ===''){
-		 			alert('veillez remplir le champs');
-		 		} else{
-		 			$.ajax({
-		 				type:'POST',
-		 				url:"{{path('kikala_front_tagCreate')}}",
-		 				data : $('#monForm').serialize(),
-		 				success:function(html){
-		 					console.log(html);
-		 				}
-		 			});
-		 		}
-		 	});
-		});
+
+
+	$(document).ready(function() {
+    // Lorsque je soumets le formulaire
+    $('#monForm').on('submit', function(e) {
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+        //recuperation des valeurs
+ 		var tag=$('#kikala_frontbundle_tag_name').val();
+ 		//verif
+ 		if(tag ===''){
+ 			alert('veillez remplir le champs');
+ 		} else{
+ 			$.ajax({
+ 				type:'POST',
+ 				url:"{{path('kikala_front_tagCreate')}}",
+ 				data : $('#monForm').serialize(),
+ 				success:function(html){
+ 					console.log(html);
+ 				}
+ 			});
+ 		}
+ 		});
+});
+
 	</script>
 {% endblock %}

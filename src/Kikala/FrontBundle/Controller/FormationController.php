@@ -79,7 +79,6 @@ class FormationController extends Controller
 
 	}
 
-
 	public function formaDetailAction($id){
         $user=$this->getUser();
         $em = $this->getDoctrine()->getEntityManager();
@@ -88,7 +87,7 @@ class FormationController extends Controller
         $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
 	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
         $creator=$formation->getCreator();
-         $kikos=$this->getUser()->getKikos();
+        $kikos=$this->getUser()->getKikos();
 	    //création d'un array associatif pour stocker les données
     	$params=array(
             'user'=>$user,
@@ -106,31 +105,30 @@ class FormationController extends Controller
         $inscri= new InscriptionForm();
         $inscri->setFormation($formation);
         $inscri->setUser($this->getUser());
+
         $dure=$formation->getDuree();
-         $kikos=$this->getUser()->getKikos();
-         $user=$this->getUser()->SetKikos($kikos-$dure);
-         $transaction= new KikoTransactionHistory();
-         $transaction->setDateTransaction(new DateTime());
-         $transaction->setKikosTransfered($dure);
-         $transaction->setTransactionType('inscription');
-         $transaction->setToUser($formation->getCreator());
-         $transaction->setFormation($formation);
-         $transaction->setFromUser($this->getUser()->getId());
+        $kikos=$this->getUser()->getKikos();
+        $user=$this->getUser()->SetKikos($kikos-$dure);
+        $transaction= new KikoTransactionHistory();
+        $transaction->setDateTransaction(new DateTime());
+        $transaction->setKikosTransfered($dure);
+        $transaction->setTransactionType('inscription');
+        $transaction->setToUser($formation->getCreator());
+        $transaction->setFormation($formation);
+        $transaction->setFromUser($this->getUser()->getId());
          //récupération du manager pour sauvegarder l'entity
            
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($inscri);
-                    $em->persist($user);
-                     $em->persist($transaction);
-                //Sauvegarde de l'entity (exécute la requête)
-                    $em->flush();
-                    
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($inscri);
+            $em->persist($user);
+            $em->persist($transaction);
+        //Sauvegarde de l'entity (exécute la requête)
+            $em->flush();
 
-                     $params=array(
-                    'id'=>$id);
+            $params=array(
+                'id'=>$id);
+
         return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
-
     }
-
 
 }

@@ -26,8 +26,11 @@
 
 	</div>
 	<p class="description col-xs-12 col-md-4"> <span class="nbUserA">{{ formation.nbTotal }}</span><br />Nombre de place :</p>
+
 	<p class="description col-xs-12 col-md-4"> <span class="nbUserB">{{ nbInscriptionForm }}</span><br />Nombre d'inscrit :</p>
+
 	
+
 
 <div class="col-xs-12">
 	<p>Cette page affiche toutes les informations publiques disponibles sur la formation. 
@@ -44,7 +47,7 @@
 {% endblock %}
 
 {% block aside %}
-	<p>Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
+	<p class="intituleLong">Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
 	{% if formation.filename %}
 		<img src="{{ asset('img/formapicture/'~formation.filename) }}" height="300" width="255" />
 	{% else %}
@@ -52,15 +55,17 @@
 	{% endif %}
 	<div class="form-group">
 		{% if formation.nbTotal == nbInscriptionForm %}
-		<p> La formation est complête</p>
+			<p class="intituleLong col-xs-12"> La formation est complête</p>
 		{% elseif creator == user %}
-		<p> vous ete le createur de la formation</p>
+
+		<p class="intituleLong col-xs-12"> vous ete le createur de la formation</p>
 		{% elseif kikos == 0 %}
 		<p>vous n'avez plus de kikos</p>
 		{% elseif quiEtIns%}
-			<p> vous ete deja inscrit</p>
+			<p class="intituleLong col-xs-12"> vous ete deja inscrit</p>
 		{% elseif  quiEtIns == false %} 
-		   <a href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</button>
+		   <a class="btn btn-default col-xs-12" role="button" href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</a>
+
 		{% endif %}
     </div> 	
 {% endblock %}

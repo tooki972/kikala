@@ -84,6 +84,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
+                 'min' => 0,
                  'placeholder' => 'Code postal',
                  'class'=> "col-xs-12 col-md-8"
                 )  
@@ -95,6 +96,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
+                 'min' => 1, 'max' => 24,
                  'placeholder' => 'duree de la formation',
                  'class'=> "col-xs-12 col-md-8"
                 )  
@@ -116,6 +118,7 @@ class FormationType extends AbstractType
                  'class'=> "col-xs-12 col-md-4"
                 ),
                 'attr' => array(
+                 'min' => 0,
                  'placeholder' => 'nombre de place totale',
                  'class'=> "col-xs-12 col-md-8"
                 )  
