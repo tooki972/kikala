@@ -19,7 +19,6 @@ class FormationController extends Controller
     // Affichage de la liste des formations par date de formation et par page (30 formation par page)
     	//1. Aller sur formationRepository et crée deux function que nous avons appelle ici.
     	$maxFormations=6;
-
         $formations_count = $this->getDoctrine()
         		->getRepository('KikalaFrontBundle:Formation')
                 ->countFormation();
@@ -62,10 +61,7 @@ class FormationController extends Controller
                                 $em->persist($creator);
                                  $em->persist($transaction);
                             //Sauvegarde de l'entity (exécute la requête)
-                                $em->flush();
-                              
-                  
-                    
+                                $em->flush();                         
                           }
             }
 
@@ -80,70 +76,72 @@ class FormationController extends Controller
 
 	}
 
-
 	public function formaDetailAction($id){
-        $user=$this->getUser();
-        $em = $this->getDoctrine()->getEntityManager();
-        //requête à la base dans la table formation
-        $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
-        $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
-	    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
-        $creator=$formation->getCreator();
-        $securityContext = $this->container->get('security.context');
-        if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-         $kikos=$this->getUser()->getKikos();
-    	$params=array(
-            'user'=>$user,
-    		'formation'=>$formation,
-            'nbInscriptionForm'=>$nbInscriptionForm,
-            'quiEtIns'=>$quiEtIns,
-            'creator'=>$creator,
-            'kikos'=>$kikos,
-            'securityContext'=>$securityContext
+    $user=$this->getUser();
+    $em = $this->getDoctrine()->getEntityManager();
+    //requête à la base dans la table formation
+    $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
+    $nbInscriptionForm=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($formation); 
+    $quiEtIns= $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->findBy(array('user'=>$user,'formation'=>$formation));
+    $creator=$formation->getCreator();
+    $securityContext = $this->container->get('security.context');
+      if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $kikos=$this->getUser()->getKikos();
+      	$params=array(
+          'user'=>$user,
+          'formation'=>$formation,
+          'nbInscriptionForm'=>$nbInscriptionForm,
+          'quiEtIns'=>$quiEtIns,
+          'creator'=>$creator,
+          'kikos'=>$kikos,
+          'securityContext'=>$securityContext
     		);
-     }else{
-            $params=array(
-            'user'=>$user,
-            'formation'=>$formation,
-            'nbInscriptionForm'=>$nbInscriptionForm,
-            'quiEtIns'=>$quiEtIns,
-            'creator'=>$creator,
-            'securityContext'=>$securityContext
-            );
-     }
-        //création d'un array associatif pour stocker les données
-
-		return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
+      }else{
+        $params=array(
+          'user'=>$user,
+          'formation'=>$formation,
+          'nbInscriptionForm'=>$nbInscriptionForm,
+          'quiEtIns'=>$quiEtIns,
+          'creator'=>$creator,
+          'securityContext'=>$securityContext
+        );
+      }
+      //création d'un array associatif pour stocker les données
+    return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
 	}
-    public function formaInsAction($id){
-        $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
-        $inscri= new InscriptionForm();
-        $inscri->setFormation($formation);
-        $inscri->setUser($this->getUser());
 
-        $dure=$formation->getDuree();
-         $kikos=$this->getUser()->getKikos();
-         $user=$this->getUser()->SetKikos($kikos-$dure);
-         $transaction= new KikoTransactionHistory();
-         $transaction->setDateTransaction(new DateTime());
-         $transaction->setKikosTransfered($dure);
-         $transaction->setTransactionType('inscription');
-         $transaction->setToUser($formation->getCreator());
-         $transaction->setFormation($formation);
-         $transaction->setFromUser($this->getUser()->getId());
-         //récupération du manager pour sauvegarder l'entity
-           
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($inscri);
-            $em->persist($user);
-            $em->persist($transaction);
-        //Sauvegarde de l'entity (exécute la requête)
-            $em->flush();
 
-            $params=array(
-                'id'=>$id);
+  public function formaInsAction($id){
+    $formation=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->find($id);
 
-        return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
-    }
+    $inscri= new InscriptionForm();
+    $inscri->setFormation($formation);
+    $inscri->setUser($this->getUser());
+
+    $dure=$formation->getDuree();
+    $kikos=$this->getUser()->getKikos();
+
+    $user=$this->getUser()->SetKikos($kikos-$dure);
+    
+    $transaction= new KikoTransactionHistory();
+    $transaction->setDateTransaction(new DateTime());
+    $transaction->setKikosTransfered($dure);
+    $transaction->setTransactionType('inscription');
+    $transaction->setToUser($formation->getCreator());
+    $transaction->setFormation($formation);
+    $transaction->setFromUser($this->getUser()->getId());
+    //récupération du manager pour sauvegarder l'entity 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($inscri);
+        $em->persist($user);
+        $em->persist($transaction);
+    //Sauvegarde de l'entity (exécute la requête)
+        $em->flush();
+
+    $params=array(
+      'id'=>$id
+    );
+    return $this->redirect($this->generateUrl('kikala_front_formaDetail',$params));    
+  }
 
 }
