@@ -49,7 +49,7 @@
 {% block aside %}
 	<p class="intituleLong">Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
 	{% if formation.filename %}
-		<img src="{{ asset('img/formapicture/'~formation.filename) }}" height="300" width="255" />
+		<img src="{{ asset('img/formapicture/medium/'~formation.filename) }}" height="300" width="255" />
 	{% else %}
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
@@ -60,12 +60,11 @@
 			<p class="intituleLongRed col-xs-12"> La formation est complête</p>
 		{% elseif creator == user %}
 			<p class="intituleLongRed col-xs-12"> Vous êtes le createur de la formation</p>
-
+		{% elseif quiEtIns%}
+			<p class="intituleLongRed col-xs-12">Vous êtes déjà inscrit !</p>
 		{% elseif kikos <=  formation.duree %}
 		<p class="intituleLongRed col-xs-12">Vous n'avez plus de kikos</p>
 		
-		{% elseif quiEtIns%}
-			<p class="intituleLongRed col-xs-12">Vous êtes déjà inscrit !</p>
 		{% elseif  quiEtIns == false %} 
 		   <a class="btn btn-default col-xs-12" role="button" href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</a>
 		

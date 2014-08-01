@@ -15,8 +15,11 @@ use Kikala\FrontBundle\Form\UserKikologueType;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Entity\Category;
 use Kikala\FrontBundle\Entity\Tag;
-use Kikala\FrontBundle\Form\FormationCreateType;
-use \abeautifulsite\simpleimage;
+
+use Kikala\FrontBundle\Entity\KikoTransactionHistory;
+use Kikala\FrontBundle\Form\FormationType;
+use \abeautifulsite\SimpleImage;
+
 use Kikala\FrontBundle\Form\TagType;
 use Symfony\Component\HttpFoundation\Session\Session; 
 
@@ -49,10 +52,18 @@ class UserController extends Controller
                     if(!empty($user->getPhoto())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
                         $photo = $user->getPhoto();
+                        //Enregistre le chemin du fichier temporaire
+                        $tmpFileName = $photo->getPathName();
                             // comput a random name and try to guess the extension
                             $extension = $photo->guessExtension();
                             $newFilename = base64_encode(microtime()).'.'.$extension;
-                            $photo->move($dir, $newFilename);
+                            //Enregistre le fichier temporaire
+                            $newPhoto = new SimpleImage($tmpFileName);
+                            //Recadre les images et enregistre dans les dossiers
+                            $newPhoto->best_fit(250, 300)->save($dir.'/medium/'.$newFilename);
+                            $newPhoto->best_fit(150, 150)->save($dir.'/small/'.$newFilename);
+                            
+                            //$photo->move($dir, $newFilename);
                             $user->setFilename($newFilename);
                     }
                     //salt
@@ -241,6 +252,24 @@ class UserController extends Controller
                 //pour remplir id du crateur de la formation
                 $forma->setCreator($user);
 
+                //Photo et Filename
+                    if(!empty($forma->getMiImage())){
+                        $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
+                        $MiImage = $forma->getMiImage();
+                        //Enregistre le chemin du fichier temporaire
+                        $tmpFileName = $MiImage->getPathName();
+                            // comput a random name and try to guess the extension
+                            $extension = $MiImage->guessExtension();
+                            $newFilename = base64_encode(microtime()).'.'.$extension;
+                            //Enregistre le fichier temporaire
+                            $newImage = new SimpleImage($tmpFileName);
+                            //Recadre les images et enregistre dans les dossiers
+                            $newImage->best_fit(250, 300)->save($dir.'/medium/'.$newFilename);
+                            $newImage->best_fit(150, 150)->save($dir.'/small/'.$newFilename);
+                            
+                            $forma->setFilename($newFilename);
+                    }
+                    /*    
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
@@ -249,7 +278,7 @@ class UserController extends Controller
                             $newFilename = base64_encode(microtime()).'.'.$extension;
                             $MiImage->move($dir, $newFilename);
                             $forma->setFilename($newFilename);
-                    }
+                    }*/
                      //récupération du manager pour sauvegarder l'entity
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($forma);
@@ -325,14 +354,45 @@ class UserController extends Controller
     public function cancelAction($id) // Id c'est l'id de la formation passe dans l'url
 
     {      
-        $user=$this->getUser();  // On récupères tout l'objet User avec tout ses données
+        $user=$this->getUser();
+        // On récupères tout l'objet User avec tout ses données
         $inscriptionRepository = $this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm'); // On récupère toute la table inscriptions
         $cancel=$inscriptionRepository->findOneBy(array('id'=>$id, 'user'=>$user)); // FindOneBy sécurité : pour s'assure que le user connecté est le user inscrit a cette formation 
+       
+        $formation=$cancel->getFormation();
+
+        $kikostran= $this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findOneBy(array(
+            'fromUser'=>$user,'transactionType'=>'inscription', 'formation'=>$formation));
+
+
+        $actkikos=$kikostran->getKikosTransfered();
+        
+        $updatekikos=$actkikos/2;
+        $updatekiko=($updatekikos-0.5);
+        $kikos=$user->getKikos();
+        $newkikos=$kikos+$updatekiko;
+        $user->setKikos($newkikos);
+
+       
+        $transaction= new KikoTransactionHistory();
+        $transaction->setDateTransaction(new DateTime());
+        $transaction->setKikosTransfered($updatekiko);
+        $transaction->setTransactionType('remboursement');
+        $transaction->setToUser($user);
+        $transaction->setFormation($formation);
+        $transaction->setFromUser('kikosmaster');
+
         $em = $this->getDoctrine()->getManager(); // Enregister l'objet dans la variable em
-        $em->remove($cancel); // pour effacer toute la ligne de la table inscriptions
+        $em-> remove($cancel); // pour effacer toute la ligne de la table inscriptions
+        $em-> persist($transaction);
+        $em-> persist($user);
+
         $em->flush(); // Exécuter
 
         return $this->redirect($this->generateUrl('kikala_front_mesInscriptions')); // Redirection sur la même page mesInscriptions
     }
- 
+
+
+
 }
+
