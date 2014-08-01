@@ -59,8 +59,10 @@
 		{% elseif creator == user %}
 
 		<p class="intituleLong col-xs-12"> vous ete le createur de la formation</p>
-		{% elseif kikos == 0 %}
+		{% if user.pseudo == 'anon.'%}
+		{% elseif kikos >=  formation.duree %}
 		<p>vous n'avez plus de kikos</p>
+		{% endif %}
 		{% elseif quiEtIns%}
 			<p class="intituleLong col-xs-12"> vous ete deja inscrit</p>
 		{% elseif  quiEtIns == false %} 
