@@ -1,15 +1,17 @@
  @import "reset.css";
+
 body{
-	background: #fff;
+	background: #f3f4ea;
 }
 #wrapper{
+	background: #fff;
 	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.2);	
-	min-height: 250px;
+	min-height: 350px;
 	margin: 0 auto;
 	padding-bottom: 15px;
 }
 header{
-	background: #fff;
+	background: #f3f4ea;
 	border-radius:0 8px 0 8px;
 	height: auto;
 	padding: 5px;
@@ -60,6 +62,9 @@ section{
 	margin-top: 10px;
 	padding: 5px 5px 15px 5px;
 	width: 70%;
+}
+article{
+	clear: left;
 }
 aside{
 	background: #fff;
@@ -227,12 +232,16 @@ aside p{
 /************** my forma ************************/
 .annule{
 	background: red;
+	border-radius: 3px;
 	color: #fff;
 	padding: 2px;
 	margin-right: 4px;
 	letter-spacing: 1px;
 	float: left;
-	width: 95px;
+	text-align: center;
+}
+.supFormation a{
+	margin-top: 0;
 }
 /**************FORMULAIRE AJOUT *****************/
 
