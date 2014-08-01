@@ -49,7 +49,7 @@
 {% block aside %}
 	<p class="intituleLong">Formation</p><h2 id="namePseudo"> {{formation.name}}</h2>
 	{% if formation.filename %}
-		<img src="{{ asset('img/formapicture/'~formation.filename) }}" height="300" width="255" />
+		<img src="{{ asset('img/formapicture/medium/'~formation.filename) }}" height="300" width="255" />
 	{% else %}
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}

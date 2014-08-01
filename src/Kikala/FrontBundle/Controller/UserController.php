@@ -49,14 +49,15 @@ class UserController extends Controller
                     if(!empty($user->getPhoto())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/profilpicture';
                         $photo = $user->getPhoto();
-                        //print_r($photo);
-                        //die();
+                        //Enregistre le chemin du fichier temporaire
                         $tmpFileName = $photo->getPathName();
                             // comput a random name and try to guess the extension
                             $extension = $photo->guessExtension();
                             $newFilename = base64_encode(microtime()).'.'.$extension;
+                            //Enregistre le fichier temporaire
                             $newPhoto = new SimpleImage($tmpFileName);
-                            $newPhoto->best_fit(300, 250)->save($dir.'/medium/'.$newFilename);
+                            //Recadre les images et enregistre dans les dossiers
+                            $newPhoto->best_fit(250, 300)->save($dir.'/medium/'.$newFilename);
                             $newPhoto->best_fit(150, 150)->save($dir.'/small/'.$newFilename);
                             
                             //$photo->move($dir, $newFilename);
@@ -249,6 +250,24 @@ class UserController extends Controller
                 //pour remplir id du crateur de la formation
                 $forma->setCreator($user);
 
+                //Photo et Filename
+                    if(!empty($forma->getMiImage())){
+                        $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
+                        $MiImage = $forma->getMiImage();
+                        //Enregistre le chemin du fichier temporaire
+                        $tmpFileName = $MiImage->getPathName();
+                            // comput a random name and try to guess the extension
+                            $extension = $MiImage->guessExtension();
+                            $newFilename = base64_encode(microtime()).'.'.$extension;
+                            //Enregistre le fichier temporaire
+                            $newImage = new SimpleImage($tmpFileName);
+                            //Recadre les images et enregistre dans les dossiers
+                            $newImage->best_fit(250, 300)->save($dir.'/medium/'.$newFilename);
+                            $newImage->best_fit(150, 150)->save($dir.'/small/'.$newFilename);
+                            
+                            $forma->setFilename($newFilename);
+                    }
+                    /*    
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
@@ -257,7 +276,7 @@ class UserController extends Controller
                             $newFilename = base64_encode(microtime()).'.'.$extension;
                             $MiImage->move($dir, $newFilename);
                             $forma->setFilename($newFilename);
-                    }
+                    }*/
                      //récupération du manager pour sauvegarder l'entity
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($forma);
