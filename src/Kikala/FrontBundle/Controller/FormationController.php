@@ -125,7 +125,7 @@ class FormationController extends Controller
          $kikos=$this->getUser()->getKikos();
          $user=$this->getUser()->SetKikos($kikos-$dure);
          $transaction= new KikoTransactionHistory();
-         $transaction->setDateTransaction(new Dat());
+         $transaction->setDateTransaction(new DateTime());
          $transaction->setKikosTransfered($dure);
          $transaction->setTransactionType('inscription');
          $transaction->setToUser($formation->getCreator());

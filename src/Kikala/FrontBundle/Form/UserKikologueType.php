@@ -80,6 +80,10 @@ class UserKikologueType extends AbstractType
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
                 ),
+                'attr' => array(
+                 'placeholder' => 'jj/mm/yyyy',
+                 'class'=> "col-xs-12 col-md-8"
+                )
                 ))
             ->add('gender', 'choice', array(
                 'choices' => array(
