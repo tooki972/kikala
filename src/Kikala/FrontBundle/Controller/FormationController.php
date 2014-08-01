@@ -62,8 +62,7 @@ class FormationController extends Controller
                                 $em->persist($creator);
                                  $em->persist($transaction);
                             //Sauvegarde de l'entity (exécute la requête)
-                                $em->flush();
-                              
+                                $em->flush();                         
                   
                     
                           }
