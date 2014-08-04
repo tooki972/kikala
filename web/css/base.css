@@ -141,6 +141,17 @@ h3{
 .nbUser{
 	width: 50%;
 }
+.newInscrit{
+	border: 1px solid #b8c945;
+	box-shadow: 0px 0px 10px rgba(0,0,0, 0.2);
+	overflow: hidden;
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	background: #fff;
+	padding: 25px;
+	z-index: 100;
+}
 /************** lsforma ***************************/
 .description{
 	border-bottom: 1px solid #b8c945;

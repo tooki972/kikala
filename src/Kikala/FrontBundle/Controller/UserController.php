@@ -105,10 +105,10 @@ class UserController extends Controller
                     // Logging the user in above the way we do it doesn't do this automatically
                     $event = new InteractiveLoginEvent($request, $token);
                     $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
+                   
                     // maybe redirect out here
 
-                 return $this->redirect($this->generateUrl("kikala_front_homepage"));
+                 return $this->redirect($this->generateUrl('kikala_front_homepage'));
                 }
 
         // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
@@ -291,7 +291,7 @@ class UserController extends Controller
                             
                             $forma->setFilename($newFilename);
                     }
-                    /*    
+                    /* Ancienne code pour afficher l'image sans simple image, voir precedement le code avec simpleimage   
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();
@@ -361,10 +361,9 @@ class UserController extends Controller
     public function formAnnulAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-<<<<<<< HEAD
+
         $formations = $em->getRepository('KikalaFrontBundle:Formation')->findByCreator($id);
-=======
->>>>>>> d381fe86e63142db5683fe0a3100be23391356f7
+
         $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
         
         $formAnnul->setIsActive(false);
