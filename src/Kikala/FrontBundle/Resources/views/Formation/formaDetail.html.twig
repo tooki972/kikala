@@ -54,13 +54,13 @@
 		<img src="{{ asset('img/profilpicture/default.jpg') }}" height="300" width="255" />
 	{% endif %}
 	<div class="form-group">
-		{% if user.pseudo == 'anon.' %}
+		{% if app.user == false %}
 			<p class="intituleLongRed col-xs-12"> Vous devez vous connecter !</p>
 		{% elseif formation.nbTotal == nbInscriptionForm %}
 			<p class="intituleLongRed col-xs-12"> La formation est complête</p>
 		{% elseif creator == user %}
 			<p class="intituleLongRed col-xs-12"> Vous êtes le createur de la formation</p>
-		{% elseif quiEtIns%}
+		{% elseif quiEtIns %}
 			<p class="intituleLongRed col-xs-12">Vous êtes déjà inscrit !</p>
 		{% elseif kikos <=  formation.duree %}
 		<p class="intituleLongRed col-xs-12">Vous n'avez plus de kikos</p>

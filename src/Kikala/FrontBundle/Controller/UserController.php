@@ -361,10 +361,9 @@ class UserController extends Controller
     public function formAnnulAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-<<<<<<< HEAD
+
         $formations = $em->getRepository('KikalaFrontBundle:Formation')->findByCreator($id);
-=======
->>>>>>> d381fe86e63142db5683fe0a3100be23391356f7
+
         $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
         
         $formAnnul->setIsActive(false);
