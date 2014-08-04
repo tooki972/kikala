@@ -216,11 +216,14 @@ class UserController extends Controller
         $user=$this->getDoctrine()->getRepository('KikalaFrontBundle:UserKikologue')->findOneById($id);
         
         $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
+   
         
+       
         return $this->render('KikalaFrontBundle:User:kikoDetail.html.twig',array(
         'user'=>$user,
-        'formations'=>$formations));
-
+        'formations'=>$formations
+        ));
+ 
     }
 
 

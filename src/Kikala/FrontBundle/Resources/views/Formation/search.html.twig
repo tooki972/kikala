@@ -4,34 +4,40 @@
 {% endblock %}
 
 {% block body %}
-{% for formation in formations %}
+{% for formation in formations|slice(0, 6) %}
 
     {% if formation.dateCreated|date("m/d/Y") >= twoday|date("m/d/Y") %}
-    <h1 class="col-xs-12  new"><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
-    <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
-    <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
-    <p class="description col-xs-12 col-md-8">{{ formation.tag.name }}</p>
-   <p class="description col-xs-12 col-md-8">{{ formation.category.name }}</p>
-   {% if formation.filename %}
-      <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/formapicture/small/'~formation.filename) }}" height="150" width="150" />
+        <div class="col-xs-12 listeforma"  >
+                <h1 class="col-xs-12 col-md-8 new"><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+                <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
+                <p class="description col-xs-12 col-md-8">{{ formation.dateFormation|date("d/m/y") }}</p>
             
-  {% else %}
-      <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/profilpicture/default.jpg') }}" height="150" width="150" />
-        
-	<div ></div>
-    {% else %}
-        
-        <h1><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
-        <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
-        <p class="description col-xs-12 col-md-4">{{ formation.dateFormation|date("d/m/y") }}</p>
-        <p class="description col-xs-12 col-md-8">{{ formation.tag.name }}</p>
-       <p class="description col-xs-12 col-md-8">{{ formation.category.name }}</p>
-        {% if formation.filename %}
+            {% if formation.filename %}
                 <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/formapicture/small/'~formation.filename) }}" height="150" width="150" />
             
-        {% else %}
+            {% else %}
+                <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/profilpicture/default.jpg') }}" height="150" width="150" />
+            {% endif %}
+        </div>      
+            
+      
+    {% else %}
+        
+        <div class="col-xs-12 listeforma" >
+                <h1 class="col-xs-12 col-md-8 new"><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
+                <p class="description col-xs-12 col-md-8"><span class="intitule">Description </span>{{ formation.descriptif }}</p>
+                  <p class="description col-xs-12 col-md-8"><span class="intitule">Tag </span>{{ formation.tag.name }}</p>
+                   <p class="description col-xs-12 col-md-8"><span class="intitule">Catégorie </span> {{ formation.category.name }}</p>
+                <p class="description col-xs-12 col-md-8"><span class="intitule">Date </span>{{ formation.dateFormation|date("d/m/y") }}</p>
+            
+            {% if formation.filename %}
+                <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/formapicture/small/'~formation.filename) }}" height="150" width="150" />
+            
+            {% else %}
                 <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/profilpicture/default.jpg') }}" height="150" width="150" />
         
+            {% endif %}
+         </div>    
     {% endif %}
 
 {% endfor %}

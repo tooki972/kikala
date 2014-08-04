@@ -26,11 +26,13 @@
     {% else %}
         
         <div class="col-xs-12 listeforma" >
+
                 <h1 class="col-xs-12 col-md-8 "><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
                 <p class="description col-xs-12 col-md-8">{{ formation.descriptif }}</p>
                   <p class="description col-xs-12 col-md-8">{{ formation.tag.name }}</p>
                    <p class="description col-xs-12 col-md-8">{{ formation.category.name }}</p>
                 <p class="description col-xs-12 col-md-8">{{ formation.dateFormation|date("d/m/y") }}</p>
+
             
             {% if formation.filename %}
                 <img class="col-xs-12 col-md-3 col-md-offset-1" src="{{ asset('img/formapicture/small/'~formation.filename) }}" height="150" width="150" />

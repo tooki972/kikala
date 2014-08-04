@@ -32,7 +32,7 @@ class SearchType extends AbstractType
             ->add('category', 'entity', array(
                 'property'=>'name',
                 'class'=>'Kikala\FrontBundle\Entity\Category',
-                'required' => true,
+                'required' => false,
                 "label" => "Catégorie",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"
@@ -47,7 +47,7 @@ class SearchType extends AbstractType
                ->add('tag', 'entity', array(
                 'property'=>'name',
                 'class'=>'Kikala\FrontBundle\Entity\Tag',
-                'required' => true,
+                'required' => false,
                 "label" => "Tag",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"

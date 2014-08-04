@@ -62,9 +62,8 @@
 			<p class="intituleLongRed col-xs-12"> Vous êtes le createur de la formation</p>
 		{% elseif quiEtIns %}
 			<p class="intituleLongRed col-xs-12">Vous êtes déjà inscrit !</p>
-		{% elseif kikos <=  formation.duree %}
-		<p class="intituleLongRed col-xs-12">Vous n'avez plus de kikos</p>
-		
+		{% elseif kikos <  formation.duree %}
+				<p class="intituleLongRed col-xs-12">Vous n'avez pas assez de kikos !</p>
 		{% elseif  quiEtIns == false %} 
 		   <a class="btn btn-default col-xs-12" role="button" href="{{ path('kikala_front_formaIns', {'id' : formation.id}) }}">S'inscrire</a>
 		

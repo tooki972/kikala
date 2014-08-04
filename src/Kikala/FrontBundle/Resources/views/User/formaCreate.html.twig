@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-	<h2 class="pageTitle">Créer une formation</h2>
+	
+	<h2 class="pageTitle">Créer une formation, (vous devez crée un formation avant de pouvoir en suivre une) </h2>
 
 	{{ form(formation_form, {'attr':{'novalidate': 'novalidate'}}) }}
-
 
 	{% block stylesheets %}
 		<link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui.min.css')}}
