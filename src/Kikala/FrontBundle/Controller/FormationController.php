@@ -110,8 +110,17 @@ class FormationController extends Controller
           'securityContext'=>$securityContext
         );
       }
+    $formateur=$this->getDoctrine()->getRepository('KikalaFrontBundle:KikoTransactionHistory')->findBytoUser($user);
+     if ($formateur){
       //création d'un array associatif pour stocker les données
+
     return $this->render('KikalaFrontBundle:Formation:formaDetail.html.twig', $params);
+
+         }else{
+                   
+             return $this->redirect($this->generateUrl('kikala_front_formaCreate'));  
+        }
+
 	}
 
 
