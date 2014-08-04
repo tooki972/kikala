@@ -153,20 +153,23 @@ class FormationController extends Controller
     $twoday=date('Y-m-d', strtotime('2 day ago'));
      
  
-         $forma= new formation;
-            $Search_form=$this->createForm(new SearchType, $forma);
-            $Search_form->handleRequest($request);
-            $name=$forma->getName();
-            if(empty($name)){
-$formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('category'=>$forma->getCategory(),'tag'=>$forma->getTag()));
-}else{
-  $formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('name'=>$forma->getName()));
-}
+      $forma= new formation;
+        $Search_form=$this->createForm(new SearchType, $forma);
+        $Search_form->handleRequest($request);
+        $name=$forma->getName();
+        $category=$forma->getCategory();
+        $tag=$forma->getTag();
+        if(empty($category)&&(empty($name))){
+          $formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('tag'=>$forma->getTag()));
+        }elseif(empty($name)){
+          $formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('category'=>$forma->getCategory()));
+        }else{
+          $formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('name'=>$forma->getName()));
+        }
        return $this->render('KikalaFrontBundle:Formation:search.html.twig', array(
- 'formations' => $formations,
- 'twoday' => $twoday,
- "Search_form" => $Search_form->createView()
-)
-);
+        'formations' => $formations,
+        'twoday' => $twoday,
+         "Search_form" => $Search_form->createView()
+         ));
    }
 }
