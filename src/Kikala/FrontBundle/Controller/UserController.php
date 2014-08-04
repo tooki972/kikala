@@ -365,11 +365,21 @@ class UserController extends Controller
     public function formAnnulAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $user=$this->getUser();
+        $user->setKikos(0);
         $formations = $em->getRepository('KikalaFrontBundle:Formation')->findByCreator($id);
 
         $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
         
+        $transaction= new KikoTransactionHistory();
+        $transaction->setDateTransaction(new DateTime());
+        $transaction->setKikosTransfered(0);
+        $transaction->setTransactionType('annulation');
+        $transaction->setToUser($user);
+        $transaction->setFormation($formAnnul);
+        $transaction->setFromUser('kikosmaster');
+        $em-> persist($transaction);
+        $em-> persist($user);
         $formAnnul->setIsActive(false);
         $em->flush();
 
