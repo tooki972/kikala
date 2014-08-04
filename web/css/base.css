@@ -1,7 +1,7 @@
  @import "reset.css";
 
 body{
-	background: #f3f4ea;
+	background: rgba(0,0,0,0.15);
 }
 #wrapper{
 	background: #fff;
@@ -11,7 +11,7 @@ body{
 	padding-bottom: 15px;
 }
 header{
-	background: #f3f4ea;
+	background: gray;
 	border-radius:0 8px 0 8px;
 	height: auto;
 	padding: 5px;
@@ -309,13 +309,14 @@ aside p{
 #bas{
 	background: #fff;
 	border-radius:0 8px  0 8px;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0, 0.3), 0px 0px 10px rgba(0,0,0, 0.3);
 	height: auto;
 	padding: 5px;
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
 footer{
-	background: #b8c945;
+	
 	padding: 15px;
 	min-height: 250px;
 	overflow: hidden;
@@ -324,6 +325,7 @@ footer{
 	margin: 0;
 	
 }
+/****************recherche**********************/
 #kikala_frontbundle_formation li{
-				display:none;
+	display:none;
 }

@@ -327,13 +327,17 @@ class UserController extends Controller
     public function myFormaAction()
 
     {
-
+       $user=$this->getuser();
+       $id=$user->getId();
         $em = $this->getDoctrine()->getManager();
+        $formations = $em->getRepository('KikalaFrontBundle:Formation')->findById($id);
         $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
-
+        $params=array(
+            'user'=>$user,
+            'formations'=>$formations);
         
         
-         return $this->render('KikalaFrontBundle:User:myForma.html.twig');
+         return $this->render('KikalaFrontBundle:User:myForma.html.twig',$params);
     } 
 
 
@@ -344,7 +348,8 @@ class UserController extends Controller
         $inscriptions=$this->getDoctrine()->getRepository('KikalaFrontBundle:InscriptionForm')->getListInsByUser($user); 
     
         $params=array(
-            'inscriptions'=>$inscriptions
+            'inscriptions'=>$inscriptions,
+            
         );                     
 
         return $this->render('KikalaFrontBundle:User:mesInscriptions.html.twig', $params);
