@@ -18,11 +18,12 @@
 	<div class="col-xs-12 nbUser">
 		<p>Le nombre d'inscrit est de <span class="nbUserA">  {{ nbUser}} </span></p>
 	</div>
-	{% if app.user %}
+	{# Flash message display : #}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
 	<div class="newInscrit">
 		<p class="message">Bienvenue au nouveau Kiko</p>
 	</div>
-	{% endif %}
+	{% endfor %}
 <article>
 	<h2 class="pageTitle">Formation à la une</h2>
 	
