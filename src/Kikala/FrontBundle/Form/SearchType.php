@@ -16,7 +16,7 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('name', null, array(
-                'required' => true,
+                'required' => false,
                 "label" => "Recherche",
                 'label_attr' => array(
                  'class'=> "col-xs-12 col-md-4"

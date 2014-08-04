@@ -330,7 +330,7 @@ class UserController extends Controller
        $user=$this->getuser();
        $id=$user->getId();
         $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('KikalaFrontBundle:Formation')->findById($id);
+        $formations = $em->getRepository('KikalaFrontBundle:Formation')->findByCreator($id);
         $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
         $params=array(
             'user'=>$user,

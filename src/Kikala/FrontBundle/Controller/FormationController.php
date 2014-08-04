@@ -156,8 +156,12 @@ class FormationController extends Controller
          $forma= new formation;
             $Search_form=$this->createForm(new SearchType, $forma);
             $Search_form->handleRequest($request);
-$formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('name'=>$forma->getName(),'category'=>$forma->getCategory(),'tag'=>$forma->getTag()));
-
+            $name=$forma->getName();
+            if(empty($name)){
+$formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('category'=>$forma->getCategory(),'tag'=>$forma->getTag()));
+}else{
+  $formations= $this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findBy(array('name'=>$forma->getName()));
+}
        return $this->render('KikalaFrontBundle:Formation:search.html.twig', array(
  'formations' => $formations,
  'twoday' => $twoday,
