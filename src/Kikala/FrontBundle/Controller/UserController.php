@@ -96,7 +96,7 @@ class UserController extends Controller
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
 
-                //
+                // Pour realiser la redirection dans une page privée home
                     // Here, "public" is the name of the firewall in your security.yml
                     $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());
                     $this->get("security.context")->setToken($token);
@@ -105,11 +105,15 @@ class UserController extends Controller
                     // Logging the user in above the way we do it doesn't do this automatically
                     $event = new InteractiveLoginEvent($request, $token);
                     $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
-                    // maybe redirect out here
-
-                 return $this->redirect($this->generateUrl("kikala_front_homepage"));
-                }
+                   
+                    // maybe redirect out here, show me a flashmessage
+                    // Flash message configuration : (Note that in our twig we add a for to show our div with message)
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Default message, here you can write blablabla!'
+                        );
+                return $this->redirect($this->generateUrl('kikala_front_homepage'));
+            }
 
         // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
             $params = array(
@@ -291,7 +295,7 @@ class UserController extends Controller
                             
                             $forma->setFilename($newFilename);
                     }
-                    /*    
+                    /* Ancienne code pour afficher l'image sans simple image, voir precedement le code avec simpleimage   
                     if(!empty($forma->getMiImage())){
                         $dir = $this->get('kernel')->getRootDir() . '/../web/img/formapicture';
                         $MiImage = $forma->getMiImage();

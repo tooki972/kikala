@@ -14,13 +14,16 @@
 		<p><span class="nbUserB"> {{ nbFormation }}</span> Formations en cours </p>
 	</div>
 	
+
 	<div class="col-xs-12 nbUser">
 		<p>Le nombre d'inscrit est de <span class="nbUserA">  {{ nbUser}} </span></p>
 	</div>
+	{# Flash message display : #}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
 	<div class="newInscrit">
-		<p>Bienvenue au nouveau Kiko</p>
+		<p class="message">Bienvenue au nouveau Kiko</p>
 	</div>
-
+	{% endfor %}
 <article>
 	<h2 class="pageTitle">Formation à la une</h2>
 	

@@ -43,7 +43,6 @@ class FormationController extends Controller
             
             if($payer == false){
              
-
                     $em = $this->getDoctrine()->getManager();
                       $inscri=$em->getRepository('KikalaFrontBundle:InscriptionForm')->countInscriptionForm($pastForma->getId()); 
                       $temp=$pastForma->getDuree();
