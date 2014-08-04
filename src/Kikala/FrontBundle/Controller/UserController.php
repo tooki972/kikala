@@ -13,6 +13,7 @@ use Kikala\FrontBundle\Form\UserProfilType;
 use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
 use Kikala\FrontBundle\Entity\Formation;
+use Kikala\FrontBundle\Form\FormationCreateType;
 use Kikala\FrontBundle\Entity\Category;
 use Kikala\FrontBundle\Entity\Tag;
 
@@ -325,22 +326,27 @@ class UserController extends Controller
     }
     
     public function myFormaAction()
-
     {
-       $user=$this->getuser();
-       $id=$user->getId();
-        $em = $this->getDoctrine()->getManager();
-        $formations = $em->getRepository('KikalaFrontBundle:Formation')->findById($id);
-        $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
-        $params=array(
-            'user'=>$user,
-            'formations'=>$formations);
-        
-        
-         return $this->render('KikalaFrontBundle:User:myForma.html.twig',$params);
+        $user=$this->getUser();
+
+        $formations=$this->getDoctrine()->getRepository('KikalaFrontBundle:Formation')->findByCreator($user);
+
+        return $this->render('KikalaFrontBundle:User:myForma.html.twig',array(
+        'user'=>$user,
+        'formations'=>$formations));
+
     } 
 
+    public function formAnnulAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $formAnnul = $em->getRepository('KikalaFrontBundle:Formation')->find($id);// crée une variable 
+        
+        $formAnnul->setIsActive(false);
+        $em->flush();
 
+        return $this->redirect($this->generateUrl('kikala_front_myForma'));
+    }
 
     public function mesInscriptionsAction()
     {
