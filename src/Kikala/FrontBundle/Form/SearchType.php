@@ -23,7 +23,7 @@ class SearchType extends AbstractType
                 ),
                 'attr' => array(
                  'placeholder' => 'Recherche',
-                 'class'=> "col-xs-12 col-md-8",
+                 'class'=> "col-xs-12 col-md-8 form-control",
                  'name'=>'name'
                 )  ,
                 ))

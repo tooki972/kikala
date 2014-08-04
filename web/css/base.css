@@ -103,8 +103,14 @@ h3{
 	color: red;
 	font-size: .8em;
 }
-
-
+.text{
+	margin-bottom: 15px;
+}
+.btn-default{
+	background: #b8c945;
+	color: #fff;
+	margin-bottom: 2px;
+}
 .pageTitle{
 	border-radius: 8px;
 	background: #b8c945;
@@ -203,6 +209,9 @@ h1 >a:hover{
 	background: url('../img/new.png') no-repeat;
 	padding-left: 35px;
 }
+#pagination a{
+	color: #ca5745
+}
 /*************** formation detail *****************/
 .intitule{
 	background: #b8c945;
@@ -268,12 +277,14 @@ h1 >a:hover{
 	margin-left: 15px;
 	width: 83px;
 	text-align: center;
+	padding: 10px 2px;
 }
 #slogan{
 	background: none;
 	color: #ca5745;
 	font-style: italic;
 }
+
 /************** kiko détail *********************/
 aside p{
 	margin-left: -15px;
