@@ -6,12 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\HttpFoundation\Request;
+
+// Ces lignes vont me permettre de faire appel à une methode Json
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+// Ces lignes vont me permettre de faire appel à une methode UsernamePasswordToken et InteractiveLoginEvent pour la redirection à ma page home lors de mon inscription au site
+use Symfony\Component\EventDispatcher\EventDispatcher; 
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 use Kikala\FrontBundle\Entity\UserKikologue;
 use Kikala\FrontBundle\Form\UserProfilType;
-use \DateTime;
 use Kikala\FrontBundle\Form\UserKikologueType;
+use \DateTime;
 use Kikala\FrontBundle\Entity\Formation;
 use Kikala\FrontBundle\Form\FormationCreateType;
 use Kikala\FrontBundle\Entity\Category;
@@ -88,8 +95,22 @@ class UserController extends Controller
                     $em->persist($user);
                 //Sauvegarde de l'entity (exécute la requête)
                     $em->flush();
+
+                //
+                    // Here, "public" is the name of the firewall in your security.yml
+                    $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());
+                    $this->get("security.context")->setToken($token);
+
+                    // Fire the login event
+                    // Logging the user in above the way we do it doesn't do this automatically
+                    $event = new InteractiveLoginEvent($request, $token);
+                    $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+                    // maybe redirect out here
+
                  return $this->redirect($this->generateUrl("kikala_front_homepage"));
                 }
+
         // Creation de la "vue" du formulaire (register.html.twig), à passer dans render();
             $params = array(
             "register_form" => $register_form->createView()
