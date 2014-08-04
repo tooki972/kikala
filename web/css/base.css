@@ -80,6 +80,7 @@ h1{
  	font-size: 1.75em;
  	margin-bottom: 15px;
  	letter-spacing: -1px;
+ 	clear: left;
 }
 h2{
  	color: #330a03;

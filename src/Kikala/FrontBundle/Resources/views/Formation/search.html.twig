@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% for formation in formations|slice(0, 6) %}
+{% for formation in formations %}
 
     {% if formation.dateCreated|date("m/d/Y") >= twoday|date("m/d/Y") %}
     <h1 class="col-xs-12  new"><a href="{{ path('kikala_front_formaDetail', {'id' : formation.id}) }}">{{ formation.name}}</a></h1>
