@@ -19,7 +19,7 @@ class FormationController extends Controller
     	
     // Affichage de la liste des formations par date de formation et par page (30 formation par page)
     	//1. Aller sur formationRepository et crée deux function que nous avons appelle ici.
-    	$maxFormations=6;
+    	$maxFormations=16;
         $formations_count = $this->getDoctrine()
         		->getRepository('KikalaFrontBundle:Formation')
                 ->countFormation();

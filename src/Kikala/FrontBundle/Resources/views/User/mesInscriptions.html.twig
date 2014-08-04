@@ -3,7 +3,7 @@
 {{ parent()}} - Redirection Page
 {% endblock %}
 {% block body %}
-
+<h1 class="pageTitle">Mes inscriptions</h1>
     <ul class="description col-xs-12">
         {% for inscription in inscriptions %}
         <span class="glyphicon glyphicon-ok-sign"></span><li class="listeForm col-xs-6"> {{ inscription.formation.name }}</li>
